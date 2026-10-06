@@ -30,14 +30,11 @@
   };
 
   document.addEventListener("DOMContentLoaded", function () {
+
     Naijs.showScreen("title-screen");
 
     if (typeof Naijs.initTitle === "function") {
       Naijs.initTitle();
-    }
-
-    if (typeof Naijs.initBirth === "function") {
-      Naijs.initBirth();
     }
 
     if (typeof Naijs.initAppearance === "function") {
@@ -47,5 +44,7 @@
     if (typeof Naijs.initGame === "function") {
       Naijs.initGame();
     }
+
   });
+
 })();
