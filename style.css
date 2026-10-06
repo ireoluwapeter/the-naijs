@@ -394,10 +394,39 @@ button {
     linear-gradient(
       to bottom,
       #edf4f3 0%,
-      #edf4f3 67%,
-      #c4c9c7 67%,
+      #edf4f3 63%,
+      #c9cecc 63%,
       #aeb3b0 100%
     );
+}
+
+
+/* =================================
+   HOSPITAL ROOM DETAILS
+================================= */
+
+.hospital-room::before {
+  content: "";
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 9%;
+  height: 4px;
+  background: #c4cecc;
+  box-shadow:
+    0 55px 0 #d2d9d7,
+    0 110px 0 #dce2e0;
+}
+
+.hospital-room::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 37%;
+  height: 4px;
+  background: #8f9895;
+  opacity: 0.6;
 }
 
 
@@ -407,65 +436,191 @@ button {
 
 .hospital-bed {
   position: absolute;
-  width: 48%;
-  height: 28%;
-  left: 26%;
-  bottom: 28%;
+  width: min(54vw, 620px);
+  height: 260px;
+  left: 50%;
+  bottom: 30%;
+  transform: translateX(-50%);
   z-index: 5;
 }
 
-.bed-frame {
+
+/* Headboard */
+
+.hospital-bed::before {
+  content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 20px;
-  background: #626a6c;
-  border-radius: 5px;
+  width: 24px;
+  height: 180px;
+  left: -8px;
+  bottom: 28px;
+  background: #697275;
+  border-radius: 8px;
+  box-shadow:
+    0 0 0 5px #899294,
+    0 0 0 9px #d5d9d8;
 }
+
+
+/* Footboard */
+
+.hospital-bed::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 130px;
+  right: -4px;
+  bottom: 28px;
+  background: #697275;
+  border-radius: 8px;
+}
+
+
+/* Mattress */
 
 .bed-mattress {
   position: absolute;
-  left: 2%;
-  right: 2%;
-  bottom: 18px;
-  height: 75px;
-  background: #f4f4f1;
-  border: 3px solid #a6acad;
+  left: 3%;
+  right: 3%;
+  bottom: 68px;
+  height: 78px;
+  background: #f8f8f5;
+  border: 3px solid #aab2b3;
   border-radius: 12px;
+  z-index: 2;
+  box-shadow:
+    inset 0 -8px 0 rgba(180, 186, 186, 0.35),
+    0 8px 0 rgba(80, 86, 87, 0.18);
 }
+
+
+/* Pillow */
 
 .bed-pillow {
   position: absolute;
-  width: 27%;
-  height: 52px;
+  width: 24%;
+  height: 58px;
   left: 7%;
-  bottom: 70px;
+  bottom: 125px;
   background: #ffffff;
-  border: 2px solid #c4c9ca;
-  border-radius: 12px;
-  z-index: 3;
+  border: 2px solid #c6cccd;
+  border-radius: 14px;
+  z-index: 4;
+  transform: rotate(-4deg);
 }
+
+
+/* Frame */
+
+.bed-frame {
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  bottom: 48px;
+  height: 25px;
+  background: #626a6c;
+  border-radius: 6px;
+  z-index: 1;
+}
+
+
+/* Bed legs */
 
 .bed-leg {
   position: absolute;
-  width: 10px;
-  height: 55px;
-  background: #555b5d;
-  bottom: -50px;
+  width: 13px;
+  height: 58px;
+  bottom: -10px;
+  background: #505759;
+  border-radius: 3px;
+  z-index: 0;
 }
 
 .bed-leg.left {
-  left: 8%;
+  left: 10%;
 }
 
 .bed-leg.right {
-  right: 8%;
+  right: 10%;
 }
 
 
 /* =================================
-   CHARACTERS
+   MOTHER
+================================= */
+
+.mother-character {
+  position: absolute;
+  width: 390px;
+  height: 190px;
+  left: 50%;
+  bottom: calc(30% + 75px);
+  transform: translateX(-50%);
+  z-index: 9;
+}
+
+
+/* Mother's body lying on mattress */
+
+.mother-body {
+  position: absolute;
+  width: 265px;
+  height: 82px;
+  left: 75px;
+  top: 76px;
+  background: #b9d8d4;
+  border-radius: 48px 24px 24px 48px;
+  transform: rotate(-3deg);
+  z-index: 2;
+  box-shadow: 0 5px 0 rgba(70, 80, 80, 0.15);
+}
+
+
+/* Mother's head */
+
+.mother-head {
+  position: absolute;
+  width: 62px;
+  height: 70px;
+  left: 30px;
+  top: 52px;
+  background: #8b5a3c;
+  border-radius: 50%;
+  z-index: 5;
+}
+
+
+/* Mother's hair */
+
+.mother-hair {
+  position: absolute;
+  width: 72px;
+  height: 48px;
+  left: 24px;
+  top: 40px;
+  background: #19130f;
+  border-radius: 50% 50% 35% 35%;
+  z-index: 6;
+}
+
+
+/* Mother's arm resting across body */
+
+.mother-arm {
+  position: absolute;
+  width: 23px;
+  height: 100px;
+  left: 230px;
+  top: 60px;
+  background: #8b5a3c;
+  border-radius: 15px;
+  transform: rotate(65deg);
+  z-index: 7;
+}
+
+
+/* =================================
+   MEDICAL STAFF / FATHER
 ================================= */
 
 .character {
@@ -473,8 +628,11 @@ button {
   bottom: 20%;
   width: 100px;
   height: 260px;
-  z-index: 10;
+  z-index: 12;
 }
+
+
+/* Head */
 
 .character-head {
   position: absolute;
@@ -488,17 +646,23 @@ button {
   z-index: 3;
 }
 
+
+/* Hair stays above head, away from eyes */
+
 .character-hair {
   position: absolute;
   width: 59px;
-  height: 26px;
+  height: 25px;
   left: 50%;
-  top: -4px;
+  top: -3px;
   transform: translateX(-50%);
   background: #18130f;
-  border-radius: 50% 50% 30% 30%;
-  z-index: 4;
+  border-radius: 55% 55% 30% 30%;
+  z-index: 5;
 }
+
+
+/* Body */
 
 .character-body {
   position: absolute;
@@ -509,7 +673,11 @@ button {
   transform: translateX(-50%);
   background: #f4f4f4;
   border-radius: 18px 18px 10px 10px;
+  z-index: 2;
 }
+
+
+/* Arms */
 
 .character-arm {
   position: absolute;
@@ -518,7 +686,7 @@ button {
   background: #8b5a3c;
   border-radius: 12px;
   top: 75px;
-  z-index: 2;
+  z-index: 1;
 }
 
 .character-arm.left {
@@ -531,6 +699,9 @@ button {
   transform: rotate(-10deg);
 }
 
+
+/* Legs */
+
 .character-leg {
   position: absolute;
   width: 24px;
@@ -538,6 +709,7 @@ button {
   background: #303030;
   top: 170px;
   border-radius: 8px;
+  z-index: 1;
 }
 
 .character-leg.left {
@@ -550,92 +722,53 @@ button {
 
 
 /* =================================
-   DOCTOR / NURSE / FATHER
+   DOCTOR
 ================================= */
 
 .doctor-character {
   left: 12%;
+  bottom: 20%;
+  transform: scale(0.9);
+  transform-origin: bottom center;
+  z-index: 14;
 }
 
 .doctor-character .character-body {
   background: #ffffff;
 }
 
+
+/* =================================
+   NURSE
+================================= */
+
 .nurse-character {
-  right: 16%;
+  right: 18%;
+  bottom: 20%;
+  transform: scale(0.9);
+  transform-origin: bottom center;
+  z-index: 16;
 }
 
 .nurse-character .character-body {
   background: #dceff1;
 }
 
+
+/* =================================
+   FATHER
+================================= */
+
 .father-character {
-  right: 4%;
-  bottom: 21%;
-  transform: scale(0.9);
+  right: 5%;
+  bottom: 20%;
+  transform: scale(0.82);
+  transform-origin: bottom center;
+  z-index: 11;
 }
 
 .father-character .character-body {
   background: #394b5c;
-}
-
-
-/* =================================
-   MOTHER
-================================= */
-
-.mother-character {
-  position: absolute;
-  width: 330px;
-  height: 180px;
-  left: 31%;
-  bottom: 35%;
-  z-index: 8;
-}
-
-.mother-body {
-  position: absolute;
-  width: 235px;
-  height: 80px;
-  left: 45px;
-  top: 70px;
-  background: #b9d8d4;
-  border-radius: 50px 20px 20px 50px;
-  transform: rotate(-5deg);
-}
-
-.mother-head {
-  position: absolute;
-  width: 60px;
-  height: 68px;
-  left: 5px;
-  top: 38px;
-  background: #8b5a3c;
-  border-radius: 50%;
-  z-index: 4;
-}
-
-.mother-hair {
-  position: absolute;
-  width: 68px;
-  height: 45px;
-  left: 1px;
-  top: 28px;
-  background: #19130f;
-  border-radius: 50% 50% 35% 35%;
-  z-index: 5;
-}
-
-.mother-arm {
-  position: absolute;
-  width: 22px;
-  height: 100px;
-  left: 190px;
-  top: 55px;
-  background: #8b5a3c;
-  border-radius: 15px;
-  transform: rotate(65deg);
-  z-index: 6;
 }
 
 
@@ -831,11 +964,6 @@ button {
     font-size: 15px;
   }
 
-  .welcome {
-    margin-top: 35px;
-    font-size: 27px;
-  }
-
   .subtext {
     font-size: 14px;
   }
@@ -845,26 +973,32 @@ button {
   }
 
   .hospital-bed {
-    width: 62%;
-    left: 19%;
+    width: 72%;
+    height: 220px;
+    bottom: 31%;
   }
 
   .mother-character {
-    left: 17%;
-    transform: scale(0.75);
-    transform-origin: bottom left;
+    width: 330px;
+    height: 165px;
+    left: 50%;
+    bottom: calc(31% + 65px);
+    transform: translateX(-50%) scale(0.72);
+    transform-origin: center bottom;
   }
 
   .doctor-character {
-    left: 1%;
-    transform: scale(0.72);
-    transform-origin: bottom;
+    left: -2%;
+    bottom: 19%;
+    transform: scale(0.66);
+    transform-origin: bottom center;
   }
 
   .nurse-character {
-    right: 5%;
-    transform: scale(0.72);
-    transform-origin: bottom;
+    right: -1%;
+    bottom: 19%;
+    transform: scale(0.66);
+    transform-origin: bottom center;
   }
 
   .father-character {
