@@ -1,0 +1,78 @@
+(function () {
+  "use strict";
+
+  window.Naijs = window.Naijs || {};
+
+  Naijs.birthState = {
+    baby: null,
+    step: 0,
+    timer: null
+  };
+
+  Naijs.startBirth = function () {
+    if (typeof Naijs.generateBirth === "function") {
+      Naijs.birthState.baby = Naijs.generateBirth();
+    }
+
+    Naijs.showScreen("birth-screen");
+    Naijs.runBirthSequence();
+  };
+
+  Naijs.runBirthSequence = function () {
+    var dialogueName = document.getElementById("dialogue-name");
+    var dialogueText = document.getElementById("dialogue-text");
+
+    var scenes = [
+      {
+        name: "Nurse",
+        text: "Easy, mama. You dey do well. Take a deep breath."
+      },
+      {
+        name: "Doctor",
+        text: "Alright. We are almost there. Keep pushing."
+      },
+      {
+        name: "Father",
+        text: "God abeg... everything go dey alright."
+      },
+      {
+        name: "Nurse",
+        text: "Yes! Baby is coming!"
+      },
+      {
+        name: "Doctor",
+        text: "And... welcome to the world, little one."
+      }
+    ];
+
+    Naijs.birthState.step = 0;
+
+    function nextScene() {
+      if (Naijs.birthState.step >= scenes.length) {
+        clearInterval(Naijs.birthState.timer);
+
+        if (typeof Naijs.showBirthResult === "function") {
+          Naijs.showBirthResult();
+        }
+
+        return;
+      }
+
+      var scene = scenes[Naijs.birthState.step];
+
+      if (dialogueName) {
+        dialogueName.textContent = scene.name;
+      }
+
+      if (dialogueText) {
+        dialogueText.textContent = scene.text;
+      }
+
+      Naijs.birthState.step += 1;
+    }
+
+    nextScene();
+
+    Naijs.birthState.timer = setInterval(nextScene, 1800);
+  };
+})();
