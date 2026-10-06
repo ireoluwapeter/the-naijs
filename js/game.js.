@@ -1,0 +1,49 @@
+(function () {
+  "use strict";
+
+  window.Naijs = window.Naijs || {};
+
+  Naijs.gameState = {
+    age: 0,
+    day: 1,
+    month: 1,
+    year: 0,
+    started: false
+  };
+
+  Naijs.initGame = function () {
+    Naijs.gameState.started = true;
+  };
+
+  Naijs.showBirthResult = function () {
+    var baby = Naijs.birthState.baby;
+
+    if (!baby) {
+      baby = Naijs.generateBirth();
+      Naijs.birthState.baby = baby;
+    }
+
+    var name = document.getElementById("result-name");
+    var gender = document.getElementById("result-gender");
+    var ethnicity = document.getElementById("result-ethnicity");
+    var parents = document.getElementById("result-parents");
+
+    if (name) {
+      name.textContent = baby.name;
+    }
+
+    if (gender) {
+      gender.textContent = baby.gender;
+    }
+
+    if (ethnicity) {
+      ethnicity.textContent = baby.ethnicity;
+    }
+
+    if (parents) {
+      parents.textContent = baby.mother + " & " + baby.father;
+    }
+
+    Naijs.showScreen("result-screen");
+  };
+})();
