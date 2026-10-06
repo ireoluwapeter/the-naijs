@@ -3,6 +3,10 @@
 
   window.Naijs = window.Naijs || {};
 
+  /* ================================
+     SCREEN CONTROL
+  ================================= */
+
   Naijs.showScreen = function (screenId) {
     var screens = document.querySelectorAll(".screen");
 
@@ -17,32 +21,60 @@
     }
   };
 
+
+  /* ================================
+     HELPERS
+  ================================= */
+
   Naijs.get = function (id) {
     return document.getElementById(id);
   };
 
-  Naijs.on = function (id, eventName, handler) {
-    var element = Naijs.get(id);
 
-    if (element) {
-      element.addEventListener(eventName, handler);
+  /* ================================
+     START GAME
+  ================================= */
+
+  Naijs.startGame = function () {
+
+    Naijs.showScreen("birth-screen");
+
+    /*
+      Generate the baby immediately.
+      This uses the existing naming.js.
+    */
+
+    if (typeof Naijs.generateBirth === "function") {
+      Naijs.birthState = Naijs.birthState || {};
+      Naijs.birthState.baby = Naijs.generateBirth();
+    }
+
+    /*
+      Start the existing birth cinematic.
+    */
+
+    if (typeof Naijs.runBirthSequence === "function") {
+      Naijs.runBirthSequence();
     }
   };
+
+
+  /* ================================
+     INITIALISE
+  ================================= */
 
   document.addEventListener("DOMContentLoaded", function () {
 
     Naijs.showScreen("title-screen");
 
-    if (typeof Naijs.initTitle === "function") {
-      Naijs.initTitle();
-    }
+    var startButton = document.getElementById("start-button");
 
-    if (typeof Naijs.initAppearance === "function") {
-      Naijs.initAppearance();
-    }
+    if (startButton) {
 
-    if (typeof Naijs.initGame === "function") {
-      Naijs.initGame();
+      startButton.onclick = function () {
+        Naijs.startGame();
+      };
+
     }
 
   });
