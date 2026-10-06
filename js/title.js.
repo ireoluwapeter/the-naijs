@@ -1,19 +1,36 @@
 (function () {
-  "use strict";
+  function startGame() {
+    var titleScreen = document.getElementById("title-screen");
+    var birthScreen = document.getElementById("birth-screen");
 
-  window.Naijs = window.Naijs || {};
+    if (!titleScreen || !birthScreen) {
+      return;
+    }
 
-  Naijs.initTitle = function () {
+    titleScreen.classList.add("hidden");
+    birthScreen.classList.remove("hidden");
+
+    if (
+      window.Naijs &&
+      typeof window.Naijs.startBirth === "function"
+    ) {
+      window.Naijs.startBirth();
+    }
+  }
+
+  function setupTitle() {
     var startButton = document.getElementById("start-button");
 
     if (!startButton) {
       return;
     }
 
-    startButton.addEventListener("click", function () {
-      if (typeof Naijs.startBirth === "function") {
-        Naijs.startBirth();
-      }
-    });
-  };
+    startButton.addEventListener("click", startGame);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupTitle);
+  } else {
+    setupTitle();
+  }
 })();
