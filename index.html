@@ -4,16 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Naijs</title>
-
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div id="game">
 
   <div class="title-world">
-
     <div class="sun"></div>
 
     <div class="cloud one"></div>
@@ -37,17 +34,10 @@
 
     <div class="person one">🧍🏾‍♀️</div>
     <div class="person two">🧍🏾‍♂️</div>
-
   </div>
 
-
-  <!-- TITLE -->
-
   <section class="title-screen screen" id="title-screen">
-
-    <div class="logo">
-      THE <span>NAIJS</span>
-    </div>
+    <div class="logo">THE <span>NAIJS</span></div>
 
     <div class="tagline">
       Your life. Your choices. Your Naija.
@@ -60,11 +50,8 @@
     <button class="play" id="start-button">
       ▶ PLAY
     </button>
-
   </section>
 
-
-  <!-- BIRTH -->
 
   <section class="birth-screen screen hidden" id="birth-screen">
 
@@ -78,7 +65,6 @@
         <div class="bed-leg right"></div>
       </div>
 
-
       <div class="mother-character">
         <div class="mother-hair"></div>
         <div class="mother-head"></div>
@@ -86,54 +72,37 @@
         <div class="mother-arm"></div>
       </div>
 
-
       <div class="character nurse-character">
-
         <div class="character-hair"></div>
         <div class="character-head"></div>
         <div class="character-body"></div>
-
         <div class="character-arm left"></div>
         <div class="character-arm right"></div>
-
         <div class="character-leg left"></div>
         <div class="character-leg right"></div>
-
       </div>
-
 
       <div class="character doctor-character">
-
         <div class="character-hair"></div>
         <div class="character-head"></div>
         <div class="character-body"></div>
-
         <div class="character-arm left"></div>
         <div class="character-arm right"></div>
-
         <div class="character-leg left"></div>
         <div class="character-leg right"></div>
-
       </div>
-
 
       <div class="character father-character">
-
         <div class="character-hair"></div>
         <div class="character-head"></div>
         <div class="character-body"></div>
-
         <div class="character-arm left"></div>
         <div class="character-arm right"></div>
-
         <div class="character-leg left"></div>
         <div class="character-leg right"></div>
-
       </div>
 
-
       <div class="dialogue-box">
-
         <div class="dialogue-name" id="dialogue-name">
           Nurse
         </div>
@@ -141,15 +110,12 @@
         <div class="dialogue-text" id="dialogue-text">
           Easy, mama. You dey do well. Take a deep breath.
         </div>
-
       </div>
 
     </div>
 
   </section>
 
-
-  <!-- RESULT -->
 
   <section class="result-screen screen hidden" id="result-screen">
 
@@ -192,8 +158,6 @@
   </section>
 
 
-  <!-- APPEARANCE -->
-
   <section class="appearance-screen screen hidden" id="appearance-screen">
 
     <div class="appearance-container">
@@ -217,35 +181,40 @@
 
         <div class="option-row">
 
-          <button class="option-button selected"
+          <button
+            class="option-button selected"
             data-appearance="skin"
             data-value="Deep"
             onclick="Naijs.selectAppearance('skin', 'Deep')">
             Deep
           </button>
 
-          <button class="option-button"
+          <button
+            class="option-button"
             data-appearance="skin"
             data-value="Dark"
             onclick="Naijs.selectAppearance('skin', 'Dark')">
             Dark
           </button>
 
-          <button class="option-button"
+          <button
+            class="option-button"
             data-appearance="skin"
             data-value="Brown"
             onclick="Naijs.selectAppearance('skin', 'Brown')">
             Brown
           </button>
 
-          <button class="option-button"
+          <button
+            class="option-button"
             data-appearance="skin"
             data-value="Light Brown"
             onclick="Naijs.selectAppearance('skin', 'Light Brown')">
             Light Brown
           </button>
 
-          <button class="option-button"
+          <button
+            class="option-button"
             data-appearance="skin"
             data-value="Light"
             onclick="Naijs.selectAppearance('skin', 'Light')">
@@ -263,28 +232,32 @@
 
         <div class="option-row">
 
-          <button class="option-button selected"
+          <button
+            class="option-button selected"
             data-appearance="hair"
             data-value="Afaridan"
             onclick="Naijs.selectAppearance('hair', 'Afaridan')">
             Afaridan
           </button>
 
-          <button class="option-button"
+          <button
+            class="option-button"
             data-appearance="hair"
             data-value="Low Cut"
             onclick="Naijs.selectAppearance('hair', 'Low Cut')">
             Low Cut
           </button>
 
-          <button class="option-button"
+          <button
+            class="option-button"
             data-appearance="hair"
             data-value="Afro"
             onclick="Naijs.selectAppearance('hair', 'Afro')">
             Afro
           </button>
 
-          <button class="option-button"
+          <button
+            class="option-button"
             data-appearance="hair"
             data-value="Mr Patches"
             onclick="Naijs.selectAppearance('hair', 'Mr Patches')">
@@ -306,21 +279,24 @@
 
         <div class="option-row">
 
-          <button class="option-button selected"
+          <button
+            class="option-button selected"
             data-appearance="eyes"
             data-value="Brown"
             onclick="Naijs.selectAppearance('eyes', 'Brown')">
             Brown
           </button>
 
-          <button class="option-button"
+          <button
+            class="option-button"
             data-appearance="eyes"
             data-value="Dark Brown"
             onclick="Naijs.selectAppearance('eyes', 'Dark Brown')">
             Dark Brown
           </button>
 
-          <button class="option-button"
+          <button
+            class="option-button"
             data-appearance="eyes"
             data-value="Light Brown"
             onclick="Naijs.selectAppearance('eyes', 'Light Brown')">
@@ -338,21 +314,24 @@
 
         <div class="option-row">
 
-          <button class="option-button selected"
+          <button
+            class="option-button selected"
             data-appearance="ears"
             data-value="Normal"
             onclick="Naijs.selectAppearance('ears', 'Normal')">
             Normal
           </button>
 
-          <button class="option-button"
+          <button
+            class="option-button"
             data-appearance="ears"
             data-value="Small"
             onclick="Naijs.selectAppearance('ears', 'Small')">
             Small
           </button>
 
-          <button class="option-button"
+          <button
+            class="option-button"
             data-appearance="ears"
             data-value="Prominent"
             onclick="Naijs.selectAppearance('ears', 'Prominent')">
@@ -370,28 +349,32 @@
 
         <div class="option-row">
 
-          <button class="option-button selected"
+          <button
+            class="option-button selected"
             data-appearance="drip"
             data-value="Hospital Wrap"
             onclick="Naijs.selectAppearance('drip', 'Hospital Wrap')">
             Hospital Wrap
           </button>
 
-          <button class="option-button"
+          <button
+            class="option-button"
             data-appearance="drip"
             data-value="Mint Wrap"
             onclick="Naijs.selectAppearance('drip', 'Mint Wrap')">
             Mint Wrap
           </button>
 
-          <button class="option-button"
+          <button
+            class="option-button"
             data-appearance="drip"
             data-value="Lavender Wrap"
             onclick="Naijs.selectAppearance('drip', 'Lavender Wrap')">
             Lavender Wrap
           </button>
 
-          <button class="option-button"
+          <button
+            class="option-button"
             data-appearance="drip"
             data-value="Blue Wrap"
             onclick="Naijs.selectAppearance('drip', 'Blue Wrap')">
@@ -403,7 +386,9 @@
       </div>
 
 
-      <button class="confirm-button" id="appearance-finish">
+      <button
+        class="confirm-button"
+        id="appearance-finish">
         Continue
       </button>
 
@@ -414,14 +399,12 @@
 </div>
 
 
-<!-- JAVASCRIPT -->
-
-<script src="js/naming.js"></script>
-<script src="js/birth.js"></script>
-<script src="js/appearance.js"></script>
-<script src="js/game.js"></script>
-<script src="js/title.js"></script>
-<script src="js/main.js"></script>
+<script src="js/naming.js."></script>
+<script src="js/birth.js."></script>
+<script src="js/appearance.js."></script>
+<script src="js/game.js."></script>
+<script src="js/title.js."></script>
+<script src="js/main.js."></script>
 
 </body>
 </html>
