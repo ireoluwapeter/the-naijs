@@ -2,1704 +2,1462 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#061b12">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Naijs</title>
 
 <style>
-:root{
-  --green:#071f16;
-  --green2:#0d3b29;
-  --yellow:#ffd447;
-  --cream:#f4efe5;
-}
-
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-}
-
-html,body{
-  margin:0;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#061b12;
-  color:#fff;
-}
-
-button{
-  font:inherit;
-  cursor:pointer;
-}
-
-/* =========================================================
-   GLOBAL SCREENS
-========================================================= */
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helvetica,sans-serif;background:#08090d;color:#fff}
+button{font:inherit}
 
 .scene{
-  position:fixed;
+  position:absolute;
   inset:0;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  transition:opacity .8s ease, visibility .8s ease;
+  opacity:1;
+  visibility:visible;
+  transition:opacity .7s ease,visibility .7s ease;
 }
-
 .hidden{
-  opacity:0 !important;
-  visibility:hidden !important;
-  pointer-events:none !important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
 }
 
-/* =========================================================
-   TITLE WORLD
-========================================================= */
+/* ================= TITLE ================= */
 
 #title{
-  z-index:20;
   background:
-    linear-gradient(
-      to bottom,
-      #66b7d4 0%,
-      #c7e4e2 45%,
-      #76a968 45%,
-      #477d45 67%,
-      #353635 67%,
-      #242625 100%
-    );
+    linear-gradient(to bottom,#72c9f2 0%,#b9e6f5 55%,#e7c99c 56%,#bd9a6b 100%);
+  overflow:hidden;
 }
 
 .sun{
   position:absolute;
-  width:85px;
-  height:85px;
-  right:9%;
-  top:8%;
+  width:100px;height:100px;
   border-radius:50%;
-  background:#ffd85b;
-  box-shadow:0 0 45px rgba(255,216,91,.75);
+  background:#ffd65a;
+  top:9%;right:12%;
+  box-shadow:0 0 45px rgba(255,214,90,.5);
 }
 
 .cloud{
   position:absolute;
-  width:150px;
-  height:38px;
-  border-radius:30px;
-  background:white;
-  opacity:.75;
-  animation:cloudMove 32s linear infinite;
+  width:180px;height:50px;
+  background:rgba(255,255,255,.7);
+  border-radius:50px;
 }
-
-.cloud:before,
-.cloud:after{
+.cloud:before,.cloud:after{
   content:"";
   position:absolute;
-  background:white;
+  background:inherit;
   border-radius:50%;
 }
-
-.cloud:before{
-  width:55px;
-  height:55px;
-  left:20px;
-  top:-27px;
-}
-
-.cloud:after{
-  width:65px;
-  height:65px;
-  right:15px;
-  top:-33px;
-}
-
-.cloud.one{
-  left:-180px;
-  top:14%;
-}
-
-.cloud.two{
-  left:-500px;
-  top:27%;
-  animation-delay:12s;
-}
-
-@keyframes cloudMove{
-  to{
-    transform:translateX(125vw);
-  }
-}
+.cloud:before{width:75px;height:75px;left:25px;bottom:0}
+.cloud:after{width:95px;height:95px;right:20px;bottom:0}
+.c1{top:13%;left:7%;transform:scale(.7)}
+.c2{top:25%;right:20%;transform:scale(.5)}
 
 .city{
   position:absolute;
-  bottom:33%;
-  left:0;
-  right:0;
-  height:145px;
+  bottom:28%;
+  left:0;right:0;
+  height:28%;
   display:flex;
   align-items:flex-end;
   gap:7px;
-  padding:0 3%;
+  padding:0 5%;
 }
-
 .building{
+  flex:1;
+  min-width:25px;
+  background:#65707a;
+  border-top:5px solid #4b555d;
   position:relative;
-  width:70px;
-  height:105px;
-  background:#68746f;
 }
-
-.building:nth-child(2){height:135px}
-.building:nth-child(3){height:92px}
-.building:nth-child(4){height:120px}
-.building:nth-child(5){height:150px}
-.building:nth-child(6){height:110px}
-
-.building:after{
-  content:"";
+.building:nth-child(1){height:50%}
+.building:nth-child(2){height:75%}
+.building:nth-child(3){height:62%}
+.building:nth-child(4){height:90%}
+.building:nth-child(5){height:55%}
+.building:nth-child(6){height:72%}
+.building:nth-child(7){height:45%}
+.window{
   position:absolute;
-  inset:12px;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      #f3d75a 0 8px,
-      transparent 8px 20px
-    );
-  opacity:.55;
+  width:7px;height:9px;
+  background:#ffd978;
+  box-shadow:
+    16px 0 #ffd978,
+    32px 0 #ffd978,
+    0 17px #ffd978,
+    16px 17px #ffd978,
+    32px 17px #ffd978;
+  left:15px;top:18px;
+  opacity:.7;
 }
 
 .road{
   position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:34%;
-  background:#303231;
+  bottom:0;left:0;right:0;
+  height:29%;
+  background:#30343a;
 }
-
-.road:before{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  top:0;
-  height:20%;
-  background:#4b7d48;
-}
-
 .road:after{
   content:"";
   position:absolute;
-  left:0;
-  right:0;
-  top:64%;
+  left:0;right:0;
+  top:52%;
   height:5px;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      #f2d44a 0 55px,
-      transparent 55px 110px
-    );
+  background:repeating-linear-gradient(
+    to right,
+    #f5d66a 0 55px,
+    transparent 55px 105px
+  );
 }
 
 .danfo{
   position:absolute;
-  bottom:9%;
+  width:150px;height:65px;
+  background:#f3c928;
+  border-radius:10px 15px 7px 7px;
+  bottom:13%;
   left:-180px;
-  width:155px;
-  height:60px;
-  border-radius:13px 18px 8px 8px;
-  background:#e5b91e;
-  animation:danfoMove 10s linear infinite;
+  animation:drive 9s linear infinite;
+  z-index:3;
 }
-
 .danfo:before{
   content:"";
   position:absolute;
-  left:13px;
-  top:10px;
-  width:92px;
-  height:24px;
+  left:15px;right:15px;top:10px;
+  height:25px;
+  background:#18232b;
   border-radius:5px;
-  background:#20362e;
 }
-
 .danfo:after{
-  content:"DANFO";
+  content:"";
   position:absolute;
-  right:9px;
-  top:13px;
-  color:#1e271f;
-  font-size:9px;
-  font-weight:900;
+  width:25px;height:25px;
+  background:#17191c;
+  border-radius:50%;
+  left:18px;bottom:-12px;
+  box-shadow:90px 0 #17191c;
 }
-
-@keyframes danfoMove{
-  to{
-    left:110%;
-  }
+@keyframes drive{
+  from{transform:translateX(0)}
+  to{transform:translateX(calc(100vw + 250px))}
 }
-
-/* =========================================================
-   TITLE CARD
-========================================================= */
 
 .titleCard{
   position:absolute;
-  z-index:10;
-  left:50%;
-  top:50%;
+  z-index:5;
+  left:50%;top:50%;
   transform:translate(-50%,-50%);
-  width:min(90%,620px);
-  padding:38px 28px;
-  border-radius:28px;
+  width:min(90%,650px);
   text-align:center;
-  background:rgba(4,29,20,.95);
-  box-shadow:0 30px 80px rgba(0,0,0,.4);
+  background:rgba(9,15,20,.82);
+  backdrop-filter:blur(12px);
+  padding:34px 25px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:24px;
+  box-shadow:0 25px 80px rgba(0,0,0,.3);
 }
-
-.logo{
-  font-size:clamp(52px,13vw,88px);
-  line-height:.85;
-  font-weight:1000;
-  letter-spacing:-5px;
+.titleCard h1{
+  font-size:clamp(42px,10vw,82px);
+  margin:0;
+  letter-spacing:6px;
 }
-
-.logo span{
-  color:var(--yellow);
-}
-
-.tagline{
-  margin:24px 0 30px;
-  color:#d5e4de;
-  font-size:16px;
-}
-
-.titleCard h2{
-  margin:0 0 8px;
-  font-size:24px;
-}
-
 .titleCard p{
-  color:#a9c1b7;
-  line-height:1.5;
+  color:#d5dbe0;
+  line-height:1.6;
+  margin:12px auto 24px;
+  max-width:500px;
 }
-
 .play{
-  margin-top:18px;
-  padding:16px 36px;
   border:0;
-  border-radius:15px;
-  background:var(--yellow);
-  color:#173523;
-  font-weight:1000;
-  font-size:17px;
-  box-shadow:0 6px 0 #b39217;
+  background:#f1c84b;
+  color:#161616;
+  font-weight:800;
+  padding:15px 42px;
+  border-radius:999px;
+  cursor:pointer;
+  transition:.2s;
 }
+.play:hover{transform:scale(1.04)}
 
-.play:active{
-  transform:translateY(4px);
-  box-shadow:0 2px 0 #b39217;
-}
-
-/* =========================================================
-   BIRTH WORLD
-========================================================= */
+/* ================= BIRTH ================= */
 
 #birth{
-  z-index:10;
-  background:#a9b9b4;
+  background:#17181c;
+  overflow:hidden;
 }
 
 .hospital{
   position:absolute;
   inset:0;
-  overflow:hidden;
   background:
-    linear-gradient(
-      105deg,
-      #9eafaa 0%,
-      #e9eeeb 48%,
-      #a9b8b3 100%
-    );
+    linear-gradient(to bottom,#e8e8e4 0%,#d5d4cf 62%,#b3b0a8 62%,#9e9a91 100%);
 }
 
-.ceiling{
+.ceilingLight{
   position:absolute;
-  left:0;
-  right:0;
-  top:0;
-  height:17%;
-  background:#f8faf8;
-}
-
-.light{
-  position:absolute;
-  top:6%;
-  left:50%;
-  transform:translateX(-50%);
-  width:180px;
-  height:18px;
-  border-radius:20px;
-  background:white;
-  box-shadow:0 0 45px white;
+  width:35%;
+  height:8%;
+  background:#fff;
+  left:32%;
+  top:5%;
+  border-radius:8px;
+  box-shadow:0 0 45px rgba(255,255,255,.8);
 }
 
 .window{
   position:absolute;
-  left:4%;
-  top:12%;
   width:25%;
-  height:28%;
-  border:10px solid #f8faf8;
-  background:
-    linear-gradient(
-      #61b5d2 0 65%,
-      #72a269 65%
-    );
-}
-
-.windowSun{
-  position:absolute;
-  right:15px;
-  top:14px;
-  width:38px;
-  height:38px;
-  border-radius:50%;
-  background:#ffd65a;
+  height:30%;
+  right:5%;
+  top:15%;
+  background:linear-gradient(#77bce1,#d9edf4);
+  border:10px solid #b8b7b0;
 }
 
 .curtain{
   position:absolute;
-  right:0;
-  top:17%;
-  width:24%;
-  height:65%;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      #f4f6f4 0 20px,
-      #d7dfdb 20px 40px
-    );
-  animation:curtainMove 4s ease-in-out infinite alternate;
+  top:10%;bottom:20%;
+  width:17%;
+  background:linear-gradient(90deg,#d7d8d4,#f1f1ed,#cacbc7);
 }
-
-@keyframes curtainMove{
-  to{
-    transform:translateX(10px);
-  }
-}
+.curtain.left{left:0}
+.curtain.right{right:0}
 
 .floor{
   position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:27%;
+  left:0;right:0;bottom:0;
+  height:38%;
   background:
-    repeating-linear-gradient(
-      90deg,
-      #bbc5c0 0 90px,
-      #aab4af 90px 93px
-    );
+    linear-gradient(90deg,rgba(0,0,0,.06) 1px,transparent 1px),
+    linear-gradient(rgba(0,0,0,.06) 1px,transparent 1px),
+    #aaa79e;
+  background-size:45px 45px;
 }
-
-/* =========================================================
-   BED + MOTHER
-========================================================= */
 
 .bed{
   position:absolute;
-  left:50%;
-  top:57%;
-  transform:translate(-50%,-50%);
-  width:min(54vw,500px);
-  height:155px;
-  border-radius:18px;
-  background:#fff;
-  box-shadow:0 25px 45px rgba(0,0,0,.2);
-}
-
-.bedHead{
-  position:absolute;
-  left:-15px;
-  top:-35px;
-  width:25px;
-  height:190px;
-  border-radius:12px;
-  background:#d1d9d5;
-}
-
-.pillow{
-  position:absolute;
-  left:8%;
-  top:-13px;
-  width:125px;
-  height:58px;
-  border-radius:35px;
-  background:#edf2ef;
-}
-
-.mother{
-  position:absolute;
+  width:43%;
+  height:22%;
   left:28%;
-  top:-105px;
-  width:155px;
-  height:135px;
+  bottom:24%;
+  background:#f5f5f2;
+  border-radius:20px 20px 5px 5px;
+  box-shadow:0 25px 35px rgba(0,0,0,.2);
 }
-
-.motherHead{
-  position:absolute;
-  left:53px;
-  top:0;
-  width:52px;
-  height:55px;
-  border-radius:50%;
-  background:#75452f;
-}
-
-.motherHair{
-  position:absolute;
-  left:47px;
-  top:-8px;
-  width:65px;
-  height:34px;
-  border-radius:50% 50% 25% 25%;
-  background:#241711;
-}
-
-.motherBody{
-  position:absolute;
-  left:30px;
-  top:48px;
-  width:105px;
-  height:82px;
-  border-radius:55px 55px 18px 18px;
-  background:#b46d75;
-}
-
-.motherBody:after{
+.bed:before{
   content:"";
   position:absolute;
-  left:32px;
-  top:14px;
-  width:55px;
-  height:55px;
-  border-radius:50%;
-  background:#d18c8e;
+  width:20%;
+  height:115%;
+  left:-7%;
+  top:-8%;
+  background:#8f9698;
+  border-radius:8px;
 }
-
-.motherArm{
+.mattress{
   position:absolute;
-  right:5px;
-  top:55px;
-  width:18px;
-  height:65px;
+  inset:10% 4% 12%;
+  background:#fff;
+  border-radius:12px;
+}
+.blanket{
+  position:absolute;
+  right:8%;top:25%;
+  width:46%;height:58%;
+  background:#c8dfe5;
   border-radius:20px;
-  background:#75452f;
-  transform:rotate(-20deg);
 }
 
 .mother{
-  animation:motherBreath 1.6s ease-in-out infinite;
-}
-
-@keyframes motherBreath{
-  50%{
-    transform:translateY(-5px);
-  }
-}
-
-/* =========================================================
-   CHARACTERS
-========================================================= */
-
-.character{
   position:absolute;
-  z-index:7;
-  width:100px;
-  height:175px;
-  animation:personFloat 2.4s ease-in-out infinite alternate;
+  width:150px;height:180px;
+  left:37%;bottom:31%;
+  z-index:4;
+  animation:breathe 2.4s ease-in-out infinite;
 }
-
-@keyframes personFloat{
-  to{
-    transform:translateY(-5px);
-  }
+@keyframes breathe{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.015)}
 }
-
-.personHead{
+.mother .head{
   position:absolute;
-  left:28px;
-  top:0;
-  width:45px;
-  height:53px;
+  width:48px;height:55px;
   border-radius:50%;
-  background:#8b573b;
-  z-index:2;
+  background:#8a563d;
+  left:52px;top:0;
+}
+.mother .hair{
+  position:absolute;
+  width:57px;height:57px;
+  border-radius:50%;
+  background:#211814;
+  left:47px;top:-7px;
+}
+.mother .body{
+  position:absolute;
+  width:105px;height:125px;
+  background:#b8d2d7;
+  border-radius:45px 45px 15px 15px;
+  left:20px;top:45px;
+}
+.mother .arm{
+  position:absolute;
+  width:25px;height:90px;
+  background:#8a563d;
+  border-radius:20px;
+  left:18px;top:63px;
+  transform:rotate(12deg);
 }
 
-.personHair{
+.person{
   position:absolute;
-  left:23px;
-  top:-8px;
-  width:55px;
-  height:31px;
-  border-radius:50% 50% 20% 20%;
-  background:#211710;
+  z-index:6;
+  width:95px;height:170px;
+  bottom:25%;
+}
+.person .phead{
+  position:absolute;
+  width:48px;height:53px;
+  border-radius:50%;
+  left:24px;top:0;
+  background:#805039;
+}
+.person .pbody{
+  position:absolute;
+  width:76px;height:105px;
+  border-radius:25px 25px 10px 10px;
+  left:9px;top:48px;
+  background:#536f78;
+}
+.person .legs{
+  position:absolute;
+  width:20px;height:65px;
+  background:#25292d;
+  left:24px;top:140px;
+  border-radius:12px;
+  box-shadow:28px 0 #25292d;
+}
+.nurse{left:8%;animation:pacing 4s ease-in-out infinite}
+.doctor{right:9%;animation:pacing 5s ease-in-out infinite reverse}
+.father{right:27%;bottom:23%;transform:scale(.9)}
+.father .pbody{background:#53604e}
+@keyframes pacing{
+  0%,100%{transform:translateX(0)}
+  50%{transform:translateX(18px)}
+}
+
+.uniform{
+  position:absolute;
+  width:35px;height:35px;
+  border-radius:50%;
+  background:#d9e5ea;
+  left:31px;top:7px;
   z-index:3;
 }
 
-.personBody{
-  position:absolute;
-  left:18px;
-  top:49px;
-  width:65px;
-  height:88px;
-  border-radius:24px 24px 10px 10px;
-  background:#eef4f1;
-}
-
-.personArm{
-  position:absolute;
-  top:55px;
-  width:18px;
-  height:68px;
-  border-radius:20px;
-  background:#8b573b;
-}
-
-.personArm.left{
-  left:3px;
-  transform:rotate(18deg);
-}
-
-.personArm.right{
-  right:3px;
-  transform:rotate(-18deg);
-}
-
-.personLeg{
-  position:absolute;
-  top:130px;
-  width:20px;
-  height:58px;
-  border-radius:15px;
-  background:#263a35;
-}
-
-.personLeg.left{left:24px}
-.personLeg.right{right:24px}
-
-.personLabel{
-  position:absolute;
-  top:190px;
-  left:50%;
-  transform:translateX(-50%);
-  white-space:nowrap;
-  padding:5px 9px;
-  border-radius:8px;
-  background:rgba(4,25,17,.92);
-  font-size:10px;
-  font-weight:900;
-}
-
-.nurse{
-  left:7%;
-  top:39%;
-}
-
-.nurse .personBody{
-  background:#f0f6f3;
-}
-
-.doctor{
-  right:9%;
-  top:31%;
-}
-
-.doctor .personBody{
-  background:#ffffff;
-}
-
-.doctor .personHead{
-  background:#633e2e;
-}
-
-.father{
-  left:43%;
-  bottom:5%;
-}
-
-.father .personBody{
-  background:#315c4b;
-}
-
-.father .personHead{
-  background:#8a5439;
-}
-
-/* =========================================================
-   CINEMATIC DIALOGUE
-========================================================= */
-
 .dialogue{
   position:absolute;
-  z-index:12;
-  left:50%;
-  top:19%;
+  z-index:20;
+  left:50%;bottom:7%;
   transform:translateX(-50%);
-  width:min(88%,620px);
-  padding:13px 20px;
-  border-radius:25px;
-  background:rgba(3,25,18,.94);
+  width:min(90%,700px);
+  background:rgba(7,8,10,.88);
+  padding:18px 22px;
+  border-radius:15px;
   text-align:center;
-  font-size:15px;
-  font-weight:700;
-  opacity:0;
-  transition:opacity .35s ease;
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(8px);
 }
-
-.dialogue.visible{
-  opacity:1;
-}
-
 .speaker{
-  display:block;
-  margin-bottom:4px;
-  color:var(--yellow);
-  font-size:10px;
-  letter-spacing:1px;
+  color:#f1ca51;
+  font-size:12px;
   text-transform:uppercase;
+  letter-spacing:2px;
+  margin-bottom:7px;
+}
+.line{
+  font-size:18px;
+  line-height:1.4;
 }
 
-/* =========================================================
-   CINEMATIC BARS
-========================================================= */
-
-.bar{
+.cinemaBar{
   position:absolute;
   z-index:30;
-  left:0;
-  right:0;
-  height:7%;
+  left:0;right:0;
+  height:8%;
   background:#000;
 }
-
-.bar.top{top:0}
-.bar.bottom{bottom:0}
-
-/* =========================================================
-   BABY REVEAL
-========================================================= */
+.cinemaBar.top{top:0}
+.cinemaBar.bottom{bottom:0}
 
 .flash{
   position:absolute;
-  z-index:40;
+  z-index:50;
   inset:0;
   background:white;
   opacity:0;
   pointer-events:none;
 }
-
-.flash.go{
-  animation:flashGo .7s ease;
-}
-
-@keyframes flashGo{
+.flash.go{animation:flash .8s ease}
+@keyframes flash{
   0%{opacity:0}
-  35%{opacity:.95}
+  30%{opacity:1}
   100%{opacity:0}
 }
 
-.reveal{
-  position:absolute;
-  z-index:50;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  background:rgba(2,18,12,.93);
-  opacity:0;
-  visibility:hidden;
-  transform:scale(1.04);
-  transition:opacity .8s ease,transform .8s ease,visibility .8s ease;
-}
-
-.reveal.show{
-  opacity:1;
-  visibility:visible;
-  transform:scale(1);
-}
-
 .baby{
-  position:relative;
-  width:150px;
-  height:150px;
-  border-radius:50%;
-  background:#f0d0b1;
-  box-shadow:0 0 80px rgba(255,218,168,.28);
-  animation:babyFloat 1.2s ease-in-out infinite alternate;
-}
-
-.baby:before{
-  content:"";
   position:absolute;
-  width:75px;
-  height:45px;
-  left:38px;
-  top:55px;
-  border-radius:50%;
-  background:#fff0df;
+  z-index:25;
+  width:100px;height:90px;
+  left:46%;bottom:41%;
+  opacity:0;
+  transform:scale(.4);
 }
-
-.baby:after{
-  content:"";
+.baby.show{
+  animation:babyReveal 1.5s forwards;
+}
+.babyHead{
   position:absolute;
-  width:75px;
-  height:45px;
-  left:38px;
-  top:70px;
+  width:48px;height:48px;
   border-radius:50%;
-  border-top:5px solid #d49b7d;
+  background:#8a563d;
+  left:25px;top:0;
+}
+.babyBody{
+  position:absolute;
+  width:75px;height:55px;
+  border-radius:40px 40px 15px 15px;
+  background:#e8c8b7;
+  left:12px;top:38px;
+}
+@keyframes babyReveal{
+  to{opacity:1;transform:scale(1)}
 }
 
-@keyframes babyFloat{
-  to{
-    transform:translateY(-10px);
-  }
-}
-
-.reveal h1{
-  margin:24px 0 8px;
-  color:var(--yellow);
-  font-size:clamp(42px,10vw,78px);
-}
-
-.reveal p{
-  margin:0;
-  color:#cbded5;
-}
-
-/* =========================================================
-   RESULT
-========================================================= */
+/* ================= RESULT ================= */
 
 #result{
-  z-index:60;
-  overflow:auto;
   background:
-    radial-gradient(
-      circle at 50% 15%,
-      #165b40,
-      #061b12 65%
-    );
-  padding:40px 18px;
-}
-
-.resultInner{
-  width:min(720px,100%);
-  margin:auto;
-  text-align:center;
-}
-
-.resultTag{
-  color:#8cb5a4;
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:2px;
-}
-
-.resultInner h1{
-  margin:10px 0;
-  color:var(--yellow);
-  font-size:clamp(38px,10vw,70px);
-}
-
-.resultIntro{
-  max-width:600px;
-  margin:auto;
-  color:#c5d9d1;
-  line-height:1.6;
-}
-
-.resultGrid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:28px;
-}
-
-.card{
-  padding:17px;
-  border-radius:15px;
-  background:#123827;
-  text-align:left;
-}
-
-.card small{
-  display:block;
-  margin-bottom:6px;
-  color:#82a896;
-}
-
-.card strong{
-  font-size:15px;
-}
-
-.continue{
-  margin-top:25px;
-  padding:15px 30px;
-  border:0;
-  border-radius:14px;
-  background:var(--yellow);
-  color:#173523;
-  font-weight:1000;
-}
-
-/* =========================================================
-   ERROR FALLBACK
-========================================================= */
-
-#errorBox{
-  display:none;
-  position:fixed;
-  z-index:999;
-  inset:0;
+    radial-gradient(circle at 50% 25%,#303742,#111318 65%);
+  display:flex;
   align-items:center;
   justify-content:center;
-  padding:25px;
-  background:#071f16;
+  padding:20px;
+}
+
+.resultCard{
+  width:min(92%,620px);
+  max-height:90vh;
+  overflow:auto;
+  background:rgba(15,17,21,.94);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:24px;
+  padding:30px;
+  box-shadow:0 30px 100px rgba(0,0,0,.45);
+}
+.resultCard h2{
+  margin:0 0 6px;
+  font-size:13px;
+  color:#f0c94d;
+  letter-spacing:3px;
+}
+.resultCard h1{
+  margin:0 0 22px;
+  font-size:38px;
+}
+.infoGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.info{
+  background:#20242b;
+  border-radius:12px;
+  padding:13px;
+}
+.info small{
+  display:block;
+  color:#9299a2;
+  margin-bottom:4px;
+}
+.info strong{font-size:15px}
+
+/* ================= APPEARANCE ================= */
+
+#appearance{
+  background:
+    radial-gradient(circle at 50% 20%,#39404a,#121419 68%);
+  overflow:auto;
+}
+
+.appearanceWrap{
+  width:min(94%,900px);
+  margin:0 auto;
+  min-height:100%;
+  padding:32px 0 45px;
+}
+
+.appearanceHeader{
   text-align:center;
+  margin-bottom:22px;
+}
+.appearanceHeader .eyebrow{
+  color:#f0c94d;
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:12px;
+}
+.appearanceHeader h1{
+  font-size:clamp(30px,7vw,48px);
+  margin:8px 0;
+}
+.appearanceHeader p{
+  color:#aeb5be;
+  margin:0 auto;
+  max-width:560px;
+  line-height:1.5;
 }
 
-#errorBox.show{
+/* baby preview */
+
+.previewStage{
+  height:260px;
+  border-radius:24px;
+  background:
+    linear-gradient(to bottom,#a9d5e5 0%,#dbe7df 62%,#b6a58c 62%);
+  position:relative;
+  overflow:hidden;
+  margin-bottom:20px;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.previewFloor{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:38%;
+  background:#b6a58c;
+}
+
+.previewBaby{
+  position:absolute;
+  left:50%;bottom:28px;
+  width:130px;height:155px;
+  transform:translateX(-50%);
+}
+
+.previewHair{
+  position:absolute;
+  z-index:3;
+  width:70px;height:58px;
+  left:30px;top:0;
+  background:#201813;
+  border-radius:50%;
+}
+.previewHead{
+  position:absolute;
+  z-index:2;
+  width:64px;height:70px;
+  left:33px;top:13px;
+  border-radius:50%;
+  background:#8a563d;
+}
+.previewEar{
+  position:absolute;
+  z-index:1;
+  width:18px;height:25px;
+  top:36px;
+  border-radius:50%;
+  background:#8a563d;
+}
+.previewEar.left{left:24px}
+.previewEar.right{right:24px}
+
+.previewBody{
+  position:absolute;
+  width:105px;height:90px;
+  left:13px;top:73px;
+  border-radius:45px 45px 15px 15px;
+  background:#e9c8b7;
+}
+.previewEye{
+  position:absolute;
+  z-index:4;
+  width:6px;height:8px;
+  background:#211b18;
+  border-radius:50%;
+  top:43px;
+}
+.previewEye.left{left:51px}
+.previewEye.right{left:75px}
+
+.previewHairFront{
+  position:absolute;
+  z-index:5;
+  left:31px;top:7px;
+  width:68px;height:27px;
+  background:#201813;
+  border-radius:50% 50% 30% 30%;
+}
+
+.previewName{
+  position:absolute;
+  bottom:12px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:10;
+  background:rgba(0,0,0,.65);
+  padding:7px 15px;
+  border-radius:999px;
+  font-size:13px;
+}
+
+/* controls */
+
+.controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.controlCard{
+  background:rgba(22,25,31,.95);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:17px;
+}
+
+.controlCard.full{
+  grid-column:1/-1;
+}
+
+.controlTitle{
+  font-size:12px;
+  color:#929aa5;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  margin-bottom:12px;
+}
+
+.options{
   display:flex;
+  flex-wrap:wrap;
+  gap:8px;
 }
 
-.errorInner{
-  max-width:500px;
+.option{
+  border:1px solid #383e48;
+  background:#252a31;
+  color:#fff;
+  padding:10px 13px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:.15s;
+}
+.option:hover{
+  border-color:#f0c94d;
+}
+.option.selected{
+  background:#f0c94d;
+  color:#151515;
+  border-color:#f0c94d;
+  font-weight:700;
 }
 
-.errorInner h2{
-  color:var(--yellow);
+.finish{
+  width:100%;
+  margin-top:18px;
+  padding:16px;
+  border:0;
+  border-radius:14px;
+  background:#f0c94d;
+  color:#161616;
+  font-weight:800;
+  cursor:pointer;
+  font-size:16px;
+}
+.finish:hover{filter:brightness(1.05)}
+
+@media(max-width:650px){
+  .controls{grid-template-columns:1fr}
+  .controlCard.full{grid-column:auto}
+  .infoGrid{grid-template-columns:1fr}
+  .appearanceWrap{padding-top:22px}
+  .previewStage{height:230px}
+  .person{transform:scale(.75)}
+  .nurse{left:1%}
+  .doctor{right:1%}
+  .father{right:17%}
 }
 
-.errorInner p{
-  color:#c5d9d1;
-  line-height:1.6;
+/* ================= ERROR ================= */
+
+#error{
+  background:#090a0d;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:30px;
 }
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:600px){
-
-  .titleCard{
-    padding:30px 20px;
-  }
-
-  .city{
-    gap:4px;
-  }
-
-  .building{
-    width:48px;
-  }
-
-  .window{
-    width:32%;
-    height:25%;
-  }
-
-  .bed{
-    width:72vw;
-  }
-
-  .nurse{
-    left:1%;
-    transform:scale(.78);
-    transform-origin:bottom;
-  }
-
-  .doctor{
-    right:0;
-    transform:scale(.78);
-    transform-origin:bottom;
-  }
-
-  .father{
-    left:38%;
-    transform:scale(.78);
-    transform-origin:bottom;
-  }
-
-  .dialogue{
-    top:18%;
-    font-size:13px;
-  }
-
-  .resultGrid{
-    grid-template-columns:1fr;
-  }
-}
+#error div{max-width:500px}
+#error h1{color:#f0c94d}
+#error p{color:#aaa}
 </style>
 </head>
 
 <body>
 
-<!-- =======================================================
-     TITLE
-======================================================== -->
+<!-- ================= TITLE ================= -->
 
 <section id="title" class="scene">
 
   <div class="sun"></div>
-
-  <div class="cloud one"></div>
-  <div class="cloud two"></div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
 
   <div class="city">
-    <div class="building"></div>
-    <div class="building"></div>
-    <div class="building"></div>
-    <div class="building"></div>
-    <div class="building"></div>
-    <div class="building"></div>
+    <div class="building"><div class="window"></div></div>
+    <div class="building"><div class="window"></div></div>
+    <div class="building"><div class="window"></div></div>
+    <div class="building"><div class="window"></div></div>
+    <div class="building"><div class="window"></div></div>
+    <div class="building"><div class="window"></div></div>
+    <div class="building"><div class="window"></div></div>
   </div>
 
   <div class="road"></div>
   <div class="danfo"></div>
 
   <div class="titleCard">
-
-    <div class="logo">
-      THE <span>NAIJS</span>
-    </div>
-
-    <div class="tagline">
-      Your life. Your choices. Your Naija.
-    </div>
-
-    <h2 id="welcomeTitle">
-      Welcome to The Naijs
-    </h2>
-
-    <p id="welcomeText">
-      No dull yourself. Your life is about to begin.
+    <h1>THE NAIJS</h1>
+    <p>
+      You didn't choose where you were born.<br>
+      You didn't choose your family.<br>
+      You just showed up.
     </p>
-
-    <button
-      id="playButton"
-      class="play"
-      type="button"
-    >
-      ▶ PLAY
-    </button>
-
+    <button class="play" id="playBtn">PLAY</button>
   </div>
-
 </section>
 
 
-<!-- =======================================================
-     BIRTH
-======================================================== -->
+<!-- ================= BIRTH ================= -->
 
 <section id="birth" class="scene hidden">
 
-  <div class="hospital">
+  <div class="hospital"></div>
+  <div class="ceilingLight"></div>
+  <div class="window"></div>
 
-    <div class="ceiling"></div>
+  <div class="curtain left"></div>
+  <div class="curtain right"></div>
+  <div class="floor"></div>
 
-    <div class="light"></div>
-
-    <div class="window">
-      <div class="windowSun"></div>
-    </div>
-
-    <div class="curtain"></div>
-
-    <div class="floor"></div>
-
-
-    <!-- BED -->
-
-    <div class="bed">
-
-      <div class="bedHead"></div>
-
-      <div class="pillow"></div>
-
-      <div class="mother">
-
-        <div class="motherHead"></div>
-        <div class="motherHair"></div>
-        <div class="motherBody"></div>
-        <div class="motherArm"></div>
-
-      </div>
-
-    </div>
-
-
-    <!-- NURSE -->
-
-    <div class="character nurse">
-
-      <div class="personHead"></div>
-      <div class="personHair"></div>
-      <div class="personBody"></div>
-
-      <div class="personArm left"></div>
-      <div class="personArm right"></div>
-
-      <div class="personLeg left"></div>
-      <div class="personLeg right"></div>
-
-      <div
-        id="nurseName"
-        class="personLabel"
-      >
-        Nurse
-      </div>
-
-    </div>
-
-
-    <!-- DOCTOR -->
-
-    <div class="character doctor">
-
-      <div class="personHead"></div>
-      <div class="personHair"></div>
-      <div class="personBody"></div>
-
-      <div class="personArm left"></div>
-      <div class="personArm right"></div>
-
-      <div class="personLeg left"></div>
-      <div class="personLeg right"></div>
-
-      <div
-        id="doctorName"
-        class="personLabel"
-      >
-        Doctor
-      </div>
-
-    </div>
-
-
-    <!-- FATHER -->
-
-    <div class="character father">
-
-      <div class="personHead"></div>
-      <div class="personHair"></div>
-      <div class="personBody"></div>
-
-      <div class="personArm left"></div>
-      <div class="personArm right"></div>
-
-      <div class="personLeg left"></div>
-      <div class="personLeg right"></div>
-
-      <div
-        id="fatherName"
-        class="personLabel"
-      >
-        Dad
-      </div>
-
-    </div>
-
-
-    <!-- DIALOGUE -->
-
-    <div
-      id="dialogue"
-      class="dialogue visible"
-    >
-      <span
-        id="speaker"
-        class="speaker"
-      >
-        Nurse
-      </span>
-
-      <span id="dialogueText">
-        Easy, easy. You dey do well.
-      </span>
-    </div>
-
-
-    <div class="bar top"></div>
-    <div class="bar bottom"></div>
-
-
-    <!-- FLASH -->
-
-    <div
-      id="flash"
-      class="flash"
-    ></div>
-
-
-    <!-- REVEAL -->
-
-    <div
-      id="reveal"
-      class="reveal"
-    >
-
-      <div class="baby"></div>
-
-      <h1>
-        IT'S A BABY!
-      </h1>
-
-      <p>
-        And just like that, your story begins.
-      </p>
-
-    </div>
-
+  <div class="bed">
+    <div class="mattress"></div>
+    <div class="blanket"></div>
   </div>
 
+  <div class="mother">
+    <div class="hair"></div>
+    <div class="head"></div>
+    <div class="body"></div>
+    <div class="arm"></div>
+  </div>
+
+  <div class="person nurse">
+    <div class="uniform"></div>
+    <div class="phead"></div>
+    <div class="pbody"></div>
+    <div class="legs"></div>
+  </div>
+
+  <div class="person doctor">
+    <div class="uniform"></div>
+    <div class="phead"></div>
+    <div class="pbody"></div>
+    <div class="legs"></div>
+  </div>
+
+  <div class="person father">
+    <div class="phead"></div>
+    <div class="pbody"></div>
+    <div class="legs"></div>
+  </div>
+
+  <div class="baby" id="baby">
+    <div class="babyHead"></div>
+    <div class="babyBody"></div>
+  </div>
+
+  <div class="flash" id="flash"></div>
+
+  <div class="cinemaBar top"></div>
+  <div class="cinemaBar bottom"></div>
+
+  <div class="dialogue">
+    <div class="speaker" id="speaker">NURSE</div>
+    <div class="line" id="dialogueText">Easy, easy. You dey do well.</div>
+  </div>
 </section>
 
 
-<!-- =======================================================
-     RESULT
-======================================================== -->
+<!-- ================= RESULT ================= -->
 
-<section
-  id="result"
-  class="scene hidden"
->
+<section id="result" class="scene hidden">
+  <div class="resultCard">
 
-  <div class="resultInner">
+    <h2>THE NAIJS</h2>
+    <h1>YOU NO GET CHOICE</h1>
 
-    <div class="resultTag">
-      YOUR LIFE HAS BEGUN
-    </div>
-
-    <h1>
-      YOU NO GET CHOICE
-    </h1>
-
-    <p class="resultIntro">
-      You arrived in a Nigerian family you did not choose.
-      For now, the adults make most of the decisions.
-      But everything that happens from here can shape who you become.
-    </p>
-
-    <div class="resultGrid">
-
-      <div class="card">
+    <div class="infoGrid">
+      <div class="info">
         <small>Your name</small>
-        <strong id="rName">-</strong>
+        <strong id="rName"></strong>
       </div>
 
-      <div class="card">
+      <div class="info">
         <small>Gender</small>
-        <strong id="rGender">-</strong>
+        <strong id="rGender"></strong>
       </div>
 
-      <div class="card">
-        <small>Born in</small>
-        <strong id="rState">-</strong>
+      <div class="info">
+        <small>State</small>
+        <strong id="rState"></strong>
       </div>
 
-      <div class="card">
+      <div class="info">
         <small>Family</small>
-        <strong id="rFamily">-</strong>
+        <strong id="rFamily"></strong>
       </div>
 
-      <div class="card">
-        <small>Mother</small>
-        <strong id="rMother">-</strong>
+      <div class="info">
+        <small>Parents</small>
+        <strong id="rParents"></strong>
       </div>
 
-      <div class="card">
-        <small>Father</small>
-        <strong id="rFather">-</strong>
+      <div class="info">
+        <small>Wealth</small>
+        <strong id="rWealth"></strong>
       </div>
 
-      <div class="card">
-        <small>Family wealth</small>
-        <strong id="rWealth">-</strong>
-      </div>
-
-      <div class="card">
+      <div class="info">
         <small>Birth order</small>
-        <strong id="rOrder">-</strong>
+        <strong id="rOrder"></strong>
       </div>
 
+      <div class="info">
+        <small>Life event</small>
+        <strong>Normal birth</strong>
+      </div>
     </div>
 
-    <button
-      id="continueButton"
-      class="continue"
-      type="button"
-    >
-      CONTINUE →
+    <button class="finish" id="appearanceBtn">
+      CHOOSE YOUR APPEARANCE
     </button>
 
   </div>
-
 </section>
 
 
-<!-- =======================================================
-     ERROR FALLBACK
-======================================================== -->
+<!-- ================= APPEARANCE ================= -->
 
-<div id="errorBox">
+<section id="appearance" class="scene hidden">
 
-  <div class="errorInner">
+  <div class="appearanceWrap">
 
-    <h2>
-      Something stopped the game from loading.
-    </h2>
+    <div class="appearanceHeader">
+      <div class="eyebrow">One thing you can control</div>
+      <h1>Make yourself look like you.</h1>
+      <p>
+        You didn't choose the family, the state or the circumstances.
+        But you can decide what you look like.
+      </p>
+    </div>
 
-    <p id="errorText">
-      The Naijs could not start correctly.
-    </p>
+    <div class="previewStage">
+
+      <div class="previewFloor"></div>
+
+      <div class="previewBaby" id="previewBaby">
+
+        <div class="previewHair" id="previewHair"></div>
+
+        <div class="previewEar left" id="previewEarLeft"></div>
+        <div class="previewEar right" id="previewEarRight"></div>
+
+        <div class="previewHead" id="previewHead"></div>
+
+        <div class="previewEye left"></div>
+        <div class="previewEye right"></div>
+
+        <div class="previewHairFront" id="previewHairFront"></div>
+
+        <div class="previewBody" id="previewBody"></div>
+
+      </div>
+
+      <div class="previewName" id="previewName">Your baby</div>
+
+    </div>
+
+
+    <div class="controls">
+
+      <!-- SKIN -->
+
+      <div class="controlCard">
+        <div class="controlTitle">Skin tone</div>
+
+        <div class="options">
+          <button class="option" data-type="skin" data-value="#5a3427">Deep</button>
+          <button class="option" data-type="skin" data-value="#744331">Dark</button>
+          <button class="option selected" data-type="skin" data-value="#8a563d">Brown</button>
+          <button class="option" data-type="skin" data-value="#a96f50">Light brown</button>
+          <button class="option" data-type="skin" data-value="#c98e6c">Light</button>
+        </div>
+      </div>
+
+
+      <!-- HAIR -->
+
+      <div class="controlCard">
+        <div class="controlTitle">Hair</div>
+
+        <div class="options">
+          <button class="option selected" data-type="hair" data-value="short">Short</button>
+          <button class="option" data-type="hair" data-value="full">Full</button>
+          <button class="option" data-type="hair" data-value="curly">Curly</button>
+          <button class="option" data-type="hair" data-value="none">Little hair</button>
+        </div>
+      </div>
+
+
+      <!-- EYES -->
+
+      <div class="controlCard">
+        <div class="controlTitle">Eyes</div>
+
+        <div class="options">
+          <button class="option selected" data-type="eyes" data-value="#211b18">Brown</button>
+          <button class="option" data-type="eyes" data-value="#3d271c">Dark brown</button>
+          <button class="option" data-type="eyes" data-value="#5a4732">Light brown</button>
+        </div>
+      </div>
+
+
+      <!-- EARS -->
+
+      <div class="controlCard">
+        <div class="controlTitle">Ears</div>
+
+        <div class="options">
+          <button class="option selected" data-type="ears" data-value="normal">Normal</button>
+          <button class="option" data-type="ears" data-value="small">Small</button>
+          <button class="option" data-type="ears" data-value="prominent">Prominent</button>
+        </div>
+      </div>
+
+
+      <!-- CLOTHING -->
+
+      <div class="controlCard full">
+        <div class="controlTitle">Baby outfit</div>
+
+        <div class="options">
+          <button class="option selected" data-type="outfit" data-value="#e9c8b7">
+            Hospital wrap
+          </button>
+
+          <button class="option" data-type="outfit" data-value="#d8e8e1">
+            Mint wrap
+          </button>
+
+          <button class="option" data-type="outfit" data-value="#ddd5e8">
+            Lavender wrap
+          </button>
+
+          <button class="option" data-type="outfit" data-value="#dce4f0">
+            Blue wrap
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="finish" id="enterLifeBtn">
+      THIS IS ME → ENTER MY LIFE
+    </button>
 
   </div>
+</section>
 
-</div>
+
+<!-- ================= ERROR ================= -->
+
+<section id="error" class="scene hidden">
+  <div>
+    <h1>Something went wrong.</h1>
+    <p id="errorText">
+      The Naijs encountered an unexpected problem.
+    </p>
+    <button class="play" onclick="location.reload()">RESTART</button>
+  </div>
+</section>
 
 
 <script>
 "use strict";
 
 /* =========================================================
-   DATA
-========================================================= */
+   THE NAIJS
+   Birth system foundation.
+
+   IMPORTANT:
+   - Normal birth = random circumstances
+   - Appearance = always available
+   - 1% "YOU DON GET CHOICE" remains a separate future path
+   ========================================================= */
+
+const title = document.getElementById("title");
+const birth = document.getElementById("birth");
+const result = document.getElementById("result");
+const appearance = document.getElementById("appearance");
+const errorScreen = document.getElementById("error");
+
+let currentLife = null;
 
 const names = [
-  "Amina",
-  "Amaka",
-  "Chiamaka",
-  "Tunde",
-  "David",
-  "Favour",
-  "Daniel",
-  "Zainab",
-  "Adebayo",
-  "Esther",
-  "Emeka",
-  "Damilola",
-  "Precious",
-  "Yusuf",
-  "Blessing",
-  "Ifeanyi",
-  "Sade",
-  "Mariam",
-  "Kelechi",
-  "Olamide",
-  "Tosin",
-  "Ada",
-  "Micheal",
-  "Mary",
-  "Abdul"
+  "Ireoluwa","Chiamaka","Daniel","Zainab","Tobi","David",
+  "Amarachi","Favour","Mariam","Ebuka","Damilola","Eniola",
+  "Kelechi","Yusuf","Temitope","Blessing","Chisom","Aisha"
 ];
 
 const states = [
-  "Lagos",
-  "Oyo",
-  "Ogun",
-  "Rivers",
-  "Enugu",
-  "Kano",
-  "Kaduna",
-  "Delta",
-  "Edo",
-  "Anambra",
-  "Kwara",
-  "Osun",
-  "Akwa Ibom",
-  "Abuja",
-  "Benue"
-];
-
-const jobs = [
-  "Teacher",
-  "Trader",
-  "Nurse",
-  "Engineer",
-  "Civil Servant",
-  "Business Owner",
-  "Banker",
-  "Doctor",
-  "Driver",
-  "Lawyer",
-  "Accountant",
-  "Artisan",
-  "Entrepreneur"
+  "Lagos","Oyo","Ogun","Rivers","Enugu","Anambra",
+  "Kaduna","Kano","Abuja","Delta","Edo","Kwara",
+  "Osun","Kogi","Akwa Ibom","Cross River"
 ];
 
 const families = [
-  "A close-knit family",
-  "A large extended family",
-  "A quiet small family",
-  "A busy working family",
-  "A lively family with plenty relatives"
+  "Working class",
+  "Lower middle class",
+  "Middle class",
+  "Upper middle class",
+  "Wealthy",
+  "Very wealthy"
 ];
 
-const wealthLevels = [
-  "Low income",
-  "Lower-middle income",
-  "Middle income",
-  "Upper-middle income",
-  "Wealthy"
+const motherNames = [
+  "Amaka","Funmi","Aisha","Ngozi","Yetunde","Maryam",
+  "Blessing","Chioma","Titi","Rukayat"
 ];
 
-const birthOrders = [
-  "First child",
-  "Second child",
-  "Third child",
-  "Fourth child"
+const fatherNames = [
+  "Kunle","Emeka","Yusuf","Tunde","Chinedu","Bayo",
+  "Ibrahim","Femi","Chuka","Seyi"
 ];
 
-const genders = [
-  "Boy",
-  "Girl"
+const dadReactions = [
+  "Ah! Ah! Thank God!",
+  "Jesus! She's here!",
+  "Omo... I'm a father.",
+  "Thank God. Thank God.",
+  "Ahhh! Look at my baby!",
+  "We made it."
 ];
 
 
 /* =========================================================
-   HELPERS
-========================================================= */
+   UTILITY
+   ========================================================= */
 
-function pick(array){
-  return array[Math.floor(Math.random() * array.length)];
+function random(arr){
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function byId(id){
-  return document.getElementById(id);
+function pickGender(){
+  return Math.random() < 0.5 ? "Girl" : "Boy";
+}
+
+function setScene(show){
+  [title,birth,result,appearance,errorScreen].forEach(scene=>{
+    scene.classList.add("hidden");
+  });
+
+  show.classList.remove("hidden");
 }
 
 
 /* =========================================================
-   GENERATE LIFE
-========================================================= */
+   LIFE GENERATION
+   ========================================================= */
 
 function generateLife(){
 
-  const motherName = pick(names);
+  const gender = pickGender();
 
-  let fatherName = pick(names);
-
-  while(fatherName === motherName){
-    fatherName = pick(names);
-  }
+  const mother = random(motherNames);
+  const father = random(fatherNames);
 
   return {
-    name:pick(names),
-    gender:pick(genders),
-    state:pick(states),
-    mother:motherName + " • " + pick(jobs),
-    father:fatherName + " • " + pick(jobs),
-    family:pick(families),
-    wealth:pick(wealthLevels),
-    order:pick(birthOrders)
+    name: random(names),
+    gender,
+    state: random(states),
+    family: random(families),
+    mother,
+    father,
+    wealth: random([
+      "Struggling",
+      "Getting by",
+      "Stable",
+      "Doing well",
+      "Very comfortable",
+      "Rich"
+    ]),
+    birthOrder: random([
+      "First child",
+      "Second child",
+      "Third child",
+      "Fourth child",
+      "Youngest child"
+    ]),
+
+    /*
+      This flag is deliberately separate.
+
+      Eventually:
+      ~1% of lives will become the
+      YOU DON GET CHOICE path.
+
+      We are NOT activating that path yet.
+      This keeps the architecture ready without
+      mixing it into normal birth.
+    */
+    rareChoice: Math.random() < 0.01
   };
 }
 
 
 /* =========================================================
-   DIALOGUE
-========================================================= */
+   START BIRTH
+   ========================================================= */
 
-const nurseLines = [
-  "Easy, easy. You dey do well.",
-  "Almost there. Just keep breathing.",
-  "You're doing well. Stay with us."
-];
+function startLife(){
 
-const doctorLines = [
-  "Everything is progressing normally. You're doing very well.",
-  "The baby is almost here. Stay calm. We're right here with you.",
-  "You're doing well. One more push."
-];
+  currentLife = generateLife();
 
-const fatherLines = [
-  "Ah! God abeg!",
-  "Jesus! Please let everything be okay.",
-  "Oh my God... please, let them be alright."
-];
+  setScene(birth);
 
-
-/* =========================================================
-   SET DIALOGUE
-========================================================= */
-
-function say(speaker, text){
-
-  byId("speaker").textContent = speaker;
-  byId("dialogueText").textContent = text;
-
-  byId("dialogue").classList.add("visible");
+  runBirthCinema(currentLife);
 }
 
 
 /* =========================================================
-   START
-========================================================= */
+   BIRTH CINEMATIC
+   ========================================================= */
 
-function startLife(){
+function runBirthCinema(life){
 
-  try{
+  const speaker = document.getElementById("speaker");
+  const text = document.getElementById("dialogueText");
+  const baby = document.getElementById("baby");
+  const flash = document.getElementById("flash");
 
-    const life = generateLife();
+  baby.classList.remove("show");
+  flash.classList.remove("go");
 
-    window.currentLife = life;
+  const scenes = [
 
-    /* Names */
+    {
+      delay:0,
+      speaker:"NURSE",
+      text:"Easy, easy. You dey do well."
+    },
 
-    byId("nurseName").textContent =
-      "Nurse " + pick(names);
+    {
+      delay:2200,
+      speaker:"NURSE",
+      text:"Almost there. Just keep breathing."
+    },
 
-    byId("doctorName").textContent =
-      "Dr. " + pick(names);
+    {
+      delay:4300,
+      speaker:"DOCTOR",
+      text:"Everything is progressing normally. You're doing very well."
+    },
 
-    byId("fatherName").textContent =
-      life.father.split(" • ")[0];
+    {
+      delay:6100,
+      speaker:"DOCTOR",
+      text:"The baby is almost here. Stay calm. We're right here with you."
+    },
 
+    {
+      delay:7200,
+      speaker:life.father.toUpperCase(),
+      text:random(dadReactions)
+    }
+  ];
 
-    /* Reset reveal */
+  scenes.forEach(scene=>{
+    setTimeout(()=>{
+      speaker.textContent = scene.speaker;
+      text.textContent = scene.text;
+    },scene.delay);
+  });
 
-    byId("reveal").classList.remove("show");
+  setTimeout(()=>{
 
-    byId("flash").classList.remove("go");
+    flash.classList.remove("go");
+    void flash.offsetWidth;
+    flash.classList.add("go");
 
-    /* Hide title */
+    speaker.textContent = "NURSE";
+    text.textContent = "Congratulations. It's a baby.";
 
-    byId("title").classList.add("hidden");
+    baby.classList.add("show");
 
-    /* Show birth */
+  },8500);
 
-    byId("birth").classList.remove("hidden");
+  setTimeout(()=>{
 
-    /* First line */
+    speaker.textContent = "THE NAIJS";
+    text.textContent = "And just like that... your life begins.";
 
-    say(
-      "Nurse",
-      pick(nurseLines)
-    );
+  },9500);
 
-
-    /* Nurse */
-
-    setTimeout(function(){
-
-      say(
-        "Nurse",
-        pick(nurseLines)
-      );
-
-    },1600);
-
-
-    /* Doctor */
-
-    setTimeout(function(){
-
-      say(
-        "Doctor",
-        pick(doctorLines)
-      );
-
-    },3200);
-
-
-    /* Doctor again */
-
-    setTimeout(function(){
-
-      say(
-        "Doctor",
-        "The baby is almost here. Stay calm. We're right here with you."
-      );
-
-    },4500);
-
-
-    /* Father */
-
-    setTimeout(function(){
-
-      say(
-        "Dad",
-        pick(fatherLines)
-      );
-
-    },5600);
-
-
-    /* Birth */
-
-    setTimeout(function(){
-
-      byId("dialogue").classList.remove("visible");
-
-      byId("flash").classList.remove("go");
-
-      /* Force animation restart */
-
-      void byId("flash").offsetWidth;
-
-      byId("flash").classList.add("go");
-
-    },6500);
-
-
-    /* Reveal */
-
-    setTimeout(function(){
-
-      byId("reveal").classList.add("show");
-
-    },6900);
-
-
-    /* Result */
-
-    setTimeout(function(){
-
-      showResult(life);
-
-    },9500);
-
-  }
-
-  catch(error){
-
-    showError(
-      "The birth sequence hit an error: " +
-      error.message
-    );
-
-  }
-
+  setTimeout(()=>{
+    showResult(life);
+  },10800);
 }
 
 
 /* =========================================================
    RESULT
-========================================================= */
+   ========================================================= */
 
 function showResult(life){
 
-  byId("birth").classList.add("hidden");
+  document.getElementById("rName").textContent = life.name;
+  document.getElementById("rGender").textContent = life.gender;
+  document.getElementById("rState").textContent = life.state;
+  document.getElementById("rFamily").textContent = life.family;
 
-  byId("result").classList.remove("hidden");
+  document.getElementById("rParents").textContent =
+    `${life.mother} & ${life.father}`;
 
-  byId("rName").textContent = life.name;
-  byId("rGender").textContent = life.gender;
-  byId("rState").textContent = life.state;
-  byId("rFamily").textContent = life.family;
-  byId("rMother").textContent = life.mother;
-  byId("rFather").textContent = life.father;
-  byId("rWealth").textContent = life.wealth;
-  byId("rOrder").textContent = life.order;
+  document.getElementById("rWealth").textContent = life.wealth;
+  document.getElementById("rOrder").textContent = life.birthOrder;
 
-  try{
-
-    localStorage.setItem(
-      "theNaijsLife",
-      JSON.stringify(life)
-    );
-
-  }
-  catch(error){
-
-    /* Game still works if storage is unavailable. */
-
-  }
-
+  setScene(result);
 }
 
 
 /* =========================================================
-   CONTINUE
-========================================================= */
+   APPEARANCE SYSTEM
+   ========================================================= */
 
-function continueGame(){
+const appearanceState = {
+  skin:"#8a563d",
+  hair:"short",
+  eyes:"#211b18",
+  ears:"normal",
+  outfit:"#e9c8b7"
+};
 
-  alert(
-    "AGE 0\n\n" +
-    "You cannot make your own decisions yet.\n\n" +
-    "Your family decides where you live, " +
-    "what you eat, what religion you practise, " +
-    "and how you are raised.\n\n" +
-    "Your experiences are already beginning to shape you."
+function openAppearance(){
+
+  setScene(appearance);
+
+  document.getElementById("previewName").textContent =
+    currentLife ? currentLife.name : "Your baby";
+
+  updateBabyAppearance();
+}
+
+
+function updateBabyAppearance(){
+
+  const head = document.getElementById("previewHead");
+  const hair = document.getElementById("previewHair");
+  const hairFront = document.getElementById("previewHairFront");
+  const earLeft = document.getElementById("previewEarLeft");
+  const earRight = document.getElementById("previewEarRight");
+  const body = document.getElementById("previewBody");
+
+  head.style.background = appearanceState.skin;
+  earLeft.style.background = appearanceState.skin;
+  earRight.style.background = appearanceState.skin;
+
+  body.style.background = appearanceState.outfit;
+
+  /* eyes */
+  document.querySelector(".previewEye.left").style.background =
+    appearanceState.eyes;
+
+  document.querySelector(".previewEye.right").style.background =
+    appearanceState.eyes;
+
+  /* hair */
+  hair.style.background = "#201813";
+  hairFront.style.background = "#201813";
+
+  if(appearanceState.hair === "none"){
+    hair.style.opacity = "0";
+    hairFront.style.opacity = "0";
+  }
+
+  else if(appearanceState.hair === "short"){
+    hair.style.opacity = "1";
+    hair.style.width = "70px";
+    hair.style.height = "58px";
+    hair.style.left = "30px";
+    hairFront.style.opacity = "1";
+  }
+
+  else if(appearanceState.hair === "full"){
+    hair.style.opacity = "1";
+    hair.style.width = "82px";
+    hair.style.height = "75px";
+    hair.style.left = "24px";
+    hairFront.style.opacity = "1";
+  }
+
+  else if(appearanceState.hair === "curly"){
+    hair.style.opacity = "1";
+    hair.style.width = "82px";
+    hair.style.height = "67px";
+    hair.style.left = "24px";
+    hair.style.background =
+      "radial-gradient(circle,#201813 0 55%,transparent 57%)";
+    hairFront.style.opacity = "1";
+  }
+
+  /* ears */
+  if(appearanceState.ears === "small"){
+    earLeft.style.width = "13px";
+    earRight.style.width = "13px";
+  }
+
+  else if(appearanceState.ears === "prominent"){
+    earLeft.style.width = "23px";
+    earRight.style.width = "23px";
+  }
+
+  else{
+    earLeft.style.width = "18px";
+    earRight.style.width = "18px";
+  }
+}
+
+
+/* =========================================================
+   OPTION BUTTONS
+   ========================================================= */
+
+document.querySelectorAll(".option").forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    const type = button.dataset.type;
+    const value = button.dataset.value;
+
+    appearanceState[type] = value;
+
+    document
+      .querySelectorAll(`.option[data-type="${type}"]`)
+      .forEach(option=>{
+        option.classList.remove("selected");
+      });
+
+    button.classList.add("selected");
+
+    updateBabyAppearance();
+  });
+
+});
+
+
+/* =========================================================
+   ENTER LIFE
+   ========================================================= */
+
+function enterLife(){
+
+  /*
+    This is deliberately a placeholder transition.
+
+    Next major system:
+    AGE 0 → AGE 1
+
+    At that stage the appearance data will become part
+    of the permanent player character.
+  */
+
+  const savedAppearance = {
+    skin:appearanceState.skin,
+    hair:appearanceState.hair,
+    eyes:appearanceState.eyes,
+    ears:appearanceState.ears,
+    outfit:appearanceState.outfit
+  };
+
+  currentLife.appearance = savedAppearance;
+
+  localStorage.setItem(
+    "theNaijsCurrentLife",
+    JSON.stringify(currentLife)
   );
 
-}
-
-
-/* =========================================================
-   ERROR
-========================================================= */
-
-function showError(message){
-
-  byId("errorText").textContent = message;
-
-  byId("errorBox").classList.add("show");
-
+  alert(
+    `${currentLife.name} is born.\n\n` +
+    `Next chapter: AGE 0 → AGE 1.`
+  );
 }
 
 
 /* =========================================================
    BUTTONS
-========================================================= */
+   ========================================================= */
 
-byId("playButton").addEventListener(
-  "click",
-  startLife
-);
+document
+  .getElementById("playBtn")
+  .addEventListener("click",startLife);
 
-byId("continueButton").addEventListener(
-  "click",
-  continueGame
-);
+document
+  .getElementById("appearanceBtn")
+  .addEventListener("click",openAppearance);
+
+document
+  .getElementById("enterLifeBtn")
+  .addEventListener("click",enterLife);
 
 
 /* =========================================================
-   RETURNING PLAYER
-========================================================= */
+   ERROR HANDLING
+   ========================================================= */
 
-try{
+window.addEventListener("error",(event)=>{
 
-  const saved =
-    localStorage.getItem("theNaijsLife");
+  console.error(event.error || event.message);
 
-  if(saved){
+  errorScreen.classList.remove("hidden");
 
-    byId("welcomeTitle").textContent =
-      "Welcome back to The Naijs";
+  document.getElementById("errorText").textContent =
+    "The game hit an unexpected error. Restarting should fix it.";
 
-    byId("welcomeText").textContent =
-      "Your story is still waiting for you.";
+});
 
-  }
 
-}
-catch(error){
+/* =========================================================
+   INITIAL STATE
+   ========================================================= */
 
-  /* Ignore storage errors. */
-
-}
+setScene(title);
 
 </script>
 
