@@ -1,769 +1,469 @@
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
-}
-
-body {
-  background: #087443;
-}
-
-button {
-  font: inherit;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none !important;
-}
-
-/* =========================
-   MAIN APP
-========================= */
-
-#game,
-#app {
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-}
-
-/* =========================
-   TITLE WORLD
-========================= */
-
-.title-world {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  background: linear-gradient(
-    #69c9d8 0%,
-    #b8e7df 55%,
-    #f4c96b 56%,
-    #d99b52 100%
-  );
-}
-
-/* SUN */
-
-.sun {
-  position: absolute;
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  background: #ffd45c;
-  top: 8%;
-  right: 10%;
-  box-shadow: 0 0 60px rgba(255, 212, 92, .6);
-}
-
-/* CLOUDS */
-
-.cloud {
-  position: absolute;
-  width: 150px;
-  height: 45px;
-  background: white;
-  border-radius: 50px;
-  opacity: .75;
-}
-
-.cloud:before,
-.cloud:after {
-  content: "";
-  position: absolute;
-  background: white;
-  border-radius: 50%;
-}
-
-.cloud:before {
-  width: 65px;
-  height: 65px;
-  left: 25px;
-  top: -30px;
-}
-
-.cloud:after {
-  width: 75px;
-  height: 75px;
-  right: 20px;
-  top: -40px;
-}
-
-.cloud.one {
-  top: 15%;
-  left: 8%;
-}
-
-.cloud.two {
-  top: 28%;
-  right: 30%;
-  transform: scale(.7);
-}
-
-/* CITY */
-
-.city {
-  position: absolute;
-  bottom: 38%;
-  left: 0;
-  width: 100%;
-  height: 180px;
-}
-
-.building {
-  position: absolute;
-  bottom: 0;
-  background: #52656b;
-  border-radius: 4px 4px 0 0;
-}
-
-.b1 {
-  left: 4%;
-  width: 90px;
-  height: 130px;
-}
-
-.b2 {
-  left: 16%;
-  width: 130px;
-  height: 170px;
-  background: #687b7d;
-}
-
-.b3 {
-  right: 15%;
-  width: 100px;
-  height: 145px;
-}
-
-.b4 {
-  right: 3%;
-  width: 150px;
-  height: 185px;
-  background: #596c70;
-}
-
-.window {
-  position: absolute;
-  width: 12px;
-  height: 18px;
-  background: #ffd76b;
-  box-shadow:
-    25px 0 #ffd76b,
-    50px 0 #ffd76b,
-    0 30px #ffd76b,
-    25px 30px #ffd76b,
-    50px 30px #ffd76b;
-  top: 25px;
-  left: 20px;
-}
-
-/* TREES */
-
-.tree {
-  position: absolute;
-  bottom: 30%;
-  width: 100px;
-  height: 180px;
-}
-
-.tree:before {
-  content: "";
-  position: absolute;
-  width: 20px;
-  height: 100px;
-  background: #68462e;
-  bottom: 0;
-  left: 40px;
-  transform: rotate(-5deg);
-}
-
-.tree:after {
-  content: "🌴";
-  font-size: 100px;
-  position: absolute;
-  bottom: 55px;
-  left: 0;
-}
-
-.tree.one {
-  left: 3%;
-}
-
-.tree.two {
-  right: 4%;
-  transform: scale(.8);
-}
-
-/* ROAD */
-
-.road {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 31%;
-  background: #3d4241;
-}
-
-.road-line {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  border-top: 7px dashed #f5d76e;
-}
-
-/* DANFO */
-
-.bus {
-  position: absolute;
-  bottom: 13%;
-  left: -220px;
-  width: 190px;
-  height: 75px;
-  background: #f4c72d;
-  border: 5px solid #222;
-  border-radius: 12px 18px 8px 8px;
-  z-index: 4;
-  animation: danfoMove 10s linear infinite;
-}
-
-.bus:before {
-  content: "";
-  position: absolute;
-  width: 55px;
-  height: 30px;
-  background: #83c7d3;
-  top: 10px;
-  left: 12px;
-  box-shadow: 65px 0 #83c7d3;
-}
-
-.bus:after {
-  content: "";
-  position: absolute;
-  width: 28px;
-  height: 28px;
-  background: #222;
-  border-radius: 50%;
-  bottom: -18px;
-  left: 25px;
-  box-shadow: 110px 0 #222;
-}
-
-@keyframes danfoMove {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(calc(100vw + 500px));
-  }
-}
-
-/* PEOPLE */
-
-.person {
-  position: absolute;
-  bottom: 26%;
-  z-index: 5;
-  font-size: 55px;
-}
-
-.person.one {
-  left: 34%;
-}
-
-.person.two {
-  right: 30%;
-  font-size: 48px;
-}
-
-/* TITLE CARD */
-
-.title-screen {
-  position: absolute;
-  z-index: 10;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: min(90%, 570px);
-  text-align: center;
-  padding: 35px 25px;
-  border-radius: 30px;
-  background: rgba(5, 54, 34, .88);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 25px 70px rgba(0, 0, 0, .35);
-  border: 1px solid rgba(255, 255, 255, .15);
-}
-
-.logo {
-  font-size: clamp(50px, 12vw, 90px);
-  font-weight: 900;
-  letter-spacing: -5px;
-  color: white;
-}
-
-.logo span {
-  color: #ffd34e;
-}
-
-.tagline {
-  margin-top: 8px;
-  color: #bce5cf;
-  font-size: 14px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.welcome {
-  margin-top: 38px;
-  font-size: 27px;
-  font-weight: 800;
-}
-
-.subtext {
-  color: #d4e8dc;
-  line-height: 1.6;
-  margin: 10px auto 28px;
-  max-width: 380px;
-}
-
-.play {
-  border: 0;
-  border-radius: 50px;
-  padding: 16px 48px;
-  background: #ffd34e;
-  color: #123322;
-  font-size: 17px;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, .25);
-}
-
-.play:hover {
-  transform: scale(1.04);
-}
-
-/* =========================
-   BIRTH SCREEN
-========================= */
-
-.birth-screen {
-  position: absolute;
-  inset: 0;
-  background: #d8d0c5;
-  overflow: hidden;
-}
-
-.hospital-room {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      to bottom,
-      #eee9e1 0%,
-      #eee9e1 68%,
-      #c5bdb2 68%,
-      #c5bdb2 100%
-    );
-}
-
-/* BED */
-
-.hospital-bed {
-  position: absolute;
-  width: min(58vw, 560px);
-  height: 240px;
-  left: 12%;
-  bottom: 25%;
-}
-
-.bed-frame {
-  position: absolute;
-  left: 0;
-  bottom: 20px;
-  width: 100%;
-  height: 32px;
-  background: #555;
-  border-radius: 5px;
-}
-
-.bed-mattress {
-  position: absolute;
-  left: 2%;
-  bottom: 52px;
-  width: 92%;
-  height: 85px;
-  background: #fafafa;
-  border-radius: 12px;
-  box-shadow: 0 6px 0 #b8b8b8;
-}
-
-.bed-pillow {
-  position: absolute;
-  left: 8%;
-  bottom: 107px;
-  width: 24%;
-  height: 45px;
-  background: #fff;
-  border-radius: 15px;
-}
-
-.bed-leg {
-  position: absolute;
-  bottom: -2px;
-  width: 18px;
-  height: 58px;
-  background: #555;
-  border-radius: 3px;
-}
-
-.bed-leg.left {
-  left: 8%;
-}
-
-.bed-leg.right {
-  right: 10%;
-}
-
-/* BIRTH CHARACTERS */
-
-.character {
-  position: absolute;
-  width: 110px;
-  height: 210px;
-  z-index: 8;
-}
-
-.character-head {
-  position: absolute;
-  top: 0;
-  left: 30px;
-  width: 50px;
-  height: 60px;
-  border-radius: 48%;
-  background: var(--skin, #6b402b);
-  z-index: 3;
-}
-
-.character-hair {
-  position: absolute;
-  top: -8px;
-  left: 20px;
-  width: 70px;
-  height: 32px;
-  z-index: 4;
-}
-
-.character-body {
-  position: absolute;
-  top: 60px;
-  left: 18px;
-  width: 74px;
-  height: 92px;
-  border-radius: 18px 18px 8px 8px;
-  background: var(--clothes, #fff);
-}
-
-.character-arm {
-  position: absolute;
-  top: 70px;
-  width: 18px;
-  height: 70px;
-  border-radius: 12px;
-  background: var(--skin, #6b402b);
-}
-
-.character-arm.left {
-  left: 1px;
-}
-
-.character-arm.right {
-  right: 1px;
-}
-
-.character-leg {
-  position: absolute;
-  top: 145px;
-  width: 23px;
-  height: 60px;
-  background: #333;
-  border-radius: 8px;
-}
-
-.character-leg.left {
-  left: 29px;
-}
-
-.character-leg.right {
-  right: 29px;
-}
-
-/* MOTHER LYING ON BED */
-
-.mother-character {
-  position: absolute;
-  left: 24%;
-  bottom: 38%;
-  width: 260px;
-  height: 130px;
-  z-index: 10;
-}
-
-.mother-body {
-  position: absolute;
-  left: 45px;
-  top: 35px;
-  width: 170px;
-  height: 58px;
-  background: #eee;
-  border-radius: 25px;
-}
-
-.mother-head {
-  position: absolute;
-  left: 5px;
-  top: 23px;
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  background: var(--mother-skin, #6b402b);
-}
-
-.mother-hair {
-  position: absolute;
-  left: -2px;
-  top: 15px;
-  width: 72px;
-  height: 42px;
-  border-radius: 50%;
-  background: #171717;
-  z-index: 2;
-}
-
-.mother-arm {
-  position: absolute;
-  width: 80px;
-  height: 16px;
-  border-radius: 12px;
-  background: var(--mother-skin, #6b402b);
-  top: 72px;
-  right: 25px;
-  transform: rotate(-8deg);
-}
-
-/* DOCTOR / NURSE / FATHER POSITIONS */
-
-.doctor-character {
-  right: 18%;
-  bottom: 28%;
-}
-
-.nurse-character {
-  left: 5%;
-  bottom: 28%;
-}
-
-.father-character {
-  right: 5%;
-  bottom: 27%;
-}
-
-/* =========================
-   DIALOGUE
-========================= */
-
-.dialogue-box {
-  position: absolute;
-  left: 5%;
-  right: 5%;
-  bottom: 4%;
-  z-index: 50;
-  background: rgba(10, 10, 10, .94);
-  color: #fff;
-  padding: 15px 20px;
-  border-radius: 16px;
-  border: 2px solid rgba(255, 255, 255, .2);
-}
-
-.dialogue-name {
-  font-weight: 900;
-  font-size: 13px;
-  text-transform: uppercase;
-  margin-bottom: 5px;
-}
-
-.dialogue-text {
-  font-size: clamp(15px, 3vw, 20px);
-  line-height: 1.4;
-}
-
-/* =========================
-   RESULT
-========================= */
-
-.result-screen {
-  position: absolute;
-  inset: 0;
-  overflow-y: auto;
-  background: #f3e6c8;
-  color: #222;
-  padding: 30px 20px;
-}
-
-.result-card {
-  width: min(650px, 94vw);
-  margin: 5vh auto;
-  padding: 30px;
-  background: #fffaf0;
-  border-radius: 28px;
-  text-align: center;
-  box-shadow: 0 25px 70px rgba(0, 0, 0, .2);
-}
-
-.result-card h1 {
-  margin-top: 0;
-}
-
-.result-row {
-  margin: 12px 0;
-}
-
-/* =========================
-   APPEARANCE
-========================= */
-
-.appearance-screen {
-  position: absolute;
-  inset: 0;
-  overflow-y: auto;
-  background: #efe3cf;
-  color: #171717;
-  padding: 25px;
-}
-
-.appearance-container {
-  width: min(760px, 94vw);
-  margin: 0 auto;
-}
-
-.appearance-title {
-  font-size: clamp(32px, 8vw, 60px);
-  font-weight: 900;
-  margin: 0;
-}
-
-.appearance-subtitle {
-  margin-top: 8px;
-  font-weight: 700;
-}
-
-.appearance-group {
-  margin-top: 24px;
-}
-
-.appearance-group h3 {
-  margin-bottom: 10px;
-}
-
-.option-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.option-button {
-  border: 2px solid #222;
-  background: #fff;
-  color: #111;
-  padding: 10px 14px;
-  border-radius: 12px;
-}
-
-.option-button.selected {
-  background: #111;
-  color: #fff;
-}
-
-.appearance-commentary {
-  margin-top: 8px;
-  font-style: italic;
-  font-weight: 700;
-}
-
-.confirm-button {
-  margin-top: 28px;
-  width: 100%;
-  padding: 15px;
-  border: 0;
-  border-radius: 14px;
-  background: #111;
-  color: #fff;
-  font-weight: 900;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 600px) {
-  .city {
-    bottom: 40%;
-  }
-
-  .road {
-    height: 27%;
-  }
-
-  .bus {
-    transform: scale(.7);
-    transform-origin: left bottom;
-  }
-
-  .person {
-    font-size: 40px;
-  }
-
-  .title-screen {
-    padding: 28px 18px;
-  }
-
-  .hospital-bed {
-    left: 5%;
-    width: 72%;
-  }
-
-  .mother-character {
-    left: 13%;
-    transform: scale(.75);
-    transform-origin: bottom left;
-  }
-
-  .doctor-character {
-    right: 2%;
-    transform: scale(.72);
-    transform-origin: bottom right;
-  }
-
-  .nurse-character {
-    left: -5%;
-    transform: scale(.72);
-    transform-origin: bottom left;
-  }
-
-  .father-character {
-    right: -8%;
-    transform: scale(.65);
-    transform-origin: bottom right;
-  }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Naijs</title>
+
+  <link rel="stylesheet" href="style%20css">
+</head>
+
+<body>
+
+<div id="game">
+
+  <!-- TITLE WORLD -->
+
+  <div class="title-world">
+
+    <div class="sun"></div>
+
+    <div class="cloud one"></div>
+    <div class="cloud two"></div>
+
+    <div class="city">
+      <div class="building b1">
+        <div class="window"></div>
+      </div>
+
+      <div class="building b2">
+        <div class="window"></div>
+      </div>
+
+      <div class="building b3">
+        <div class="window"></div>
+      </div>
+
+      <div class="building b4">
+        <div class="window"></div>
+      </div>
+    </div>
+
+    <div class="tree one"></div>
+    <div class="tree two"></div>
+
+    <div class="road">
+      <div class="road-line"></div>
+    </div>
+
+    <div class="bus"></div>
+
+    <div class="person one">🧍🏾‍♀️</div>
+    <div class="person two">🧍🏾‍♂️</div>
+
+  </div>
+
+
+  <!-- TITLE SCREEN -->
+
+  <section class="title-screen screen" id="title-screen">
+
+    <div class="logo">
+      THE <span>NAIJS</span>
+    </div>
+
+    <div class="tagline">
+      Your life. Your choices. Your Naija.
+    </div>
+
+    <div class="welcome">
+      Welcome to The Naijs
+    </div>
+
+    <div class="subtext">
+      No dull yourself. Your life is about to begin.
+    </div>
+
+    <button class="play" id="start-button">
+      ▶ PLAY
+    </button>
+
+  </section>
+
+
+  <!-- BIRTH SCREEN -->
+
+  <section class="birth-screen screen hidden" id="birth-screen">
+
+    <div class="hospital-room">
+
+      <div class="hospital-bed">
+
+        <div class="bed-pillow"></div>
+        <div class="bed-mattress"></div>
+        <div class="bed-frame"></div>
+
+        <div class="bed-leg left"></div>
+        <div class="bed-leg right"></div>
+
+      </div>
+
+
+      <!-- MOTHER -->
+
+      <div class="mother-character">
+
+        <div class="mother-hair"></div>
+        <div class="mother-head"></div>
+        <div class="mother-body"></div>
+        <div class="mother-arm"></div>
+
+      </div>
+
+
+      <!-- NURSE -->
+
+      <div class="character nurse-character">
+
+        <div class="character-hair"></div>
+        <div class="character-head"></div>
+        <div class="character-body"></div>
+
+        <div class="character-arm left"></div>
+        <div class="character-arm right"></div>
+
+        <div class="character-leg left"></div>
+        <div class="character-leg right"></div>
+
+      </div>
+
+
+      <!-- DOCTOR -->
+
+      <div class="character doctor-character">
+
+        <div class="character-hair"></div>
+        <div class="character-head"></div>
+        <div class="character-body"></div>
+
+        <div class="character-arm left"></div>
+        <div class="character-arm right"></div>
+
+        <div class="character-leg left"></div>
+        <div class="character-leg right"></div>
+
+      </div>
+
+
+      <!-- FATHER -->
+
+      <div class="character father-character">
+
+        <div class="character-hair"></div>
+        <div class="character-head"></div>
+        <div class="character-body"></div>
+
+        <div class="character-arm left"></div>
+        <div class="character-arm right"></div>
+
+        <div class="character-leg left"></div>
+        <div class="character-leg right"></div>
+
+      </div>
+
+
+      <!-- DIALOGUE -->
+
+      <div class="dialogue-box">
+
+        <div class="dialogue-name" id="dialogue-name">
+          Nurse
+        </div>
+
+        <div class="dialogue-text" id="dialogue-text">
+          Easy, mama. You dey do well. Take a deep breath.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- BIRTH RESULT -->
+
+  <section class="result-screen screen hidden" id="result-screen">
+
+    <div class="result-card">
+
+      <h1>YOU NO GET CHOICE</h1>
+
+      <p>
+        Welcome to Nigeria. You have just been born.
+      </p>
+
+      <div class="result-row">
+        <strong>Name:</strong>
+        <span id="result-name"></span>
+      </div>
+
+      <div class="result-row">
+        <strong>Gender:</strong>
+        <span id="result-gender"></span>
+      </div>
+
+      <div class="result-row">
+        <strong>Ethnicity:</strong>
+        <span id="result-ethnicity"></span>
+      </div>
+
+      <div class="result-row">
+        <strong>Parents:</strong>
+        <span id="result-parents"></span>
+      </div>
+
+      <button
+        class="play"
+        onclick="Naijs.showScreen('appearance-screen')">
+        How You Wan Look?
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- APPEARANCE -->
+
+  <section class="appearance-screen screen hidden" id="appearance-screen">
+
+    <div class="appearance-container">
+
+      <h1 class="appearance-title">
+        THIS ONE NA YOUR OWN
+      </h1>
+
+      <div class="appearance-subtitle">
+        How You Wan Look?
+      </div>
+
+      <p>
+        Your circumstances were chosen. Your appearance is yours.
+      </p>
+
+
+      <!-- SKIN -->
+
+      <div class="appearance-group">
+
+        <h3>Skin</h3>
+
+        <div class="option-row">
+
+          <button class="option-button selected"
+            data-appearance="skin"
+            data-value="Deep"
+            onclick="Naijs.selectAppearance('skin', 'Deep')">
+            Deep
+          </button>
+
+          <button class="option-button"
+            data-appearance="skin"
+            data-value="Dark"
+            onclick="Naijs.selectAppearance('skin', 'Dark')">
+            Dark
+          </button>
+
+          <button class="option-button"
+            data-appearance="skin"
+            data-value="Brown"
+            onclick="Naijs.selectAppearance('skin', 'Brown')">
+            Brown
+          </button>
+
+          <button class="option-button"
+            data-appearance="skin"
+            data-value="Light Brown"
+            onclick="Naijs.selectAppearance('skin', 'Light Brown')">
+            Light Brown
+          </button>
+
+          <button class="option-button"
+            data-appearance="skin"
+            data-value="Light"
+            onclick="Naijs.selectAppearance('skin', 'Light')">
+            Light
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- HAIR -->
+
+      <div class="appearance-group">
+
+        <h3>Hair</h3>
+
+        <div class="option-row">
+
+          <button class="option-button selected"
+            data-appearance="hair"
+            data-value="Afaridan"
+            onclick="Naijs.selectAppearance('hair', 'Afaridan')">
+            Afaridan
+          </button>
+
+          <button class="option-button"
+            data-appearance="hair"
+            data-value="Low Cut"
+            onclick="Naijs.selectAppearance('hair', 'Low Cut')">
+            Low Cut
+          </button>
+
+          <button class="option-button"
+            data-appearance="hair"
+            data-value="Afro"
+            onclick="Naijs.selectAppearance('hair', 'Afro')">
+            Afro
+          </button>
+
+          <button class="option-button"
+            data-appearance="hair"
+            data-value="Mr Patches"
+            onclick="Naijs.selectAppearance('hair', 'Mr Patches')">
+            Mr Patches
+          </button>
+
+        </div>
+
+        <div class="appearance-commentary">
+          Na baby hair, abeg. Keep am realistic.
+        </div>
+
+      </div>
+
+
+      <!-- EYES -->
+
+      <div class="appearance-group">
+
+        <h3>Eyes</h3>
+
+        <div class="option-row">
+
+          <button class="option-button selected"
+            data-appearance="eyes"
+            data-value="Brown"
+            onclick="Naijs.selectAppearance('eyes', 'Brown')">
+            Brown
+          </button>
+
+          <button class="option-button"
+            data-appearance="eyes"
+            data-value="Dark Brown"
+            onclick="Naijs.selectAppearance('eyes', 'Dark Brown')">
+            Dark Brown
+          </button>
+
+          <button class="option-button"
+            data-appearance="eyes"
+            data-value="Light Brown"
+            onclick="Naijs.selectAppearance('eyes', 'Light Brown')">
+            Light Brown
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- EARS -->
+
+      <div class="appearance-group">
+
+        <h3>Ears</h3>
+
+        <div class="option-row">
+
+          <button class="option-button selected"
+            data-appearance="ears"
+            data-value="Normal"
+            onclick="Naijs.selectAppearance('ears', 'Normal')">
+            Normal
+          </button>
+
+          <button class="option-button"
+            data-appearance="ears"
+            data-value="Small"
+            onclick="Naijs.selectAppearance('ears', 'Small')">
+            Small
+          </button>
+
+          <button class="option-button"
+            data-appearance="ears"
+            data-value="Prominent"
+            onclick="Naijs.selectAppearance('ears', 'Prominent')">
+            Prominent
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- BABY DRIP -->
+
+      <div class="appearance-group">
+
+        <h3>Baby Drip</h3>
+
+        <div class="option-row">
+
+          <button class="option-button selected"
+            data-appearance="drip"
+            data-value="Hospital Wrap"
+            onclick="Naijs.selectAppearance('drip', 'Hospital Wrap')">
+            Hospital Wrap
+          </button>
+
+          <button class="option-button"
+            data-appearance="drip"
+            data-value="Mint Wrap"
+            onclick="Naijs.selectAppearance('drip', 'Mint Wrap')">
+            Mint Wrap
+          </button>
+
+          <button class="option-button"
+            data-appearance="drip"
+            data-value="Lavender Wrap"
+            onclick="Naijs.selectAppearance('drip', 'Lavender Wrap')">
+            Lavender Wrap
+          </button>
+
+          <button class="option-button"
+            data-appearance="drip"
+            data-value="Blue Wrap"
+            onclick="Naijs.selectAppearance('drip', 'Blue Wrap')">
+            Blue Wrap
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <button class="confirm-button" id="appearance-finish">
+        Continue
+      </button>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- GAME SCRIPTS -->
+
+<script src="js/naming.js"></script>
+<script src="js/birth.js"></script>
+<script src="js/appearance.js"></script>
+<script src="js/game.js"></script>
+<script src="js/title.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
