@@ -1,679 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Naijs</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Naijs</title>
 
-<style>
-* {
-  box-sizing: border-box;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #071d14;
-  color: white;
-  overflow-x: hidden;
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+    }
 
-button {
-  font: inherit;
-  cursor: pointer;
-}
+    #game {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
 
-#game {
-  min-height: 100vh;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(#78c8e8 0%, #b8e8f4 48%, #75b86b 48%, #39783d 100%);
-}
+    .title-screen {
+      width: 100%;
+      max-width: 700px;
+      text-align: center;
+      padding: 40px 24px;
+    }
 
-/* SKY */
+    .logo {
+      font-size: clamp(48px, 12vw, 88px);
+      font-weight: 900;
+      letter-spacing: -4px;
+      margin-bottom: 8px;
+    }
 
-.sun {
-  position: absolute;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: #ffd447;
-  top: 55px;
-  right: 55px;
-  box-shadow: 0 0 40px #ffd447;
-}
+    .tagline {
+      font-size: 16px;
+      color: #aaa;
+      margin-bottom: 48px;
+    }
 
-.cloud {
-  position: absolute;
-  width: 130px;
-  height: 35px;
-  background: white;
-  border-radius: 50px;
-  opacity: .8;
-  animation: drift 28s linear infinite;
-}
+    .welcome {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
 
-.cloud:before,
-.cloud:after {
-  content: "";
-  position: absolute;
-  background: white;
-  border-radius: 50%;
-}
+    .subtext {
+      color: #aaa;
+      line-height: 1.6;
+      margin: 0 auto 30px;
+      max-width: 430px;
+    }
 
-.cloud:before {
-  width: 55px;
-  height: 55px;
-  left: 20px;
-  top: -25px;
-}
+    .play-button {
+      border: none;
+      border-radius: 14px;
+      padding: 16px 50px;
+      background: white;
+      color: #111;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+    }
 
-.cloud:after {
-  width: 70px;
-  height: 70px;
-  right: 15px;
-  top: -35px;
-}
+    .play-button:hover {
+      transform: translateY(-2px);
+    }
 
-.cloud.one {
-  top: 90px;
-  left: -160px;
-}
+    .game-screen {
+      display: none;
+      width: 100%;
+      max-width: 700px;
+      background: #f4efe6;
+      color: #222;
+      border-radius: 24px;
+      padding: 30px;
+      text-align: center;
+    }
 
-.cloud.two {
-  top: 175px;
-  left: -300px;
-  animation-delay: 10s;
-}
+    .baby {
+      font-size: 90px;
+      margin: 15px 0;
+    }
 
-@keyframes drift {
-  from { transform: translateX(0); }
-  to { transform: translateX(120vw); }
-}
+    .headline {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
 
-/* CITY */
-
-.city {
-  position: absolute;
-  bottom: 31%;
-  left: 0;
-  right: 0;
-  height: 150px;
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  padding: 0 20px;
-}
-
-.building {
-  background: #7b8581;
-  width: 70px;
-  height: 110px;
-  box-shadow: inset -8px 0 #626b68;
-}
-
-.building:nth-child(2) { height: 145px; }
-.building:nth-child(3) { height: 95px; }
-.building:nth-child(4) { height: 125px; }
-.building:nth-child(5) { height: 80px; }
-
-.windows {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  padding: 12px;
-}
-
-.windows span {
-  height: 13px;
-  background: #f6d85d;
-}
-
-/* GROUND */
-
-.ground {
-  position: absolute;
-  bottom: 0;
-  height: 31%;
-  width: 100%;
-  background: #326b36;
-}
-
-.road {
-  position: absolute;
-  bottom: 0;
-  height: 105px;
-  width: 100%;
-  background: #303332;
-}
-
-.road:after {
-  content: "";
-  position: absolute;
-  top: 48px;
-  left: 0;
-  right: 0;
-  height: 7px;
-  background: repeating-linear-gradient(
-    90deg,
-    #f3df72 0 55px,
-    transparent 55px 105px
-  );
-}
-
-/* BUS */
-
-.bus {
-  position: absolute;
-  bottom: 45px;
-  left: -180px;
-  width: 150px;
-  height: 65px;
-  background: #e7b91e;
-  border-radius: 12px 18px 5px 5px;
-  animation: drive 13s linear infinite;
-}
-
-.bus:before {
-  content: "";
-  position: absolute;
-  width: 95px;
-  height: 25px;
-  background: #243b36;
-  top: 10px;
-  left: 12px;
-  border-radius: 4px;
-}
-
-.bus:after {
-  content: "DANFO";
-  position: absolute;
-  right: 8px;
-  top: 12px;
-  font-size: 10px;
-  font-weight: bold;
-  color: #222;
-}
-
-@keyframes drive {
-  from { left: -180px; }
-  to { left: 110%; }
-}
-
-/* TITLE / CARDS */
-
-.card {
-  position: relative;
-  z-index: 10;
-  width: min(92%, 600px);
-  margin: auto;
-  top: 50vh;
-  transform: translateY(-50%);
-  padding: 35px 28px;
-  border-radius: 24px;
-  background: rgba(3, 35, 23, .91);
-  text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,.35);
-}
-
-.logo {
-  font-size: clamp(48px, 12vw, 82px);
-  font-weight: 1000;
-  letter-spacing: -4px;
-}
-
-.logo span {
-  color: #ffd42f;
-}
-
-.tagline {
-  margin-top: -5px;
-  color: #d8e7df;
-  font-size: 15px;
-}
-
-.card h2 {
-  margin-top: 30px;
-  font-size: 27px;
-}
-
-.card p {
-  color: #d6ded9;
-  line-height: 1.5;
-}
-
-.main-btn {
-  margin-top: 20px;
-  border: 0;
-  border-radius: 14px;
-  padding: 15px 35px;
-  background: #ffd42f;
-  color: #173522;
-  font-weight: 900;
-  font-size: 17px;
-  transition: .2s;
-}
-
-.main-btn:hover {
-  transform: scale(1.05);
-}
-
-/* BIRTH SCREEN */
-
-.birth-screen {
-  display: none;
-  position: relative;
-  z-index: 20;
-  min-height: 100vh;
-  padding: 35px 18px;
-  background:
-    radial-gradient(circle at top right, rgba(255,211,48,.2), transparent 35%),
-    linear-gradient(#073b29, #061e15);
-}
-
-.birth-container {
-  width: min(100%, 720px);
-  margin: auto;
-}
-
-.birth-title {
-  text-align: center;
-  font-size: clamp(34px, 9vw, 60px);
-  margin: 10px 0 5px;
-  font-weight: 1000;
-}
-
-.birth-subtitle {
-  text-align: center;
-  color: #b9d1c6;
-  margin-bottom: 28px;
-}
-
-.birth-card {
-  background: #102f23;
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 22px;
-  padding: 24px;
-  margin-bottom: 16px;
-  box-shadow: 0 12px 30px rgba(0,0,0,.2);
-}
-
-.birth-card h3 {
-  margin-top: 0;
-  color: #ffd42f;
-}
-
-.birth-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
-.info {
-  background: #173d2d;
-  border-radius: 13px;
-  padding: 13px;
-}
-
-.info small {
-  display: block;
-  color: #8faea0;
-  margin-bottom: 4px;
-}
-
-.info strong {
-  font-size: 15px;
-}
-
-.baby {
-  text-align: center;
-  font-size: 80px;
-  animation: babyBounce 1.5s ease-in-out infinite;
-}
-
-@keyframes babyBounce {
-  50% { transform: translateY(-8px); }
-}
-
-.choice-box {
-  text-align: center;
-  padding: 25px;
-  background: #123d2b;
-  border-radius: 20px;
-  border: 1px solid #285d45;
-}
-
-.choice-box .rare {
-  color: #ffd42f;
-  font-weight: 900;
-  font-size: 13px;
-  letter-spacing: 1px;
-}
-
-.hidden {
-  display: none;
-}
-
-@media(max-width:500px) {
-  .birth-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .card {
-    padding: 28px 20px;
-  }
-}
-</style>
+    .description {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+  </style>
 </head>
 
 <body>
 
-<div id="game">
+  <div id="game">
 
-  <div class="sun"></div>
-  <div class="cloud one"></div>
-  <div class="cloud two"></div>
+    <div class="title-screen" id="titleScreen">
 
-  <div class="city">
-    <div class="building"><div class="windows"><span></span><span></span><span></span><span></span></div></div>
-    <div class="building"><div class="windows"><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
-    <div class="building"><div class="windows"><span></span><span></span><span></span></div></div>
-    <div class="building"><div class="windows"><span></span><span></span><span></span><span></span></div></div>
-    <div class="building"><div class="windows"><span></span><span></span></div></div>
-  </div>
+      <div class="logo">THE NAIJS</div>
 
-  <div class="ground"></div>
-  <div class="road"></div>
-  <div class="bus"></div>
+      <div class="tagline">
+        A Nigerian life. Your choices. Your story.
+      </div>
 
-  <!-- TITLE SCREEN -->
+      <div class="welcome" id="welcomeText">
+        Welcome to The Naijs
+      </div>
 
-  <div class="card" id="titleScreen">
-    <div class="logo">THE <span>NAIJS</span></div>
-    <div class="tagline">Your life. Your choices. Your Naija.</div>
+      <p class="subtext" id="subText">
+        No dull yourself. Your life is about to begin.
+      </p>
 
-    <h2 id="welcomeTitle">Welcome to The Naijs</h2>
+      <button class="play-button" id="playButton" onclick="startGame()">
+        ▶ PLAY
+      </button>
 
-    <p id="welcomeText">
-      No dull yourself. Your life is about to begin.
-    </p>
+    </div>
 
-    <button class="main-btn" id="startButton" onclick="playGame()">
-      ▶ PLAY
-    </button>
-  </div>
 
-  <!-- BIRTH SCREEN -->
-
-  <div class="birth-screen" id="birthScreen">
-
-    <div class="birth-container">
+    <div class="game-screen" id="gameScreen">
 
       <div class="baby">👶🏾</div>
 
-      <div class="birth-title" id="birthHeadline">
+      <div class="headline">
         YOU NO GET CHOICE
       </div>
 
-      <div class="birth-subtitle">
-        Welcome to Nigeria. Your story has officially started.
+      <div class="description">
+        Welcome to Nigeria. You have just been born.
+        Your family, your state, your circumstances
+        and your story are about to be decided.
       </div>
 
-      <div class="birth-card">
-
-        <h3>🍼 You Have Been Born</h3>
-
-        <div class="birth-grid">
-
-          <div class="info">
-            <small>Name</small>
-            <strong id="babyName"></strong>
-          </div>
-
-          <div class="info">
-            <small>Gender</small>
-            <strong id="babyGender"></strong>
-          </div>
-
-          <div class="info">
-            <small>State</small>
-            <strong id="babyState"></strong>
-          </div>
-
-          <div class="info">
-            <small>Ethnic Background</small>
-            <strong id="babyEthnicity"></strong>
-          </div>
-
-          <div class="info">
-            <small>Religion</small>
-            <strong id="babyReligion"></strong>
-          </div>
-
-          <div class="info">
-            <small>Birth Order</small>
-            <strong id="babyOrder"></strong>
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="birth-card">
-
-        <h3>👨🏾‍👩🏾‍👧🏾 Your Family</h3>
-
-        <div class="birth-grid">
-
-          <div class="info">
-            <small>Mother</small>
-            <strong id="mother"></strong>
-          </div>
-
-          <div class="info">
-            <small>Father</small>
-            <strong id="father"></strong>
-          </div>
-
-          <div class="info">
-            <small>Mother's Job</small>
-            <strong id="motherJob"></strong>
-          </div>
-
-          <div class="info">
-            <small>Father's Job</small>
-            <strong id="fatherJob"></strong>
-          </div>
-
-          <div class="info">
-            <small>Family Wealth</small>
-            <strong id="wealth"></strong>
-          </div>
-
-          <div class="info">
-            <small>Home</small>
-            <strong id="home"></strong>
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="choice-box" id="rareChoice">
-
-        <div class="rare">✨ 1% BIRTH EVENT ✨</div>
-
-        <h2>YOU DON GET CHOICE!</h2>
-
-        <p>
-          Somehow, fate has decided to give you control over the circumstances of your birth.
-        </p>
-
-        <button class="main-btn" onclick="customBirth()">
-          CHOOSE MY LIFE
-        </button>
-
-      </div>
-
-      <button class="main-btn" onclick="continueFromBirth()">
-        CONTINUE →
+      <button class="play-button" onclick="beginLife()">
+        Continue
       </button>
 
     </div>
 
   </div>
 
-</div>
 
-<script>
+  <script>
 
-const names = [
-  "Ireoluwa","Chiamaka","Tunde","Amaka","David",
-  "Favour","Daniel","Zainab","Adebayo","Esther",
-  "Emeka","Damilola","Precious","Yusuf","Blessing"
-];
+    const hasSavedGame = localStorage.getItem("theNaijsSave");
 
-const states = [
-  "Lagos","Oyo","Ogun","Rivers","Abuja",
-  "Enugu","Kano","Kaduna","Delta","Edo",
-  "Anambra","Kwara","Osun","Katsina","Akwa Ibom"
-];
+    if (hasSavedGame) {
+      document.getElementById("welcomeText").textContent =
+        "Welcome back to The Naijs";
 
-const ethnicities = [
-  "Yoruba","Igbo","Hausa","Edo","Ijaw",
-  "Ibibio","Fulani","Efik","Tiv","Mixed"
-];
+      document.getElementById("subText").textContent =
+        "Your story is still waiting for you.";
 
-const religions = [
-  "Christian","Muslim","Christian","Muslim","Traditional / Other"
-];
+      document.getElementById("playButton").textContent =
+        "▶ CONTINUE";
+    }
 
-const jobs = [
-  "Teacher","Trader","Nurse","Engineer","Civil Servant",
-  "Business Owner","Banker","Doctor","Driver",
-  "Lawyer","Accountant","Artisan","Entrepreneur"
-];
 
-const homes = [
-  "Family house",
-  "Rented apartment",
-  "Self-contained apartment",
-  "Duplex",
-  "Compound house"
-];
+    function startGame() {
 
-function random(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
+      document.getElementById("titleScreen").style.display = "none";
+      document.getElementById("gameScreen").style.display = "block";
 
-function playGame() {
+      localStorage.setItem("theNaijsSave", "started");
 
-  document.getElementById("titleScreen").style.display = "none";
+    }
 
-  document.querySelector(".sun").style.display = "none";
-  document.querySelectorAll(".cloud").forEach(x => x.style.display = "none");
-  document.querySelector(".city").style.display = "none";
-  document.querySelector(".ground").style.display = "none";
-  document.querySelector(".road").style.display = "none";
-  document.querySelector(".bus").style.display = "none";
 
-  document.getElementById("birthScreen").style.display = "block";
+    function beginLife() {
 
-  generateBirth();
+      alert("Birth system coming next.");
 
-  localStorage.setItem("theNaijsSave", "started");
-}
+    }
 
-function generateBirth() {
-
-  const gender = Math.random() < 0.5 ? "Male" : "Female";
-
-  const birth = {
-    name: random(names),
-    gender: gender,
-    state: random(states),
-    ethnicity: random(ethnicities),
-    religion: random(religions),
-    order: Math.random() < .7 ? "First child" : random([
-      "Second child",
-      "Third child",
-      "Fourth child"
-    ]),
-    mother: random(names),
-    father: random(names),
-    motherJob: random(jobs),
-    fatherJob: random(jobs),
-    wealth: random([
-      "Low income",
-      "Lower-middle income",
-      "Middle income",
-      "Upper-middle income",
-      "Wealthy"
-    ]),
-    home: random(homes)
-  };
-
-  document.getElementById("babyName").textContent = birth.name;
-  document.getElementById("babyGender").textContent = birth.gender;
-  document.getElementById("babyState").textContent = birth.state;
-  document.getElementById("babyEthnicity").textContent = birth.ethnicity;
-  document.getElementById("babyReligion").textContent = birth.religion;
-  document.getElementById("babyOrder").textContent = birth.order;
-
-  document.getElementById("mother").textContent = birth.mother;
-  document.getElementById("father").textContent = birth.father;
-  document.getElementById("motherJob").textContent = birth.motherJob;
-  document.getElementById("fatherJob").textContent = birth.fatherJob;
-  document.getElementById("wealth").textContent = birth.wealth;
-  document.getElementById("home").textContent = birth.home;
-
-  /* 1% RARE BIRTH */
-  const rare = Math.random() < 0.01;
-
-  if (!rare) {
-    document.getElementById("rareChoice").classList.add("hidden");
-  } else {
-    document.getElementById("rareChoice").classList.remove("hidden");
-  }
-
-  localStorage.setItem(
-    "theNaijsBirth",
-    JSON.stringify(birth)
-  );
-}
-
-function customBirth() {
-
-  alert(
-    "🔥 RARE BIRTH UNLOCKED!\n\n" +
-    "Full birth customization is coming next."
-  );
-}
-
-function continueFromBirth() {
-
-  alert(
-    "Your childhood is about to begin.\n\n" +
-    "Next: baby life, parents, family relationships and your first memories."
-  );
-}
-
-/* RETURNING PLAYER */
-
-const saved = localStorage.getItem("theNaijsSave");
-
-if (saved) {
-  document.getElementById("welcomeTitle").textContent =
-    "Welcome back to The Naijs";
-
-  document.getElementById("welcomeText").textContent =
-    "Your story is still waiting for you.";
-
-  document.getElementById("startButton").textContent =
-    "▶ CONTINUE";
-}
-
-</script>
+  </script>
 
 </body>
 </html>
