@@ -2,403 +2,424 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Naijs</title>
 
 <style>
-*{box-sizing:border-box}
+* { box-sizing: border-box; }
 
-body{
- margin:0;
- font-family:Arial,sans-serif;
- background:#061b13;
- color:white;
- overflow:hidden
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: #087443;
 }
 
-button{font:inherit;cursor:pointer}
-
-#game{
- min-height:100vh;
- position:relative;
- overflow:hidden;
- background:linear-gradient(#73c7e5 0%,#c5edf3 48%,#57945b 48%,#326b38 100%)
+#game {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(#69c9d8 0%, #b8e7df 55%, #f4c96b 56%, #d99b52 100%);
 }
 
-/* TITLE WORLD */
+/* SUN */
 
-.sun{
- position:absolute;
- width:90px;height:90px;
- border-radius:50%;
- background:#ffd447;
- top:50px;right:45px;
- box-shadow:0 0 45px #ffd447
+.sun {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: #ffd45c;
+  top: 8%;
+  right: 10%;
+  box-shadow: 0 0 60px rgba(255,212,92,.6);
 }
 
-.cloud{
- position:absolute;
- width:135px;height:35px;
- background:white;
- border-radius:50px;
- opacity:.8;
- animation:cloudMove 28s linear infinite
+/* CLOUDS */
+
+.cloud {
+  position: absolute;
+  width: 150px;
+  height: 45px;
+  background: white;
+  border-radius: 50px;
+  opacity: .75;
 }
 
-.cloud:before,.cloud:after{
- content:"";
- position:absolute;
- background:white;
- border-radius:50%
+.cloud:before,
+.cloud:after {
+  content: "";
+  position: absolute;
+  background: white;
+  border-radius: 50%;
 }
 
-.cloud:before{width:55px;height:55px;left:20px;top:-25px}
-.cloud:after{width:70px;height:70px;right:15px;top:-35px}
-
-.cloud.one{top:90px;left:-160px}
-.cloud.two{top:170px;left:-300px;animation-delay:10s}
-
-@keyframes cloudMove{
- from{transform:translateX(0)}
- to{transform:translateX(120vw)}
+.cloud:before {
+  width: 65px;
+  height: 65px;
+  left: 25px;
+  top: -30px;
 }
 
-.city{
- position:absolute;
- bottom:31%;
- left:0;right:0;
- height:150px;
- display:flex;
- align-items:flex-end;
- gap:8px;
- padding:0 20px
+.cloud:after {
+  width: 75px;
+  height: 75px;
+  right: 20px;
+  top: -40px;
 }
 
-.building{
- width:70px;
- height:110px;
- background:#747f7b
+.cloud.one { top: 15%; left: 8%; }
+.cloud.two { top: 28%; right: 30%; transform: scale(.7); }
+
+/* CITY */
+
+.city {
+  position: absolute;
+  bottom: 38%;
+  left: 0;
+  width: 100%;
+  height: 180px;
 }
 
-.building:nth-child(2){height:145px}
-.building:nth-child(3){height:95px}
-.building:nth-child(4){height:125px}
-.building:nth-child(5){height:80px}
-
-.windows{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:8px;
- padding:12px
+.building {
+  position: absolute;
+  bottom: 0;
+  background: #52656b;
+  border-radius: 4px 4px 0 0;
 }
 
-.windows span{
- height:13px;
- background:#f5d65d
+.b1 { left: 4%; width: 90px; height: 130px; }
+.b2 { left: 16%; width: 130px; height: 170px; background:#687b7d; }
+.b3 { right: 15%; width: 100px; height: 145px; }
+.b4 { right: 3%; width: 150px; height: 185px; background:#596c70; }
+
+.window {
+  position: absolute;
+  width: 12px;
+  height: 18px;
+  background: #ffd76b;
+  box-shadow:
+    25px 0 #ffd76b,
+    50px 0 #ffd76b,
+    0 30px #ffd76b,
+    25px 30px #ffd76b,
+    50px 30px #ffd76b;
+  top: 25px;
+  left: 20px;
 }
 
-.ground{
- position:absolute;
- bottom:0;
- width:100%;
- height:31%;
- background:#326b38
+/* TREES */
+
+.tree {
+  position: absolute;
+  bottom: 30%;
+  width: 100px;
+  height: 180px;
 }
 
-.road{
- position:absolute;
- bottom:0;
- width:100%;
- height:105px;
- background:#303332
+.tree:before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 100px;
+  background: #68462e;
+  bottom: 0;
+  left: 40px;
+  transform: rotate(-5deg);
 }
 
-.road:after{
- content:"";
- position:absolute;
- top:48px;left:0;right:0;
- height:7px;
- background:repeating-linear-gradient(
-  90deg,#f3df72 0 55px,transparent 55px 105px
- )
+.tree:after {
+  content: "🌴";
+  font-size: 100px;
+  position: absolute;
+  bottom: 55px;
+  left: 0;
 }
 
-.bus{
- position:absolute;
- bottom:45px;
- left:-180px;
- width:150px;height:65px;
- background:#e5b91e;
- border-radius:12px 18px 5px 5px;
- animation:busMove 13s linear infinite
+.tree.one { left: 3%; }
+.tree.two { right: 4%; transform: scale(.8); }
+
+/* ROAD */
+
+.road {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 31%;
+  background: #3d4241;
 }
 
-.bus:before{
- content:"";
- position:absolute;
- width:95px;height:25px;
- background:#243b36;
- top:10px;left:12px;
- border-radius:4px
+.road-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  border-top: 7px dashed #f5d76e;
 }
 
-@keyframes busMove{
- from{left:-180px}
- to{left:110%}
+/* DANFO */
+
+.bus {
+  position: absolute;
+  bottom: 13%;
+  left: 8%;
+  width: 190px;
+  height: 75px;
+  background: #f4c72d;
+  border: 5px solid #222;
+  border-radius: 12px 18px 8px 8px;
+  z-index: 4;
 }
 
-/* TITLE CARD */
-
-.card{
- position:relative;
- z-index:10;
- width:min(92%,600px);
- margin:auto;
- top:50vh;
- transform:translateY(-50%);
- padding:35px 28px;
- border-radius:24px;
- background:rgba(3,35,23,.92);
- text-align:center;
- box-shadow:0 20px 60px rgba(0,0,0,.35)
+.bus:before {
+  content: "";
+  position: absolute;
+  width: 55px;
+  height: 30px;
+  background: #83c7d3;
+  top: 10px;
+  left: 12px;
+  box-shadow: 65px 0 #83c7d3;
 }
 
-.logo{
- font-size:clamp(48px,12vw,82px);
- font-weight:1000;
- letter-spacing:-4px
-}
-
-.logo span{color:#ffd42f}
-
-.tagline{
- color:#d8e7df;
- font-size:15px
-}
-
-.card h2{margin-top:30px}
-
-.card p{
- color:#d6ded9;
- line-height:1.5
-}
-
-.main-btn{
- margin-top:20px;
- border:0;
- border-radius:14px;
- padding:15px 35px;
- background:#ffd42f;
- color:#173522;
- font-weight:900;
- font-size:17px
-}
-
-/* BIRTH SCENE */
-
-.birth-screen{
- display:none;
- position:relative;
- z-index:30;
- min-height:100vh;
- background:#071b14
-}
-
-.delivery-room{
- min-height:100vh;
- position:relative;
- overflow:hidden;
- background:linear-gradient(#d8e7e3,#9fb8b1)
-}
-
-.hospital-sign{
- position:absolute;
- top:25px;
- left:50%;
- transform:translateX(-50%);
- background:white;
- color:#174b38;
- padding:12px 22px;
- border-radius:8px;
- font-weight:bold;
- z-index:5
-}
-
-/* WINDOW */
-
-.room-window{
- position:absolute;
- top:0;
- left:0;
- width:32%;
- height:35%;
- background:#83cde0;
- border-right:8px solid white;
- border-bottom:8px solid white
-}
-
-.window-sun{
- position:absolute;
- width:55px;height:55px;
- border-radius:50%;
- background:#ffd447;
- top:35px;right:25px
-}
-
-/* BED */
-
-.delivery-bed{
- position:absolute;
- width:310px;
- height:145px;
- background:white;
- border-radius:18px;
- left:50%;
- top:52%;
- transform:translate(-50%,-50%);
- box-shadow:0 18px 40px rgba(0,0,0,.2)
-}
-
-.mother{
- position:absolute;
- left:60px;
- top:-75px;
- font-size:90px;
- animation:mumMove 1.8s ease-in-out infinite
-}
-
-@keyframes mumMove{
- 0%,100%{transform:translateY(0)}
- 50%{transform:translateY(-5px)}
+.bus:after {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background: #222;
+  border-radius: 50%;
+  bottom: -18px;
+  left: 25px;
+  box-shadow: 110px 0 #222;
 }
 
 /* PEOPLE */
 
-.person{
- position:absolute;
- display:flex;
- flex-direction:column;
- align-items:center;
- font-size:65px;
- z-index:4;
- animation:personMove 2s ease-in-out infinite alternate
+.person {
+  position: absolute;
+  bottom: 26%;
+  z-index: 5;
+  font-size: 55px;
 }
 
-.person span{
- background:rgba(0,0,0,.7);
- padding:4px 8px;
- border-radius:7px;
- font-size:11px;
- color:white
+.person.one { left: 34%; }
+.person.two { right: 30%; font-size: 48px; }
+
+/* TITLE CARD */
+
+.title-screen {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(90%, 570px);
+  text-align: center;
+  padding: 35px 25px;
+  border-radius: 30px;
+  background: rgba(5, 54, 34, .88);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 25px 70px rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.15);
 }
 
-.person.nurse{
- left:10%;
- top:43%
+.logo {
+  font-size: clamp(50px, 12vw, 90px);
+  font-weight: 900;
+  letter-spacing: -5px;
+  color: white;
 }
 
-.person.doctor{
- right:10%;
- top:39%;
- animation-delay:.5s
+.logo span {
+  color: #ffd34e;
 }
 
-.person.family{
- left:43%;
- bottom:9%;
- animation-delay:1s
+.tagline {
+  margin-top: 8px;
+  color: #bce5cf;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-@keyframes personMove{
- from{transform:translateY(0)}
- to{transform:translateY(-8px)}
+.welcome {
+  margin-top: 38px;
+  font-size: 27px;
+  font-weight: 800;
 }
 
-/* DELIVERY */
-
-.delivery-text{
- position:absolute;
- bottom:22%;
- left:50%;
- transform:translateX(-50%);
- color:#173c2d;
- font-weight:bold;
- font-size:18px;
- white-space:nowrap;
- animation:pulse 1.2s infinite
+.subtext {
+  color: #d4e8dc;
+  line-height: 1.6;
+  margin: 10px auto 28px;
+  max-width: 380px;
 }
 
-@keyframes pulse{
- 50%{opacity:.45}
+.play {
+  border: 0;
+  border-radius: 50px;
+  padding: 16px 48px;
+  background: #ffd34e;
+  color: #123322;
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(0,0,0,.25);
 }
 
-/* BABY ARRIVAL */
-
-.baby-scene{
- position:absolute;
- inset:0;
- z-index:20;
- background:rgba(4,30,21,.82);
- display:flex;
- flex-direction:column;
- justify-content:center;
- align-items:center;
- opacity:0;
- pointer-events:none;
- transform:scale(.85);
- transition:1.2s
+.play:hover {
+  transform: scale(1.04);
 }
 
-.baby-scene.show{
- opacity:1;
- transform:scale(1)
+/* GAME SCREEN */
+
+.game-screen {
+  display: none;
+  position: absolute;
+  z-index: 20;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(90%, 650px);
+  background: #fffaf0;
+  color: #222;
+  padding: 35px;
+  border-radius: 28px;
+  text-align: center;
+  box-shadow: 0 25px 70px rgba(0,0,0,.35);
 }
 
-.baby{
- font-size:105px;
- animation:babyBounce .8s ease-in-out infinite alternate
+.baby {
+  font-size: 85px;
 }
 
-@keyframes babyBounce{
- from{transform:translateY(4px)}
- to{transform:translateY(-10px)}
+.headline {
+  font-size: 30px;
+  font-weight: 900;
 }
 
-.baby-scene h1{
- color:#ffd42f;
- font-size:clamp(40px,10vw,75px);
- margin:10px;
- text-align:center
+.description {
+  color: #666;
+  line-height: 1.6;
+  margin: 15px auto 25px;
+  max-width: 500px;
 }
 
-.baby-scene p{
- font-size:17px;
- text-align:center
+@media(max-width:600px) {
+  .city { bottom: 40%; }
+  .road { height: 27%; }
+  .bus { transform: scale(.7); left: 2%; }
+  .person { font-size: 40px; }
+  .title-screen { padding: 28px 18px; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="game">
+
+  <div class="sun"></div>
+
+  <div class="cloud one"></div>
+  <div class="cloud two"></div>
+
+  <div class="city">
+    <div class="building b1"><div class="window"></div></div>
+    <div class="building b2"><div class="window"></div></div>
+    <div class="building b3"><div class="window"></div></div>
+    <div class="building b4"><div class="window"></div></div>
+  </div>
+
+  <div class="tree one"></div>
+  <div class="tree two"></div>
+
+  <div class="road">
+    <div class="road-line"></div>
+  </div>
+
+  <div class="bus"></div>
+
+  <div class="person one">🧍🏾‍♀️</div>
+  <div class="person two">🧍🏾‍♂️</div>
+
+
+  <div class="title-screen" id="titleScreen">
+
+    <div class="logo">
+      THE <span>NAIJS</span>
+    </div>
+
+    <div class="tagline">
+      Your life. Your choices. Your Naija.
+    </div>
+
+    <div class="welcome" id="welcome">
+      Welcome to The Naijs
+    </div>
+
+    <div class="subtext" id="subtext">
+      No dull yourself. Your life is about to begin.
+    </div>
+
+    <button class="play" id="playButton" onclick="playGame()">
+      ▶ PLAY
+    </button>
+
+  </div>
+
+
+  <div class="game-screen" id="gameScreen">
+
+    <div class="baby">👶🏾</div>
+
+    <div class="headline">
+      YOU NO GET CHOICE
+    </div>
+
+    <div class="description">
+      Welcome to Nigeria. You have just been born.
+      Your family, your state, your circumstances
+      and your story are about to be decided.
+    </div>
+
+    <button class="play" onclick="beginLife()">
+      Continue
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+const savedGame = localStorage.getItem("theNaijsSave");
+
+if (savedGame) {
+  document.getElementById("welcome").textContent =
+    "Welcome back to The Naijs";
+
+  document.getElementById("subtext").textContent =
+    "Your story is still waiting for you.";
+
+  document.getElementById("playButton").textContent =
+    "▶ CONTINUE";
 }
 
-/* BIRTH RESULT */
+function playGame() {
+  document.getElementById("titleScreen").style.display = "none";
+  document.getElementById("gameScreen").style.display = "block";
 
-.birth-result{
- display:none;
- min-height:100vh;
- overflow:auto;
- padding:35px 18px;
- background:linear-gradient(#073b29,#061e15)
+  localStorage.setItem("theNaijsSave", "started");
 }
 
-.birth-container{
- width:min(100%,720px);
- margin:auto
+function beginLife() {
+  alert("Birth system coming next.");
 }
 
-.birth-title{
- text-align:center;
- font-size:clamp(35px,9vw,60px);
- font-weight:1000;
- margin:10px 0
-}
+</script>
 
-.birth-subtitle{
- text-align:center;
- color:#b9d1c6;
- margin-bottom:
+</body>
+</html>
