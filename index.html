@@ -1,192 +1,1332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Naijs</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Naijs</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+:root{
+  --green:#08291d;
+  --deep:#04150f;
+  --yellow:#ffd43b;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: white;
-    }
+*{box-sizing:border-box}
 
-    #game {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#08291d;
+  font-family:Arial,Helvetica,sans-serif;
+  color:white;
+}
 
-    .title-screen {
-      width: 100%;
-      max-width: 700px;
-      text-align: center;
-      padding: 40px 24px;
-    }
+button{font-family:inherit}
 
-    .logo {
-      font-size: clamp(48px, 12vw, 88px);
-      font-weight: 900;
-      letter-spacing: -4px;
-      margin-bottom: 8px;
-    }
+.screen{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+}
 
-    .tagline {
-      font-size: 16px;
-      color: #aaa;
-      margin-bottom: 48px;
-    }
+/* ================= TITLE ================= */
 
-    .welcome {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
+#title{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:
+    linear-gradient(
+      to bottom,
+      #68b8d5 0%,
+      #b9e1e1 48%,
+      #63995c 48%,
+      #39703d 70%,
+      #303331 70%,
+      #303331 100%
+    );
+}
 
-    .subtext {
-      color: #aaa;
-      line-height: 1.6;
-      margin: 0 auto 30px;
-      max-width: 430px;
-    }
+.sun{
+  position:absolute;
+  width:90px;
+  height:90px;
+  right:8%;
+  top:8%;
+  border-radius:50%;
+  background:#ffd34d;
+  box-shadow:0 0 45px #ffd34d;
+}
 
-    .play-button {
-      border: none;
-      border-radius: 14px;
-      padding: 16px 50px;
-      background: white;
-      color: #111;
-      font-size: 17px;
-      font-weight: 700;
-      cursor: pointer;
-    }
+.cloud{
+  position:absolute;
+  width:150px;
+  height:38px;
+  border-radius:40px;
+  background:#fff;
+  opacity:.82;
+  animation:cloud 30s linear infinite;
+}
 
-    .play-button:hover {
-      transform: translateY(-2px);
-    }
+.cloud:before,
+.cloud:after{
+  content:"";
+  position:absolute;
+  background:#fff;
+  border-radius:50%;
+}
 
-    .game-screen {
-      display: none;
-      width: 100%;
-      max-width: 700px;
-      background: #f4efe6;
-      color: #222;
-      border-radius: 24px;
-      padding: 30px;
-      text-align: center;
-    }
+.cloud:before{
+  width:55px;
+  height:55px;
+  left:18px;
+  top:-25px;
+}
 
-    .baby {
-      font-size: 90px;
-      margin: 15px 0;
-    }
+.cloud:after{
+  width:68px;
+  height:68px;
+  right:12px;
+  top:-35px;
+}
 
-    .headline {
-      font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
+.cloud.a{left:-180px;top:14%}
+.cloud.b{left:-400px;top:27%;animation-delay:10s}
 
-    .description {
-      color: #666;
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
-  </style>
+@keyframes cloud{
+  to{transform:translateX(130vw)}
+}
+
+.skyline{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:30%;
+  height:150px;
+  display:flex;
+  align-items:flex-end;
+  gap:8px;
+  padding:0 4%;
+}
+
+.building{
+  width:75px;
+  height:100px;
+  background:#66736e;
+  position:relative;
+}
+
+.building:nth-child(2){height:140px}
+.building:nth-child(3){height:115px}
+.building:nth-child(4){height:88px}
+.building:nth-child(5){height:128px}
+
+.building:after{
+  content:"";
+  position:absolute;
+  inset:12px;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      #f1d35e 0 9px,
+      transparent 9px 22px
+    );
+  opacity:.7;
+}
+
+.road{
+  position:absolute;
+  bottom:0;
+  height:30%;
+  width:100%;
+  background:#303332;
+}
+
+.road:before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:23%;
+  background:#39723e;
+}
+
+.road:after{
+  content:"";
+  position:absolute;
+  top:63%;
+  left:0;
+  width:100%;
+  height:6px;
+  background:repeating-linear-gradient(
+    90deg,
+    #f2d34a 0 55px,
+    transparent 55px 110px
+  );
+}
+
+.danfo{
+  position:absolute;
+  width:155px;
+  height:62px;
+  bottom:7%;
+  left:-180px;
+  border-radius:13px 18px 7px 7px;
+  background:#e4b51e;
+  animation:drive 11s linear infinite;
+}
+
+.danfo:before{
+  content:"";
+  position:absolute;
+  left:13px;
+  top:10px;
+  width:95px;
+  height:24px;
+  background:#20342f;
+  border-radius:5px;
+}
+
+.danfo:after{
+  content:"DANFO";
+  position:absolute;
+  right:9px;
+  top:12px;
+  color:#222;
+  font-size:10px;
+  font-weight:900;
+}
+
+@keyframes drive{
+  to{left:110%}
+}
+
+.titleCard{
+  position:relative;
+  z-index:5;
+  width:min(90%,620px);
+  padding:38px 28px;
+  text-align:center;
+  border-radius:26px;
+  background:rgba(3,31,22,.94);
+  box-shadow:0 30px 80px rgba(0,0,0,.4);
+}
+
+.logo{
+  font-size:clamp(50px,12vw,85px);
+  line-height:.9;
+  font-weight:1000;
+  letter-spacing:-5px;
+}
+
+.logo span{color:var(--yellow)}
+
+.titleCard h2{
+  margin:28px 0 8px;
+}
+
+.titleCard p{
+  color:#c5d9d1;
+  line-height:1.5;
+}
+
+.play{
+  margin-top:18px;
+  border:0;
+  border-radius:15px;
+  padding:16px 34px;
+  background:var(--yellow);
+  color:#173523;
+  font-weight:1000;
+  font-size:17px;
+  box-shadow:0 7px 0 #b99918;
+}
+
+.play:active{
+  transform:translateY(4px);
+  box-shadow:0 3px 0 #b99918;
+}
+
+/* ================= BIRTH ================= */
+
+#birth{
+  display:none;
+  background:#9eafaa;
+}
+
+.hospital{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  background:
+    linear-gradient(
+      105deg,
+      #a9bbb6,
+      #e5ebe8 50%,
+      #aabbb6
+    );
+}
+
+.hospital.cameraStart{
+  animation:cameraIn 4s ease forwards;
+}
+
+@keyframes cameraIn{
+  from{transform:scale(1.10)}
+  to{transform:scale(1)}
+}
+
+.ceiling{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:16%;
+  background:#f4f7f5;
+}
+
+.ceilingLight{
+  position:absolute;
+  top:6%;
+  left:42%;
+  width:170px;
+  height:20px;
+  border-radius:30px;
+  background:#fff;
+  box-shadow:0 0 45px #fff;
+}
+
+.window{
+  position:absolute;
+  left:4%;
+  top:9%;
+  width:25%;
+  height:30%;
+  border:10px solid #f8faf9;
+  background:
+    linear-gradient(
+      #64b7d5 0 68%,
+      #77a66e 68%
+    );
+  box-shadow:0 12px 30px rgba(0,0,0,.14);
+}
+
+.windowSun{
+  position:absolute;
+  width:42px;
+  height:42px;
+  right:15px;
+  top:18px;
+  background:#ffd34b;
+  border-radius:50%;
+}
+
+.curtain{
+  position:absolute;
+  right:0;
+  top:15%;
+  width:23%;
+  height:62%;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #f1f3f0 0 20px,
+      #d8dfda 20px 40px
+    );
+  animation:curtainSway 4s ease-in-out infinite alternate;
+}
+
+@keyframes curtainSway{
+  to{transform:translateX(12px)}
+}
+
+.floor{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:28%;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #b8c2be 0 90px,
+      #aab5b0 90px 93px
+    );
+}
+
+/* BED */
+
+.bed{
+  position:absolute;
+  left:50%;
+  top:55%;
+  width:min(52vw,470px);
+  height:150px;
+  transform:translate(-50%,-50%);
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 25px 45px rgba(0,0,0,.22);
+}
+
+.mattress{
+  position:absolute;
+  inset:0;
+  border-radius:18px;
+  background:#fff;
+}
+
+.pillow{
+  position:absolute;
+  width:125px;
+  height:58px;
+  left:10%;
+  top:-12px;
+  border-radius:35px;
+  background:#edf2ef;
+}
+
+.motherBody{
+  position:absolute;
+  left:27%;
+  top:-95px;
+  font-size:90px;
+  animation:breathe 1.7s ease-in-out infinite;
+}
+
+@keyframes breathe{
+  50%{
+    transform:translateY(-5px) scale(1.015);
+  }
+}
+
+/* PEOPLE */
+
+.character{
+  position:absolute;
+  z-index:5;
+  width:90px;
+  height:150px;
+  animation:characterMove 2.6s ease-in-out infinite alternate;
+}
+
+@keyframes characterMove{
+  to{transform:translateY(-5px)}
+}
+
+.head{
+  position:absolute;
+  left:25px;
+  top:0;
+  width:43px;
+  height:50px;
+  border-radius:50% 50% 47% 47%;
+  background:#8b573b;
+  z-index:2;
+}
+
+.hair{
+  position:absolute;
+  left:20px;
+  top:-7px;
+  width:53px;
+  height:28px;
+  border-radius:50% 50% 20% 20%;
+  background:#211811;
+  z-index:3;
+}
+
+.body{
+  position:absolute;
+  left:15px;
+  top:48px;
+  width:62px;
+  height:82px;
+  border-radius:25px 25px 10px 10px;
+  background:#e8f0ed;
+}
+
+.arm{
+  position:absolute;
+  width:18px;
+  height:66px;
+  border-radius:20px;
+  background:#8b573b;
+  top:55px;
+}
+
+.arm.left{
+  left:2px;
+  transform:rotate(18deg);
+}
+
+.arm.right{
+  right:2px;
+  transform:rotate(-18deg);
+}
+
+.leg{
+  position:absolute;
+  width:20px;
+  height:60px;
+  border-radius:15px;
+  background:#263a35;
+  top:120px;
+}
+
+.leg.left{left:22px}
+.leg.right{right:22px}
+
+.nurseCharacter{
+  left:8%;
+  top:39%;
+}
+
+.nurseCharacter .body{
+  background:#eef5f1;
+}
+
+.doctorCharacter{
+  right:10%;
+  top:32%;
+}
+
+.doctorCharacter .body{
+  background:#f6f7f5;
+}
+
+.doctorCharacter .head{
+  background:#633e2e;
+}
+
+.fatherCharacter{
+  left:42%;
+  bottom:7%;
+}
+
+.fatherCharacter .body{
+  background:#315b4b;
+}
+
+.fatherCharacter .head{
+  background:#8a5439;
+}
+
+.characterLabel{
+  position:absolute;
+  top:158px;
+  left:50%;
+  transform:translateX(-50%);
+  white-space:nowrap;
+  background:rgba(4,25,17,.9);
+  border-radius:8px;
+  padding:5px 8px;
+  font-size:10px;
+  font-weight:bold;
+}
+
+/* CINEMATIC TEXT */
+
+.cinematicText{
+  position:absolute;
+  z-index:10;
+  left:50%;
+  top:21%;
+  transform:translateX(-50%);
+  padding:11px 18px;
+  background:rgba(5,30,21,.92);
+  border-radius:24px;
+  font-weight:bold;
+  white-space:nowrap;
+  opacity:0;
+  transition:.4s;
+}
+
+.cinematicText.show{
+  opacity:1;
+}
+
+.cameraLetterbox{
+  position:absolute;
+  z-index:30;
+  left:0;
+  right:0;
+  height:8%;
+  background:#000;
+  pointer-events:none;
+}
+
+.cameraLetterbox.top{top:0}
+.cameraLetterbox.bottom{bottom:0}
+
+/* REVEAL */
+
+.flash{
+  position:absolute;
+  inset:0;
+  z-index:20;
+  background:#fff;
+  opacity:0;
+  pointer-events:none;
+}
+
+.flash.active{
+  animation:flash .65s ease;
+}
+
+@keyframes flash{
+  50%{opacity:.8}
+}
+
+.reveal{
+  position:absolute;
+  inset:0;
+  z-index:25;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:rgba(2,18,12,.9);
+  opacity:0;
+  transform:scale(.94);
+  pointer-events:none;
+  transition:1s;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:scale(1);
+}
+
+.babyCircle{
+  width:145px;
+  height:145px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#f5dfc5;
+  box-shadow:0 0 70px rgba(255,220,160,.3);
+  font-size:76px;
+  animation:babyFloat 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes babyFloat{
+  to{transform:translateY(-10px)}
+}
+
+.reveal h1{
+  margin:22px 0 7px;
+  color:var(--yellow);
+  font-size:clamp(40px,10vw,78px);
+}
+
+.reveal p{
+  color:#d5e2dc;
+}
+
+/* RESULT */
+
+#result{
+  display:none;
+  position:absolute;
+  inset:0;
+  overflow:auto;
+  background:
+    radial-gradient(circle at 50% 15%,#13573d,#061b12 65%);
+  padding:35px 18px;
+  z-index:50;
+}
+
+.resultInner{
+  width:min(720px,100%);
+  margin:auto;
+  text-align:center;
+}
+
+.resultTag{
+  color:#88b8a3;
+  font-size:13px;
+  letter-spacing:2px;
+  font-weight:bold;
+}
+
+.resultInner h1{
+  margin:10px 0;
+  color:var(--yellow);
+  font-size:clamp(38px,10vw,70px);
+}
+
+.resultIntro{
+  color:#c5d9d1;
+  line-height:1.5;
+}
+
+.resultGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:28px;
+}
+
+.resultCard{
+  text-align:left;
+  padding:17px;
+  border-radius:15px;
+  background:#123827;
+  border:1px solid rgba(255,255,255,.05);
+}
+
+.resultCard small{
+  display:block;
+  color:#82a896;
+  margin-bottom:6px;
+}
+
+.resultCard strong{
+  font-size:15px;
+}
+
+.continue{
+  margin-top:25px;
+  border:0;
+  border-radius:14px;
+  padding:15px 30px;
+  background:var(--yellow);
+  color:#173523;
+  font-weight:1000;
+}
+
+@media(max-width:600px){
+
+  .skyline{
+    padding-left:1%;
+  }
+
+  .building{
+    width:55px;
+  }
+
+  .titleCard{
+    padding:30px 20px;
+  }
+
+  .window{
+    width:34%;
+    height:25%;
+  }
+
+  .bed{
+    width:72vw;
+  }
+
+  .character{
+    transform:scale(.82);
+    transform-origin:bottom;
+  }
+
+  .nurseCharacter{
+    left:2%;
+  }
+
+  .doctorCharacter{
+    right:2%;
+  }
+
+  .fatherCharacter{
+    left:38%;
+  }
+
+  .cinematicText{
+    max-width:82%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .resultGrid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div id="game">
+<!-- TITLE -->
 
-    <div class="title-screen" id="titleScreen">
+<section id="title" class="screen">
 
-      <div class="logo">THE NAIJS</div>
+  <div class="sun"></div>
 
-      <div class="tagline">
-        A Nigerian life. Your choices. Your story.
+  <div class="cloud a"></div>
+  <div class="cloud b"></div>
+
+  <div class="skyline">
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+    <div class="building"></div>
+  </div>
+
+  <div class="road"></div>
+
+  <div class="danfo"></div>
+
+  <div class="titleCard">
+
+    <div class="logo">
+      THE <span>NAIJS</span>
+    </div>
+
+    <p>
+      Your life. Your choices. Your Naija.
+    </p>
+
+    <h2 id="welcomeTitle">
+      Welcome to The Naijs
+    </h2>
+
+    <p id="welcomeText">
+      No dull yourself. Your life is about to begin.
+    </p>
+
+    <button
+      class="play"
+      onclick="startLife()"
+    >
+      ▶ PLAY
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- BIRTH -->
+
+<section id="birth" class="screen">
+
+  <div class="hospital cameraStart">
+
+    <div class="ceiling"></div>
+
+    <div class="ceilingLight"></div>
+
+    <div class="window">
+      <div class="windowSun"></div>
+    </div>
+
+    <div class="curtain"></div>
+
+    <div class="floor"></div>
+
+    <div class="bed">
+
+      <div class="mattress"></div>
+
+      <div class="pillow"></div>
+
+      <div class="motherBody">
+        🤰🏾
       </div>
-
-      <div class="welcome" id="welcomeText">
-        Welcome to The Naijs
-      </div>
-
-      <p class="subtext" id="subText">
-        No dull yourself. Your life is about to begin.
-      </p>
-
-      <button class="play-button" id="playButton" onclick="startGame()">
-        ▶ PLAY
-      </button>
 
     </div>
 
 
-    <div class="game-screen" id="gameScreen">
+    <!-- NURSE -->
 
-      <div class="baby">👶🏾</div>
+    <div class="character nurseCharacter">
 
-      <div class="headline">
-        YOU NO GET CHOICE
+      <div class="head"></div>
+      <div class="hair"></div>
+      <div class="body"></div>
+      <div class="arm left"></div>
+      <div class="arm right"></div>
+      <div class="leg left"></div>
+      <div class="leg right"></div>
+
+      <div
+        class="characterLabel"
+        id="nurseLabel"
+      >
+        Nurse
       </div>
 
-      <div class="description">
-        Welcome to Nigeria. You have just been born.
-        Your family, your state, your circumstances
-        and your story are about to be decided.
+    </div>
+
+
+    <!-- DOCTOR -->
+
+    <div class="character doctorCharacter">
+
+      <div class="head"></div>
+      <div class="hair"></div>
+      <div class="body"></div>
+      <div class="arm left"></div>
+      <div class="arm right"></div>
+      <div class="leg left"></div>
+      <div class="leg right"></div>
+
+      <div
+        class="characterLabel"
+        id="doctorLabel"
+      >
+        Doctor
       </div>
 
-      <button class="play-button" onclick="beginLife()">
-        Continue
-      </button>
+    </div>
+
+
+    <!-- FATHER -->
+
+    <div class="character fatherCharacter">
+
+      <div class="head"></div>
+      <div class="hair"></div>
+      <div class="body"></div>
+      <div class="arm left"></div>
+      <div class="arm right"></div>
+      <div class="leg left"></div>
+      <div class="leg right"></div>
+
+      <div
+        class="characterLabel"
+        id="fatherLabel"
+      >
+        Dad
+      </div>
+
+    </div>
+
+
+    <div
+      class="cinematicText show"
+      id="sceneText"
+    >
+      "Easy, easy. You dey do well."
 
     </div>
 
   </div>
 
 
-  <script>
+  <div class="cameraLetterbox top"></div>
+  <div class="cameraLetterbox bottom"></div>
 
-    const hasSavedGame = localStorage.getItem("theNaijsSave");
-
-    if (hasSavedGame) {
-      document.getElementById("welcomeText").textContent =
-        "Welcome back to The Naijs";
-
-      document.getElementById("subText").textContent =
-        "Your story is still waiting for you.";
-
-      document.getElementById("playButton").textContent =
-        "▶ CONTINUE";
-    }
+  <div
+    class="flash"
+    id="flash"
+  ></div>
 
 
-    function startGame() {
+  <div
+    class="reveal"
+    id="reveal"
+  >
 
-      document.getElementById("titleScreen").style.display = "none";
-      document.getElementById("gameScreen").style.display = "block";
+    <div class="babyCircle">
+      👶🏾
+    </div>
 
-      localStorage.setItem("theNaijsSave", "started");
+    <h1>
+      IT'S A BABY!
+    </h1>
 
-    }
+    <p>
+      And just like that, your story begins.
+    </p>
+
+  </div>
+
+</section>
 
 
-    function beginLife() {
+<!-- RESULT -->
 
-      alert("Birth system coming next.");
+<section id="result">
 
-    }
+  <div class="resultInner">
 
-  </script>
+    <div class="resultTag">
+      YOUR LIFE HAS BEGUN
+    </div>
+
+    <h1>
+      YOU NO GET CHOICE
+    </h1>
+
+    <div class="resultIntro">
+      You arrived in a Nigerian family you did not choose.
+      For now, the adults make the decisions.
+      But every experience from here will shape the person you become.
+    </div>
+
+    <div class="resultGrid">
+
+      <div class="resultCard">
+        <small>Your name</small>
+        <strong id="rName"></strong>
+      </div>
+
+      <div class="resultCard">
+        <small>Gender</small>
+        <strong id="rGender"></strong>
+      </div>
+
+      <div class="resultCard">
+        <small>Born in</small>
+        <strong id="rState"></strong>
+      </div>
+
+      <div class="resultCard">
+        <small>Family</small>
+        <strong id="rFamily"></strong>
+      </div>
+
+      <div class="resultCard">
+        <small>Mother</small>
+        <strong id="rMother"></strong>
+      </div>
+
+      <div class="resultCard">
+        <small>Father</small>
+        <strong id="rFather"></strong>
+      </div>
+
+      <div class="resultCard">
+        <small>Family wealth</small>
+        <strong id="rWealth"></strong>
+      </div>
+
+      <div class="resultCard">
+        <small>Birth order</small>
+        <strong id="rOrder"></strong>
+      </div>
+
+    </div>
+
+    <button
+      class="continue"
+      onclick="continueGame()"
+    >
+      CONTINUE →
+    </button>
+
+  </div>
+
+</section>
+
+
+<script>
+
+/* =====================================================
+   DATA
+===================================================== */
+
+const firstNames = [
+  "Amina","Amaka","Chiamaka","Tunde","David",
+  "Favour","Daniel","Zainab","Adebayo","Esther",
+  "Emeka","Damilola","Precious","Yusuf","Blessing",
+  "Ifeanyi","Sade","Mariam","Kelechi","Olamide",
+  "Tosin","Ada","Micheal","Mary","Abdul"
+];
+
+const states = [
+  "Lagos","Oyo","Ogun","Rivers","Enugu",
+  "Kano","Kaduna","Delta","Edo","Anambra",
+  "Kwara","Osun","Akwa Ibom","Abuja","Benue"
+];
+
+const occupations = [
+  "Teacher","Trader","Nurse","Engineer",
+  "Civil Servant","Business Owner","Banker",
+  "Doctor","Driver","Lawyer","Accountant",
+  "Artisan","Entrepreneur"
+];
+
+const familyTypes = [
+  "A close-knit family",
+  "A large extended family",
+  "A quiet small family",
+  "A busy working family",
+  "A lively family with plenty relatives"
+];
+
+const wealth = [
+  "Low income",
+  "Lower-middle income",
+  "Middle income",
+  "Upper-middle income",
+  "Wealthy"
+];
+
+const orders = [
+  "First child",
+  "Second child",
+  "Third child",
+  "Fourth child"
+];
+
+const genders = [
+  "Boy",
+  "Girl"
+];
+
+
+/* =====================================================
+   RANDOM
+===================================================== */
+
+function pick(list){
+  return list[
+    Math.floor(Math.random() * list.length)
+  ];
+}
+
+
+/* =====================================================
+   LIFE GENERATION
+===================================================== */
+
+function generateLife(){
+
+  const mother = pick(firstNames);
+
+  let father = pick(firstNames);
+
+  while(father === mother){
+    father = pick(firstNames);
+  }
+
+  return {
+
+    name:pick(firstNames),
+
+    gender:pick(genders),
+
+    state:pick(states),
+
+    mother:
+      mother + " • " + pick(occupations),
+
+    father:
+      father + " • " + pick(occupations),
+
+    family:
+      pick(familyTypes),
+
+    wealth:
+      pick(wealth),
+
+    order:
+      pick(orders)
+
+  };
+}
+
+
+/* =====================================================
+   START LIFE
+===================================================== */
+
+function startLife(){
+
+  const life = generateLife();
+
+  window.currentLife = life;
+
+  document.getElementById("title").style.display = "none";
+  document.getElementById("birth").style.display = "block";
+  document.getElementById("result").style.display = "none";
+
+
+  /* New people every life */
+
+  document.getElementById("nurseLabel").textContent =
+    "Nurse " + pick(firstNames);
+
+  document.getElementById("doctorLabel").textContent =
+    "Dr. " + pick(firstNames);
+
+  document.getElementById("fatherLabel").textContent =
+    life.father.split(" • ")[0];
+
+
+  const sceneText =
+    document.getElementById("sceneText");
+
+
+  /* NURSE */
+
+  sceneText.textContent =
+    "\"Easy, easy. You dey do well.\"";
+
+
+  setTimeout(function(){
+
+    sceneText.textContent =
+      "\"Almost there. Just keep breathing.\"";
+
+  },1500);
+
+
+  /* DOCTOR - PROFESSIONAL ENGLISH */
+
+  setTimeout(function(){
+
+    sceneText.textContent =
+      "\"Everything is progressing normally. You're doing very well.\"";
+
+  },3000);
+
+
+  setTimeout(function(){
+
+    sceneText.textContent =
+      "\"The baby is almost here. Stay calm. We're right here with you.\"";
+
+  },4300);
+
+
+  /* DELIVERY */
+
+  setTimeout(function(){
+
+    sceneText.textContent =
+      "\"You're doing well. One more push.\"";
+
+  },5200);
+
+
+  /* BABY ARRIVES */
+
+  setTimeout(function(){
+
+    sceneText.classList.remove("show");
+
+    document
+      .getElementById("flash")
+      .classList.add("active");
+
+  },6000);
+
+
+  /* BABY REVEAL */
+
+  setTimeout(function(){
+
+    document
+      .getElementById("reveal")
+      .classList.add("active");
+
+  },6400);
+
+
+  /* RESULT */
+
+  setTimeout(function(){
+
+    document
+      .getElementById("reveal")
+      .classList.remove("active");
+
+    showResult(life);
+
+  },9000);
+
+}
+
+
+/* =====================================================
+   RESULT
+===================================================== */
+
+function showResult(life){
+
+  document.getElementById("birth").style.display = "none";
+  document.getElementById("result").style.display = "block";
+
+  document.getElementById("rName").textContent =
+    life.name;
+
+  document.getElementById("rGender").textContent =
+    life.gender;
+
+  document.getElementById("rState").textContent =
+    life.state;
+
+  document.getElementById("rFamily").textContent =
+    life.family;
+
+  document.getElementById("rMother").textContent =
+    life.mother;
+
+  document.getElementById("rFather").textContent =
+    life.father;
+
+  document.getElementById("rWealth").textContent =
+    life.wealth;
+
+  document.getElementById("rOrder").textContent =
+    life.order;
+
+  localStorage.setItem(
+    "theNaijsLife",
+    JSON.stringify(life)
+  );
+}
+
+
+/* =====================================================
+   CONTINUE
+===================================================== */
+
+function continueGame(){
+
+  alert(
+    "AGE 0\n\n" +
+    "You cannot make your own decisions yet.\n\n" +
+    "Your family decides where you live, " +
+    "what you eat, what religion you practise, " +
+    "and how you are raised.\n\n" +
+    "Your experiences are already beginning to shape you."
+  );
+
+}
+
+
+/* =====================================================
+   RETURNING PLAYER
+===================================================== */
+
+window.addEventListener("load",function(){
+
+  const saved =
+    localStorage.getItem("theNaijsLife");
+
+  if(saved){
+
+    document
+      .getElementById("welcomeTitle")
+      .textContent =
+      "Welcome back to The Naijs";
+
+    document
+      .getElementById("welcomeText")
+      .textContent =
+      "Your story is still waiting for you.";
+
+  }
+
+});
+
+</script>
 
 </body>
 </html>
