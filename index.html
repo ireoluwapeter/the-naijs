@@ -1,274 +1,425 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Naijs</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Naijs</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      color: white;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.12), transparent 25%),
-        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.08), transparent 30%),
-        linear-gradient(135deg, #064d32, #087443 45%, #043d28);
-    }
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: #087443;
+}
 
-    #game {
-      min-height: 100vh;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+#game {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(#69c9d8 0%, #b8e7df 55%, #f4c96b 56%, #d99b52 100%);
+}
 
-    /* Decorative background shapes */
+/* SUN */
 
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(2px);
-      opacity: 0.35;
-      animation: float 8s ease-in-out infinite;
-    }
+.sun {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: #ffd45c;
+  top: 8%;
+  right: 10%;
+  box-shadow: 0 0 60px rgba(255,212,92,.6);
+}
 
-    .orb.one {
-      width: 220px;
-      height: 220px;
-      background: #f7c948;
-      top: -70px;
-      left: -60px;
-    }
+/* CLOUDS */
 
-    .orb.two {
-      width: 300px;
-      height: 300px;
-      background: #20a866;
-      bottom: -140px;
-      right: -100px;
-      animation-delay: -3s;
-    }
+.cloud {
+  position: absolute;
+  width: 150px;
+  height: 45px;
+  background: white;
+  border-radius: 50px;
+  opacity: .75;
+}
 
-    .orb.three {
-      width: 120px;
-      height: 120px;
-      background: #f2f2f2;
-      top: 25%;
-      right: 8%;
-      opacity: 0.08;
-      animation-delay: -5s;
-    }
+.cloud:before,
+.cloud:after {
+  content: "";
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+}
 
-    .pattern {
-      position: absolute;
-      inset: 0;
-      opacity: 0.06;
-      background-image:
-        linear-gradient(45deg, white 1px, transparent 1px),
-        linear-gradient(-45deg, white 1px, transparent 1px);
-      background-size: 45px 45px;
-      transform: rotate(8deg) scale(1.3);
-    }
+.cloud:before {
+  width: 65px;
+  height: 65px;
+  left: 25px;
+  top: -30px;
+}
 
-    .title-screen {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 720px;
-      text-align: center;
-      padding: 45px 25px;
-    }
+.cloud:after {
+  width: 75px;
+  height: 75px;
+  right: 20px;
+  top: -40px;
+}
 
-    .logo {
-      font-size: clamp(52px, 13vw, 96px);
-      font-weight: 900;
-      letter-spacing: -5px;
-      line-height: 0.95;
-      text-shadow: 0 8px 30px rgba(0,0,0,0.25);
-      margin-bottom: 12px;
-    }
+.cloud.one { top: 15%; left: 8%; }
+.cloud.two { top: 28%; right: 30%; transform: scale(.7); }
 
-    .logo span {
-      color: #f7c948;
-    }
+/* CITY */
 
-    .tagline {
-      font-size: 14px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      opacity: 0.75;
-      margin-bottom: 55px;
-    }
+.city {
+  position: absolute;
+  bottom: 38%;
+  left: 0;
+  width: 100%;
+  height: 180px;
+}
 
-    .welcome {
-      font-size: clamp(25px, 6vw, 38px);
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
+.building {
+  position: absolute;
+  bottom: 0;
+  background: #52656b;
+  border-radius: 4px 4px 0 0;
+}
 
-    .subtext {
-      color: rgba(255,255,255,0.78);
-      line-height: 1.6;
-      font-size: 16px;
-      margin: 0 auto 32px;
-      max-width: 430px;
-    }
+.b1 { left: 4%; width: 90px; height: 130px; }
+.b2 { left: 16%; width: 130px; height: 170px; background:#687b7d; }
+.b3 { right: 15%; width: 100px; height: 145px; }
+.b4 { right: 3%; width: 150px; height: 185px; background:#596c70; }
 
-    .play-button {
-      border: 0;
-      border-radius: 999px;
-      padding: 17px 48px;
-      background: #f7c948;
-      color: #123322;
-      font-size: 17px;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+.window {
+  position: absolute;
+  width: 12px;
+  height: 18px;
+  background: #ffd76b;
+  box-shadow:
+    25px 0 #ffd76b,
+    50px 0 #ffd76b,
+    0 30px #ffd76b,
+    25px 30px #ffd76b,
+    50px 30px #ffd76b;
+  top: 25px;
+  left: 20px;
+}
 
-    .play-button:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-    }
+/* TREES */
 
-    .game-screen {
-      display: none;
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 700px;
-      background: #f4efe6;
-      color: #222;
-      border-radius: 28px;
-      padding: 35px 25px;
-      text-align: center;
-      box-shadow: 0 25px 70px rgba(0,0,0,0.3);
-    }
+.tree {
+  position: absolute;
+  bottom: 30%;
+  width: 100px;
+  height: 180px;
+}
 
-    .baby {
-      font-size: 90px;
-      margin: 10px 0;
-    }
+.tree:before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 100px;
+  background: #68462e;
+  bottom: 0;
+  left: 40px;
+  transform: rotate(-5deg);
+}
 
-    .headline {
-      font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
+.tree:after {
+  content: "🌴";
+  font-size: 100px;
+  position: absolute;
+  bottom: 55px;
+  left: 0;
+}
 
-    .description {
-      color: #666;
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
+.tree.one { left: 3%; }
+.tree.two { right: 4%; transform: scale(.8); }
 
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0) translateX(0);
-      }
+/* ROAD */
 
-      50% {
-        transform: translateY(-25px) translateX(12px);
-      }
-    }
-  </style>
+.road {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 31%;
+  background: #3d4241;
+}
+
+.road-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  border-top: 7px dashed #f5d76e;
+}
+
+/* DANFO */
+
+.bus {
+  position: absolute;
+  bottom: 13%;
+  left: 8%;
+  width: 190px;
+  height: 75px;
+  background: #f4c72d;
+  border: 5px solid #222;
+  border-radius: 12px 18px 8px 8px;
+  z-index: 4;
+}
+
+.bus:before {
+  content: "";
+  position: absolute;
+  width: 55px;
+  height: 30px;
+  background: #83c7d3;
+  top: 10px;
+  left: 12px;
+  box-shadow: 65px 0 #83c7d3;
+}
+
+.bus:after {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background: #222;
+  border-radius: 50%;
+  bottom: -18px;
+  left: 25px;
+  box-shadow: 110px 0 #222;
+}
+
+/* PEOPLE */
+
+.person {
+  position: absolute;
+  bottom: 26%;
+  z-index: 5;
+  font-size: 55px;
+}
+
+.person.one { left: 34%; }
+.person.two { right: 30%; font-size: 48px; }
+
+/* TITLE CARD */
+
+.title-screen {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(90%, 570px);
+  text-align: center;
+  padding: 35px 25px;
+  border-radius: 30px;
+  background: rgba(5, 54, 34, .88);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 25px 70px rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.15);
+}
+
+.logo {
+  font-size: clamp(50px, 12vw, 90px);
+  font-weight: 900;
+  letter-spacing: -5px;
+  color: white;
+}
+
+.logo span {
+  color: #ffd34e;
+}
+
+.tagline {
+  margin-top: 8px;
+  color: #bce5cf;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.welcome {
+  margin-top: 38px;
+  font-size: 27px;
+  font-weight: 800;
+}
+
+.subtext {
+  color: #d4e8dc;
+  line-height: 1.6;
+  margin: 10px auto 28px;
+  max-width: 380px;
+}
+
+.play {
+  border: 0;
+  border-radius: 50px;
+  padding: 16px 48px;
+  background: #ffd34e;
+  color: #123322;
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(0,0,0,.25);
+}
+
+.play:hover {
+  transform: scale(1.04);
+}
+
+/* GAME SCREEN */
+
+.game-screen {
+  display: none;
+  position: absolute;
+  z-index: 20;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(90%, 650px);
+  background: #fffaf0;
+  color: #222;
+  padding: 35px;
+  border-radius: 28px;
+  text-align: center;
+  box-shadow: 0 25px 70px rgba(0,0,0,.35);
+}
+
+.baby {
+  font-size: 85px;
+}
+
+.headline {
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.description {
+  color: #666;
+  line-height: 1.6;
+  margin: 15px auto 25px;
+  max-width: 500px;
+}
+
+@media(max-width:600px) {
+  .city { bottom: 40%; }
+  .road { height: 27%; }
+  .bus { transform: scale(.7); left: 2%; }
+  .person { font-size: 40px; }
+  .title-screen { padding: 28px 18px; }
+}
+</style>
 </head>
 
 <body>
 
-  <div id="game">
+<div id="game">
 
-    <div class="pattern"></div>
+  <div class="sun"></div>
 
-    <div class="orb one"></div>
-    <div class="orb two"></div>
-    <div class="orb three"></div>
+  <div class="cloud one"></div>
+  <div class="cloud two"></div>
 
-    <div class="title-screen" id="titleScreen">
+  <div class="city">
+    <div class="building b1"><div class="window"></div></div>
+    <div class="building b2"><div class="window"></div></div>
+    <div class="building b3"><div class="window"></div></div>
+    <div class="building b4"><div class="window"></div></div>
+  </div>
 
-      <div class="logo">
-        THE <span>NAIJS</span>
-      </div>
+  <div class="tree one"></div>
+  <div class="tree two"></div>
 
-      <div class="tagline">
-        A Nigerian life. Your choices. Your story.
-      </div>
+  <div class="road">
+    <div class="road-line"></div>
+  </div>
 
-      <div class="welcome" id="welcomeText">
-        Welcome to The Naijs
-      </div>
+  <div class="bus"></div>
 
-      <p class="subtext" id="subText">
-        No dull yourself. Your life is about to begin.
-      </p>
+  <div class="person one">🧍🏾‍♀️</div>
+  <div class="person two">🧍🏾‍♂️</div>
 
-      <button class="play-button" id="playButton" onclick="startGame()">
-        ▶ PLAY
-      </button>
 
+  <div class="title-screen" id="titleScreen">
+
+    <div class="logo">
+      THE <span>NAIJS</span>
     </div>
 
-
-    <div class="game-screen" id="gameScreen">
-
-      <div class="baby">👶🏾</div>
-
-      <div class="headline">
-        YOU NO GET CHOICE
-      </div>
-
-      <div class="description">
-        Welcome to Nigeria. You have just been born.
-        Your family, your state, your circumstances
-        and your story are about to be decided.
-      </div>
-
-      <button class="play-button" onclick="beginLife()">
-        Continue
-      </button>
-
+    <div class="tagline">
+      Your life. Your choices. Your Naija.
     </div>
+
+    <div class="welcome" id="welcome">
+      Welcome to The Naijs
+    </div>
+
+    <div class="subtext" id="subtext">
+      No dull yourself. Your life is about to begin.
+    </div>
+
+    <button class="play" id="playButton" onclick="playGame()">
+      ▶ PLAY
+    </button>
 
   </div>
 
 
-  <script>
+  <div class="game-screen" id="gameScreen">
 
-    const hasSavedGame = localStorage.getItem("theNaijsSave");
+    <div class="baby">👶🏾</div>
 
-    if (hasSavedGame) {
-      document.getElementById("welcomeText").textContent =
-        "Welcome back to The Naijs";
+    <div class="headline">
+      YOU NO GET CHOICE
+    </div>
 
-      document.getElementById("subText").textContent =
-        "Your story is still waiting for you.";
+    <div class="description">
+      Welcome to Nigeria. You have just been born.
+      Your family, your state, your circumstances
+      and your story are about to be decided.
+    </div>
 
-      document.getElementById("playButton").textContent =
-        "▶ CONTINUE";
-    }
+    <button class="play" onclick="beginLife()">
+      Continue
+    </button>
 
-    function startGame() {
-      document.getElementById("titleScreen").style.display = "none";
-      document.getElementById("gameScreen").style.display = "block";
+  </div>
 
-      localStorage.setItem("theNaijsSave", "started");
-    }
+</div>
 
-    function beginLife() {
-      alert("Birth system coming next.");
-    }
 
-  </script>
+<script>
+
+const savedGame = localStorage.getItem("theNaijsSave");
+
+if (savedGame) {
+  document.getElementById("welcome").textContent =
+    "Welcome back to The Naijs";
+
+  document.getElementById("subtext").textContent =
+    "Your story is still waiting for you.";
+
+  document.getElementById("playButton").textContent =
+    "▶ CONTINUE";
+}
+
+function playGame() {
+  document.getElementById("titleScreen").style.display = "none";
+  document.getElementById("gameScreen").style.display = "block";
+
+  localStorage.setItem("theNaijsSave", "started");
+}
+
+function beginLife() {
+  alert("Birth system coming next.");
+}
+
+</script>
 
 </body>
 </html>
