@@ -6,14 +6,13 @@ html,
 body {
   margin: 0;
   width: 100%;
-  min-height: 100%;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #0b0b0b;
-  color: #fff;
+  height: 100%;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
 }
 
 body {
-  overflow: hidden;
+  background: #087443;
 }
 
 button {
@@ -21,158 +20,349 @@ button {
   cursor: pointer;
 }
 
-#app {
-  width: 100vw;
-  height: 100vh;
-  min-height: 560px;
-  position: relative;
-  overflow: hidden;
-}
-
-/* =========================
-   SHARED SCENE
-========================= */
-
-.screen {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
 .hidden {
   display: none !important;
 }
 
 /* =========================
-   TITLE SCREEN
+   MAIN APP
 ========================= */
 
-.title-screen {
-  background: #f5d76e;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.title-content {
+#game,
+#app {
+  width: 100vw;
+  height: 100vh;
   position: relative;
-  z-index: 5;
-  text-align: center;
-}
-
-.title-heading {
-  margin: 0;
-  font-size: clamp(3.5rem, 13vw, 8rem);
-  font-weight: 900;
-  letter-spacing: -0.06em;
-  line-height: 0.85;
-}
-
-.title-subtitle {
-  margin-top: 18px;
-  font-size: clamp(0.9rem, 3vw, 1.3rem);
-  font-weight: 700;
-}
-
-.start-button {
-  margin-top: 32px;
-  padding: 15px 28px;
-  border: 0;
-  border-radius: 999px;
-  background: #111;
-  color: #fff;
-  font-weight: 800;
+  overflow: hidden;
 }
 
 /* =========================
-   DANFO
+   TITLE WORLD
 ========================= */
 
-.danfo {
+.title-world {
   position: absolute;
-  left: -240px;
-  bottom: 12%;
-  width: 210px;
-  height: 82px;
-  z-index: 3;
-  animation: danfoDrive 8s linear infinite;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(
+    #69c9d8 0%,
+    #b8e7df 55%,
+    #f4c96b 56%,
+    #d99b52 100%
+  );
 }
 
-.danfo-body {
+/* SUN */
+
+.sun {
   position: absolute;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: #ffd45c;
+  top: 8%;
+  right: 10%;
+  box-shadow: 0 0 60px rgba(255, 212, 92, .6);
+}
+
+/* CLOUDS */
+
+.cloud {
+  position: absolute;
+  width: 150px;
+  height: 45px;
+  background: white;
+  border-radius: 50px;
+  opacity: .75;
+}
+
+.cloud:before,
+.cloud:after {
+  content: "";
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+}
+
+.cloud:before {
+  width: 65px;
+  height: 65px;
+  left: 25px;
+  top: -30px;
+}
+
+.cloud:after {
+  width: 75px;
+  height: 75px;
+  right: 20px;
+  top: -40px;
+}
+
+.cloud.one {
+  top: 15%;
+  left: 8%;
+}
+
+.cloud.two {
+  top: 28%;
+  right: 30%;
+  transform: scale(.7);
+}
+
+/* CITY */
+
+.city {
+  position: absolute;
+  bottom: 38%;
   left: 0;
-  bottom: 16px;
-  width: 210px;
-  height: 58px;
-  border-radius: 12px 18px 8px 8px;
-  background: #f5c400;
-  border: 4px solid #151515;
+  width: 100%;
+  height: 180px;
 }
 
-.danfo-front {
-  position: absolute;
-  right: -3px;
-  bottom: 16px;
-  width: 42px;
-  height: 58px;
-  border-radius: 0 17px 7px 0;
-  background: #f5c400;
-  border: 4px solid #151515;
-  border-left: 0;
-}
-
-.danfo-window {
-  position: absolute;
-  top: 8px;
-  left: 12px;
-  width: 178px;
-  height: 27px;
-  display: flex;
-  gap: 5px;
-}
-
-.danfo-window span {
-  flex: 1;
-  background: #222;
-  border: 2px solid #111;
-}
-
-.danfo-wheel {
+.building {
   position: absolute;
   bottom: 0;
-  width: 25px;
-  height: 25px;
+  background: #52656b;
+  border-radius: 4px 4px 0 0;
+}
+
+.b1 {
+  left: 4%;
+  width: 90px;
+  height: 130px;
+}
+
+.b2 {
+  left: 16%;
+  width: 130px;
+  height: 170px;
+  background: #687b7d;
+}
+
+.b3 {
+  right: 15%;
+  width: 100px;
+  height: 145px;
+}
+
+.b4 {
+  right: 3%;
+  width: 150px;
+  height: 185px;
+  background: #596c70;
+}
+
+.window {
+  position: absolute;
+  width: 12px;
+  height: 18px;
+  background: #ffd76b;
+  box-shadow:
+    25px 0 #ffd76b,
+    50px 0 #ffd76b,
+    0 30px #ffd76b,
+    25px 30px #ffd76b,
+    50px 30px #ffd76b;
+  top: 25px;
+  left: 20px;
+}
+
+/* TREES */
+
+.tree {
+  position: absolute;
+  bottom: 30%;
+  width: 100px;
+  height: 180px;
+}
+
+.tree:before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 100px;
+  background: #68462e;
+  bottom: 0;
+  left: 40px;
+  transform: rotate(-5deg);
+}
+
+.tree:after {
+  content: "🌴";
+  font-size: 100px;
+  position: absolute;
+  bottom: 55px;
+  left: 0;
+}
+
+.tree.one {
+  left: 3%;
+}
+
+.tree.two {
+  right: 4%;
+  transform: scale(.8);
+}
+
+/* ROAD */
+
+.road {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 31%;
+  background: #3d4241;
+}
+
+.road-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  border-top: 7px dashed #f5d76e;
+}
+
+/* DANFO */
+
+.bus {
+  position: absolute;
+  bottom: 13%;
+  left: -220px;
+  width: 190px;
+  height: 75px;
+  background: #f4c72d;
+  border: 5px solid #222;
+  border-radius: 12px 18px 8px 8px;
+  z-index: 4;
+  animation: danfoMove 10s linear infinite;
+}
+
+.bus:before {
+  content: "";
+  position: absolute;
+  width: 55px;
+  height: 30px;
+  background: #83c7d3;
+  top: 10px;
+  left: 12px;
+  box-shadow: 65px 0 #83c7d3;
+}
+
+.bus:after {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background: #222;
   border-radius: 50%;
-  background: #111;
-  border: 5px solid #777;
+  bottom: -18px;
+  left: 25px;
+  box-shadow: 110px 0 #222;
 }
 
-.danfo-wheel.left {
-  left: 28px;
-}
-
-.danfo-wheel.right {
-  right: 28px;
-}
-
-@keyframes danfoDrive {
-  from {
+@keyframes danfoMove {
+  0% {
     transform: translateX(0);
   }
 
-  to {
+  100% {
     transform: translateX(calc(100vw + 500px));
   }
 }
 
+/* PEOPLE */
+
+.person {
+  position: absolute;
+  bottom: 26%;
+  z-index: 5;
+  font-size: 55px;
+}
+
+.person.one {
+  left: 34%;
+}
+
+.person.two {
+  right: 30%;
+  font-size: 48px;
+}
+
+/* TITLE CARD */
+
+.title-screen {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(90%, 570px);
+  text-align: center;
+  padding: 35px 25px;
+  border-radius: 30px;
+  background: rgba(5, 54, 34, .88);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, .35);
+  border: 1px solid rgba(255, 255, 255, .15);
+}
+
+.logo {
+  font-size: clamp(50px, 12vw, 90px);
+  font-weight: 900;
+  letter-spacing: -5px;
+  color: white;
+}
+
+.logo span {
+  color: #ffd34e;
+}
+
+.tagline {
+  margin-top: 8px;
+  color: #bce5cf;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.welcome {
+  margin-top: 38px;
+  font-size: 27px;
+  font-weight: 800;
+}
+
+.subtext {
+  color: #d4e8dc;
+  line-height: 1.6;
+  margin: 10px auto 28px;
+  max-width: 380px;
+}
+
+.play {
+  border: 0;
+  border-radius: 50px;
+  padding: 16px 48px;
+  background: #ffd34e;
+  color: #123322;
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, .25);
+}
+
+.play:hover {
+  transform: scale(1.04);
+}
+
 /* =========================
-   BIRTH SCENE
+   BIRTH SCREEN
 ========================= */
 
 .birth-screen {
-  background: #d9d1c5;
+  position: absolute;
+  inset: 0;
+  background: #d8d0c5;
+  overflow: hidden;
 }
 
 .hospital-room {
@@ -181,58 +371,61 @@ button {
   background:
     linear-gradient(
       to bottom,
-      #eee8df 0%,
-      #eee8df 67%,
-      #c9c0b4 67%,
-      #c9c0b4 100%
+      #eee9e1 0%,
+      #eee9e1 68%,
+      #c5bdb2 68%,
+      #c5bdb2 100%
     );
 }
 
+/* BED */
+
 .hospital-bed {
   position: absolute;
-  left: 14%;
+  width: min(58vw, 560px);
+  height: 240px;
+  left: 12%;
   bottom: 25%;
-  width: 48%;
-  height: 25%;
 }
 
 .bed-frame {
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: 20px;
   width: 100%;
-  height: 22%;
-  background: #777;
+  height: 32px;
+  background: #555;
   border-radius: 5px;
 }
 
 .bed-mattress {
   position: absolute;
-  left: 4%;
-  bottom: 21%;
-  width: 88%;
-  height: 45%;
-  background: #f8f8f5;
+  left: 2%;
+  bottom: 52px;
+  width: 92%;
+  height: 85px;
+  background: #fafafa;
   border-radius: 12px;
-  box-shadow: 0 5px 0 #bbb;
+  box-shadow: 0 6px 0 #b8b8b8;
 }
 
 .bed-pillow {
   position: absolute;
   left: 8%;
-  bottom: 48%;
+  bottom: 107px;
   width: 24%;
-  height: 25%;
-  border-radius: 12px;
+  height: 45px;
   background: #fff;
+  border-radius: 15px;
 }
 
 .bed-leg {
   position: absolute;
-  bottom: -20%;
-  width: 5%;
-  height: 24%;
+  bottom: -2px;
+  width: 18px;
+  height: 58px;
   background: #555;
+  border-radius: 3px;
 }
 
 .bed-leg.left {
@@ -240,53 +433,51 @@ button {
 }
 
 .bed-leg.right {
-  right: 8%;
+  right: 10%;
 }
 
-/* =========================
-   CHARACTERS
-========================= */
+/* BIRTH CHARACTERS */
 
 .character {
   position: absolute;
-  width: 100px;
-  height: 190px;
-  z-index: 5;
+  width: 110px;
+  height: 210px;
+  z-index: 8;
 }
 
 .character-head {
   position: absolute;
   top: 0;
-  left: 25px;
+  left: 30px;
   width: 50px;
-  height: 58px;
-  border-radius: 48% 48% 45% 45%;
+  height: 60px;
+  border-radius: 48%;
   background: var(--skin, #6b402b);
   z-index: 3;
 }
 
 .character-hair {
   position: absolute;
-  top: -7px;
-  left: 18px;
-  width: 64px;
-  height: 28px;
+  top: -8px;
+  left: 20px;
+  width: 70px;
+  height: 32px;
   z-index: 4;
 }
 
 .character-body {
   position: absolute;
-  top: 58px;
-  left: 15px;
-  width: 70px;
-  height: 90px;
-  border-radius: 20px 20px 8px 8px;
-  background: var(--clothes, #ffffff);
+  top: 60px;
+  left: 18px;
+  width: 74px;
+  height: 92px;
+  border-radius: 18px 18px 8px 8px;
+  background: var(--clothes, #fff);
 }
 
 .character-arm {
   position: absolute;
-  top: 67px;
+  top: 70px;
   width: 18px;
   height: 70px;
   border-radius: 12px;
@@ -294,30 +485,98 @@ button {
 }
 
 .character-arm.left {
-  left: 2px;
-  transform: rotate(8deg);
+  left: 1px;
 }
 
 .character-arm.right {
-  right: 2px;
-  transform: rotate(-8deg);
+  right: 1px;
 }
 
 .character-leg {
   position: absolute;
-  top: 140px;
-  width: 22px;
-  height: 50px;
-  border-radius: 8px;
+  top: 145px;
+  width: 23px;
+  height: 60px;
   background: #333;
+  border-radius: 8px;
 }
 
 .character-leg.left {
-  left: 27px;
+  left: 29px;
 }
 
 .character-leg.right {
-  right: 27px;
+  right: 29px;
+}
+
+/* MOTHER LYING ON BED */
+
+.mother-character {
+  position: absolute;
+  left: 24%;
+  bottom: 38%;
+  width: 260px;
+  height: 130px;
+  z-index: 10;
+}
+
+.mother-body {
+  position: absolute;
+  left: 45px;
+  top: 35px;
+  width: 170px;
+  height: 58px;
+  background: #eee;
+  border-radius: 25px;
+}
+
+.mother-head {
+  position: absolute;
+  left: 5px;
+  top: 23px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--mother-skin, #6b402b);
+}
+
+.mother-hair {
+  position: absolute;
+  left: -2px;
+  top: 15px;
+  width: 72px;
+  height: 42px;
+  border-radius: 50%;
+  background: #171717;
+  z-index: 2;
+}
+
+.mother-arm {
+  position: absolute;
+  width: 80px;
+  height: 16px;
+  border-radius: 12px;
+  background: var(--mother-skin, #6b402b);
+  top: 72px;
+  right: 25px;
+  transform: rotate(-8deg);
+}
+
+/* DOCTOR / NURSE / FATHER POSITIONS */
+
+.doctor-character {
+  right: 18%;
+  bottom: 28%;
+}
+
+.nurse-character {
+  left: 5%;
+  bottom: 28%;
+}
+
+.father-character {
+  right: 5%;
+  bottom: 27%;
 }
 
 /* =========================
@@ -328,48 +587,56 @@ button {
   position: absolute;
   left: 5%;
   right: 5%;
-  bottom: 5%;
-  z-index: 20;
-  padding: 16px 20px;
-  border-radius: 14px;
-  background: rgba(15, 15, 15, 0.94);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  bottom: 4%;
+  z-index: 50;
+  background: rgba(10, 10, 10, .94);
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 16px;
+  border: 2px solid rgba(255, 255, 255, .2);
 }
 
 .dialogue-name {
-  margin-bottom: 5px;
   font-weight: 900;
-  font-size: 0.85rem;
+  font-size: 13px;
   text-transform: uppercase;
+  margin-bottom: 5px;
 }
 
 .dialogue-text {
-  font-size: clamp(0.95rem, 3vw, 1.25rem);
-  line-height: 1.35;
+  font-size: clamp(15px, 3vw, 20px);
+  line-height: 1.4;
 }
 
 /* =========================
-   RESULT SCREEN
+   RESULT
 ========================= */
 
 .result-screen {
-  background: #f3e6c8;
-  color: #171717;
-  padding: 30px;
+  position: absolute;
+  inset: 0;
   overflow-y: auto;
+  background: #f3e6c8;
+  color: #222;
+  padding: 30px 20px;
 }
 
 .result-card {
-  width: min(720px, 94vw);
+  width: min(650px, 94vw);
   margin: 5vh auto;
-  padding: 28px;
-  border-radius: 24px;
-  background: #fff;
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  background: #fffaf0;
+  border-radius: 28px;
+  text-align: center;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, .2);
 }
 
 .result-card h1 {
   margin-top: 0;
+}
+
+.result-row {
+  margin: 12px 0;
 }
 
 /* =========================
@@ -377,9 +644,11 @@ button {
 ========================= */
 
 .appearance-screen {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
   background: #efe3cf;
   color: #171717;
-  overflow-y: auto;
   padding: 25px;
 }
 
@@ -389,7 +658,7 @@ button {
 }
 
 .appearance-title {
-  font-size: clamp(2rem, 8vw, 4rem);
+  font-size: clamp(32px, 8vw, 60px);
   font-weight: 900;
   margin: 0;
 }
@@ -448,21 +717,53 @@ button {
 ========================= */
 
 @media (max-width: 600px) {
-  #app {
-    min-height: 100svh;
+  .city {
+    bottom: 40%;
+  }
+
+  .road {
+    height: 27%;
+  }
+
+  .bus {
+    transform: scale(.7);
+    transform-origin: left bottom;
+  }
+
+  .person {
+    font-size: 40px;
+  }
+
+  .title-screen {
+    padding: 28px 18px;
   }
 
   .hospital-bed {
-    left: 8%;
-    width: 65%;
+    left: 5%;
+    width: 72%;
   }
 
-  .character {
-    transform: scale(0.82);
-    transform-origin: bottom center;
+  .mother-character {
+    left: 13%;
+    transform: scale(.75);
+    transform-origin: bottom left;
   }
 
-  .dialogue-box {
-    bottom: 3%;
+  .doctor-character {
+    right: 2%;
+    transform: scale(.72);
+    transform-origin: bottom right;
+  }
+
+  .nurse-character {
+    left: -5%;
+    transform: scale(.72);
+    transform-origin: bottom left;
+  }
+
+  .father-character {
+    right: -8%;
+    transform: scale(.65);
+    transform-origin: bottom right;
   }
 }
