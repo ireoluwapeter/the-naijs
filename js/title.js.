@@ -1,0 +1,19 @@
+(function () {
+  "use strict";
+
+  window.Naijs = window.Naijs || {};
+
+  Naijs.initTitle = function () {
+    var startButton = document.getElementById("start-button");
+
+    if (!startButton) {
+      return;
+    }
+
+    startButton.addEventListener("click", function () {
+      if (typeof Naijs.startBirth === "function") {
+        Naijs.startBirth();
+      }
+    });
+  };
+})();
