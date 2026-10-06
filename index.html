@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Naijs</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f4efe6;
+      font-family: Arial, sans-serif;
+      color: #222;
+    }
+
+    #game {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      background: #111;
+      color: white;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .age {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .scene {
+      flex: 1;
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .character-card {
+      width: 100%;
+      max-width: 700px;
+      background: white;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .character {
+      font-size: 90px;
+      margin-bottom: 10px;
+    }
+
+    .headline {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .description {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .choices {
+      display: grid;
+      gap: 12px;
+    }
+
+    button {
+      border: none;
+      padding: 15px 18px;
+      border-radius: 12px;
+      background: #111;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.85;
+    }
+
+    .bottom-nav {
+      background: white;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-button {
+      background: #eee;
+      color: #222;
+      font-size: 13px;
+      padding: 10px 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="game">
+
+    <div class="topbar">
+      <div class="logo">THE NAIJS</div>
+      <div class="age">Age 0</div>
+    </div>
+
+    <main class="scene">
+      <div class="character-card">
+
+        <div class="character">👶🏾</div>
+
+        <div class="headline">
+          YOU NO GET CHOICE
+        </div>
+
+        <div class="description">
+          Welcome to Nigeria. You have just been born.
+          Your family, your state, your circumstances and your story
+          are about to be decided.
+        </div>
+
+        <div class="choices">
+          <button onclick="startLife()">
+            Start Life
+          </button>
+        </div>
+
+      </div>
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="nav-button">Family</button>
+      <button class="nav-button">Location</button>
+      <button class="nav-button">Map</button>
+      <button class="nav-button">Stats</button>
+    </nav>
+
+  </div>
+
+  <script>
+
+    function startLife() {
+      alert("Your Nigerian life is about to begin...");
+    }
+
+  </script>
+
+</body>
+</html>
