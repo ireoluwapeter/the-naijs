@@ -1,26 +1,36 @@
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html,
 body {
+  margin: 0;
+  padding: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
   font-family: Arial, Helvetica, sans-serif;
-  background: #071b16;
+  background: #111;
 }
 
 body {
-  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
+#game {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #f5d58a;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
 }
 
 .hidden {
@@ -28,53 +38,40 @@ button {
 }
 
 
-/* =================================
-   MAIN GAME
-================================= */
-
-#game {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-}
-
-
-/* =================================
+/* =========================================
    TITLE WORLD
-================================= */
+   ========================================= */
 
 .title-world {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background:
-    linear-gradient(
-      to bottom,
-      #73c9ee 0%,
-      #bce9f7 55%,
-      #d9b979 56%,
-      #8a633f 100%
-    );
+  background: linear-gradient(
+    to bottom,
+    #55bde8 0%,
+    #8ed8ef 55%,
+    #f2c46d 56%,
+    #d79a45 100%
+  );
 }
 
 .sun {
   position: absolute;
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  background: #ffd85a;
-  top: 9%;
+  width: 90px;
+  height: 90px;
+  top: 8%;
   right: 12%;
-  box-shadow: 0 0 50px rgba(255, 216, 90, 0.5);
+  border-radius: 50%;
+  background: #ffd84a;
+  box-shadow: 0 0 35px rgba(255, 216, 74, 0.8);
 }
 
 .cloud {
   position: absolute;
-  width: 150px;
-  height: 45px;
-  background: rgba(255, 255, 255, 0.75);
-  border-radius: 50px;
+  width: 120px;
+  height: 35px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 30px;
 }
 
 .cloud::before,
@@ -86,156 +83,140 @@ button {
 }
 
 .cloud::before {
-  width: 60px;
-  height: 60px;
-  left: 25px;
-  top: -25px;
+  width: 55px;
+  height: 55px;
+  left: 20px;
+  bottom: 5px;
 }
 
 .cloud::after {
-  width: 75px;
-  height: 75px;
-  right: 20px;
-  top: -35px;
+  width: 70px;
+  height: 70px;
+  right: 15px;
+  bottom: 0;
 }
 
 .cloud.one {
-  top: 16%;
+  top: 13%;
   left: 8%;
 }
 
 .cloud.two {
-  top: 28%;
-  right: 22%;
-  transform: scale(0.7);
+  top: 23%;
+  left: 52%;
+  transform: scale(0.75);
 }
-
-
-/* =================================
-   CITY
-================================= */
 
 .city {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 31%;
-  height: 30%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 10px;
+  height: 31%;
 }
 
 .building {
-  position: relative;
-  background: #b56e50;
-  width: 15%;
-  height: 70%;
-  border-top: 5px solid #8c4d3a;
+  position: absolute;
+  bottom: 0;
+  background: #9b6d55;
+  border: 3px solid #704b3d;
 }
 
-.building.b1 {
-  height: 58%;
-  background: #b87955;
+.b1 {
+  left: 4%;
+  width: 16%;
+  height: 72%;
 }
 
-.building.b2 {
-  height: 82%;
-  background: #9d6654;
-}
-
-.building.b3 {
-  height: 68%;
-  background: #c1845d;
-}
-
-.building.b4 {
+.b2 {
+  left: 23%;
+  width: 19%;
   height: 92%;
-  background: #8e5c4d;
+  background: #b47c5d;
+}
+
+.b3 {
+  left: 45%;
+  width: 15%;
+  height: 65%;
+}
+
+.b4 {
+  right: 6%;
+  width: 20%;
+  height: 82%;
+  background: #a66f52;
 }
 
 .window {
-  width: 65%;
-  height: 60%;
-  margin: 15% auto;
+  position: absolute;
+  inset: 15% 15%;
   background:
-    repeating-linear-gradient(
-      to right,
-      #f8d77a 0 15px,
-      transparent 15px 25px
-    ),
-    repeating-linear-gradient(
-      to bottom,
-      #f8d77a 0 15px,
-      transparent 15px 25px
-    );
+    linear-gradient(to right, transparent 42%, #e8c96d 42%, #e8c96d 58%, transparent 58%),
+    linear-gradient(to bottom, transparent 42%, #e8c96d 42%, #e8c96d 58%, transparent 58%);
+  border: 3px solid #704b3d;
 }
-
-
-/* =================================
-   TREES
-================================= */
 
 .tree {
   position: absolute;
-  bottom: 28%;
-  width: 22px;
-  height: 100px;
-  background: #6a432d;
-  border-radius: 10px;
+  bottom: 29%;
+  width: 70px;
+  height: 110px;
 }
 
 .tree::before {
   content: "";
   position: absolute;
-  width: 100px;
-  height: 100px;
-  background: #397847;
+  width: 16px;
+  height: 70px;
+  bottom: 0;
+  left: 27px;
+  background: #71452b;
+}
+
+.tree::after {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  top: 0;
   border-radius: 50%;
-  left: 50%;
-  top: -55px;
-  transform: translateX(-50%);
+  background: #3d873f;
 }
 
 .tree.one {
-  left: 8%;
+  left: 3%;
 }
 
 .tree.two {
-  right: 8%;
+  right: 5%;
+  transform: scale(0.85);
 }
-
-
-/* =================================
-   ROAD
-================================= */
 
 .road {
   position: absolute;
-  bottom: 0;
   left: 0;
-  width: 100%;
+  right: 0;
+  bottom: 0;
   height: 31%;
-  background: #3c3c3c;
+  background: #454545;
+  border-top: 5px solid #222;
 }
 
 .road-line {
   position: absolute;
-  width: 100%;
-  height: 7px;
-  top: 48%;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 6px;
   background: repeating-linear-gradient(
     to right,
-    #f5dc66 0 70px,
-    transparent 70px 120px
+    #f6df6b 0,
+    #f6df6b 70px,
+    transparent 70px,
+    transparent 130px
   );
 }
-
-
-/* =================================
-   DANFO
-================================= */
 
 .bus {
   position: absolute;
@@ -253,33 +234,23 @@ button {
 .bus::before {
   content: "";
   position: absolute;
+  width: 65px;
+  height: 38px;
   left: 15px;
-  right: 15px;
-  top: 12px;
-  height: 34px;
-  background:
-    linear-gradient(
-      to right,
-      #8ed2e8 0 27%,
-      #171717 27% 30%,
-      #8ed2e8 30% 63%,
-      #171717 63% 66%,
-      #8ed2e8 66% 100%
-    );
-  border: 3px solid #111;
-  border-radius: 4px;
+  top: 10px;
+  background: #9fd4e8;
+  border: 4px solid #161616;
 }
 
 .bus::after {
   content: "";
   position: absolute;
-  width: 27px;
-  height: 27px;
-  border-radius: 50%;
-  background: #191919;
-  bottom: -18px;
-  left: 25px;
-  box-shadow: 120px 0 #191919;
+  width: 65px;
+  height: 38px;
+  right: 15px;
+  top: 10px;
+  background: #9fd4e8;
+  border: 4px solid #161616;
 }
 
 @keyframes danfoMove {
@@ -292,20 +263,15 @@ button {
   }
 }
 
-
-/* =================================
-   PEOPLE
-================================= */
-
 .person {
   position: absolute;
-  bottom: 27%;
-  z-index: 4;
-  font-size: 45px;
+  bottom: 29%;
+  z-index: 6;
+  font-size: 48px;
 }
 
 .person.one {
-  left: 27%;
+  left: 32%;
 }
 
 .person.two {
@@ -313,31 +279,31 @@ button {
 }
 
 
-/* =================================
+/* =========================================
    TITLE SCREEN
-================================= */
+   ========================================= */
 
 .title-screen {
-  position: absolute;
-  inset: 0;
-  z-index: 20;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: rgba(0, 0, 0, 0.12);
+  padding: 20px;
 }
 
 .logo {
-  font-size: clamp(48px, 12vw, 100px);
+  font-size: clamp(46px, 12vw, 92px);
   font-weight: 900;
-  letter-spacing: 5px;
-  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  letter-spacing: -3px;
+  color: #fff;
+  text-shadow:
+    0 5px 10px rgba(0, 0, 0, 0.45),
+    0 0 15px rgba(0, 0, 0, 0.25);
 }
 
 .logo span {
-  color: #f6c927;
+  color: #f3c623;
 }
 
 .tagline {
@@ -359,31 +325,30 @@ button {
 }
 
 .play {
-  margin-top: 30px;
-  padding: 15px 38px;
+  margin-top: 28px;
+  padding: 15px 34px;
+  border: 4px solid #161616;
   border-radius: 12px;
-  background: #f4c72b;
-  color: #171717;
+  background: #f3c623;
+  color: #161616;
   font-size: 18px;
   font-weight: 900;
-  box-shadow: 0 7px 0 #a77e0b;
+  cursor: pointer;
+  box-shadow: 0 5px 0 #161616;
 }
 
 .play:active {
-  transform: translateY(5px);
-  box-shadow: 0 2px 0 #a77e0b;
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #161616;
 }
 
 
-/* =================================
+/* =========================================
    BIRTH SCREEN
-================================= */
+   ========================================= */
 
 .birth-screen {
-  position: absolute;
-  inset: 0;
-  z-index: 30;
-  background: #dce6e8;
+  background: #d9e4e8;
 }
 
 .hospital-room {
@@ -393,521 +358,454 @@ button {
   background:
     linear-gradient(
       to bottom,
-      #edf4f3 0%,
-      #edf4f3 63%,
-      #c9cecc 63%,
-      #aeb3b0 100%
+      #edf4f5 0%,
+      #edf4f5 72%,
+      #c7b59e 72%,
+      #c7b59e 100%
     );
 }
 
 
-/* =================================
-   HOSPITAL ROOM DETAILS
-================================= */
-
-.hospital-room::before {
-  content: "";
-  position: absolute;
-  left: 7%;
-  right: 7%;
-  top: 9%;
-  height: 4px;
-  background: #c4cecc;
-  box-shadow:
-    0 55px 0 #d2d9d7,
-    0 110px 0 #dce2e0;
-}
-
-.hospital-room::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 37%;
-  height: 4px;
-  background: #8f9895;
-  opacity: 0.6;
-}
-
-
-/* =================================
-   HOSPITAL BED
-================================= */
+/* Hospital bed */
 
 .hospital-bed {
   position: absolute;
-  width: min(54vw, 620px);
-  height: 260px;
-  left: 50%;
-  bottom: 30%;
-  transform: translateX(-50%);
-  z-index: 5;
-}
-
-
-/* Headboard */
-
-.hospital-bed::before {
-  content: "";
-  position: absolute;
-  width: 24px;
-  height: 180px;
-  left: -8px;
-  bottom: 28px;
-  background: #697275;
-  border-radius: 8px;
-  box-shadow:
-    0 0 0 5px #899294,
-    0 0 0 9px #d5d9d8;
-}
-
-
-/* Footboard */
-
-.hospital-bed::after {
-  content: "";
-  position: absolute;
-  width: 18px;
-  height: 130px;
-  right: -4px;
-  bottom: 28px;
-  background: #697275;
-  border-radius: 8px;
-}
-
-
-/* Mattress */
-
-.bed-mattress {
-  position: absolute;
-  left: 3%;
-  right: 3%;
-  bottom: 68px;
-  height: 78px;
-  background: #f8f8f5;
-  border: 3px solid #aab2b3;
-  border-radius: 12px;
-  z-index: 2;
-  box-shadow:
-    inset 0 -8px 0 rgba(180, 186, 186, 0.35),
-    0 8px 0 rgba(80, 86, 87, 0.18);
-}
-
-
-/* Pillow */
-
-.bed-pillow {
-  position: absolute;
-  width: 24%;
-  height: 58px;
-  left: 7%;
-  bottom: 125px;
-  background: #ffffff;
-  border: 2px solid #c6cccd;
-  border-radius: 14px;
-  z-index: 4;
-  transform: rotate(-4deg);
-}
-
-
-/* Frame */
-
-.bed-frame {
-  position: absolute;
-  left: 2%;
-  right: 2%;
-  bottom: 48px;
-  height: 25px;
-  background: #626a6c;
-  border-radius: 6px;
-  z-index: 1;
-}
-
-
-/* Bed legs */
-
-.bed-leg {
-  position: absolute;
-  width: 13px;
-  height: 58px;
-  bottom: -10px;
-  background: #505759;
-  border-radius: 3px;
-  z-index: 0;
-}
-
-.bed-leg.left {
+  width: 55%;
+  max-width: 500px;
+  height: 145px;
   left: 10%;
-}
-
-.bed-leg.right {
-  right: 10%;
-}
-
-
-/* =================================
-   MOTHER
-================================= */
-
-.mother-character {
-  position: absolute;
-  width: 390px;
-  height: 190px;
-  left: 50%;
-  bottom: calc(30% + 75px);
-  transform: translateX(-50%);
-  z-index: 9;
-}
-
-
-/* Mother's body lying on mattress */
-
-.mother-body {
-  position: absolute;
-  width: 265px;
-  height: 82px;
-  left: 75px;
-  top: 76px;
-  background: #b9d8d4;
-  border-radius: 48px 24px 24px 48px;
-  transform: rotate(-3deg);
-  z-index: 2;
-  box-shadow: 0 5px 0 rgba(70, 80, 80, 0.15);
-}
-
-
-/* Mother's head */
-
-.mother-head {
-  position: absolute;
-  width: 62px;
-  height: 70px;
-  left: 30px;
-  top: 52px;
-  background: #8b5a3c;
-  border-radius: 50%;
-  z-index: 5;
-}
-
-
-/* Mother's hair */
-
-.mother-hair {
-  position: absolute;
-  width: 72px;
-  height: 48px;
-  left: 24px;
-  top: 40px;
-  background: #19130f;
-  border-radius: 50% 50% 35% 35%;
-  z-index: 6;
-}
-
-
-/* Mother's arm resting across body */
-
-.mother-arm {
-  position: absolute;
-  width: 23px;
-  height: 100px;
-  left: 230px;
-  top: 60px;
-  background: #8b5a3c;
-  border-radius: 15px;
-  transform: rotate(65deg);
-  z-index: 7;
-}
-
-
-/* =================================
-   MEDICAL STAFF / FATHER
-================================= */
-
-.character {
-  position: absolute;
-  bottom: 20%;
-  width: 100px;
-  height: 260px;
-  z-index: 12;
-}
-
-
-/* Head */
-
-.character-head {
-  position: absolute;
-  width: 55px;
-  height: 65px;
-  border-radius: 48% 48% 45% 45%;
-  background: #8b5a3c;
-  left: 50%;
-  top: 0;
-  transform: translateX(-50%);
+  bottom: 32%;
   z-index: 3;
 }
 
-
-/* Hair stays above head, away from eyes */
-
-.character-hair {
+.bed-pillow {
   position: absolute;
-  width: 59px;
-  height: 25px;
-  left: 50%;
-  top: -3px;
-  transform: translateX(-50%);
-  background: #18130f;
-  border-radius: 55% 55% 30% 30%;
+  width: 28%;
+  height: 45px;
+  left: 4%;
+  top: 5px;
+  background: #fff;
+  border: 4px solid #303030;
+  border-radius: 15px;
+}
+
+.bed-mattress {
+  position: absolute;
+  width: 92%;
+  height: 75px;
+  left: 4%;
+  top: 42px;
+  background: #f4f4f4;
+  border: 5px solid #303030;
+  border-radius: 12px;
+}
+
+.bed-frame {
+  position: absolute;
+  width: 100%;
+  height: 15px;
+  left: 0;
+  bottom: 15px;
+  background: #555;
+  border: 3px solid #222;
+}
+
+.bed-leg {
+  position: absolute;
+  width: 12px;
+  height: 55px;
+  bottom: -35px;
+  background: #333;
+}
+
+.bed-leg.left {
+  left: 8%;
+}
+
+.bed-leg.right {
+  right: 8%;
+}
+
+
+/* =========================================
+   MOTHER
+   ========================================= */
+
+.mother-character {
+  position: absolute;
+  width: 180px;
+  height: 150px;
+  left: 13%;
+  bottom: 39%;
+  z-index: 6;
+  transform: rotate(-7deg);
+}
+
+.mother-head {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  left: 18px;
+  top: 4px;
+  background: #70462f;
+  border: 4px solid #222;
+  border-radius: 50%;
+  z-index: 4;
+}
+
+.mother-hair {
+  position: absolute;
+  width: 62px;
+  height: 48px;
+  left: 13px;
+  top: -5px;
+  background: #191919;
+  border: 4px solid #222;
+  border-radius: 50% 50% 35% 35%;
+  z-index: 5;
+}
+
+.mother-body {
+  position: absolute;
+  width: 125px;
+  height: 75px;
+  left: 55px;
+  top: 45px;
+  background: #d36b6b;
+  border: 4px solid #222;
+  border-radius: 35px 45px 25px 25px;
+  transform: rotate(3deg);
+}
+
+.mother-arm {
+  position: absolute;
+  width: 22px;
+  height: 70px;
+  left: 76px;
+  top: 78px;
+  background: #70462f;
+  border: 4px solid #222;
+  border-radius: 15px;
+  transform: rotate(-42deg);
   z-index: 5;
 }
 
 
-/* Body */
+/* =========================================
+   OTHER CHARACTERS
+   ========================================= */
 
-.character-body {
+.character {
   position: absolute;
-  width: 78px;
-  height: 115px;
-  left: 50%;
-  top: 62px;
-  transform: translateX(-50%);
-  background: #f4f4f4;
-  border-radius: 18px 18px 10px 10px;
+  width: 80px;
+  height: 180px;
+  bottom: 29%;
+  z-index: 7;
+}
+
+.character-head {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  left: 16px;
+  top: 0;
+  background: #70462f;
+  border: 4px solid #222;
+  border-radius: 50%;
+}
+
+.character-hair {
+  position: absolute;
+  width: 52px;
+  height: 30px;
+  left: 14px;
+  top: -5px;
+  background: #191919;
+  border: 4px solid #222;
+  border-radius: 50% 50% 30% 30%;
   z-index: 2;
 }
 
-
-/* Arms */
+.character-body {
+  position: absolute;
+  width: 58px;
+  height: 78px;
+  left: 11px;
+  top: 46px;
+  background: #fff;
+  border: 4px solid #222;
+  border-radius: 12px;
+}
 
 .character-arm {
   position: absolute;
-  width: 18px;
-  height: 90px;
-  background: #8b5a3c;
+  width: 16px;
+  height: 65px;
+  top: 52px;
+  background: #70462f;
+  border: 4px solid #222;
   border-radius: 12px;
-  top: 75px;
-  z-index: 1;
 }
 
 .character-arm.left {
-  left: 0;
-  transform: rotate(10deg);
+  left: -3px;
+  transform: rotate(12deg);
 }
 
 .character-arm.right {
-  right: 0;
-  transform: rotate(-10deg);
+  right: -3px;
+  transform: rotate(-12deg);
 }
-
-
-/* Legs */
 
 .character-leg {
   position: absolute;
-  width: 24px;
-  height: 80px;
-  background: #303030;
-  top: 170px;
-  border-radius: 8px;
-  z-index: 1;
+  width: 19px;
+  height: 60px;
+  top: 120px;
+  background: #333;
+  border: 4px solid #222;
+  border-radius: 10px;
 }
 
 .character-leg.left {
-  left: 25px;
+  left: 18px;
 }
 
 .character-leg.right {
-  right: 25px;
+  right: 18px;
 }
-
-
-/* =================================
-   DOCTOR
-================================= */
-
-.doctor-character {
-  left: 12%;
-  bottom: 20%;
-  transform: scale(0.9);
-  transform-origin: bottom center;
-  z-index: 14;
-}
-
-.doctor-character .character-body {
-  background: #ffffff;
-}
-
-
-/* =================================
-   NURSE
-================================= */
 
 .nurse-character {
-  right: 18%;
-  bottom: 20%;
-  transform: scale(0.9);
-  transform-origin: bottom center;
-  z-index: 16;
+  left: 66%;
 }
 
-.nurse-character .character-body {
-  background: #dceff1;
+.doctor-character {
+  left: 79%;
 }
-
-
-/* =================================
-   FATHER
-================================= */
 
 .father-character {
-  right: 5%;
-  bottom: 20%;
-  transform: scale(0.82);
-  transform-origin: bottom center;
-  z-index: 11;
-}
-
-.father-character .character-body {
-  background: #394b5c;
+  right: 4%;
 }
 
 
-/* =================================
+/* =========================================
+   NEWBORN BABY
+   ========================================= */
+
+.newborn-baby {
+  position: absolute;
+  width: 105px;
+  height: 125px;
+  left: 43%;
+  bottom: 39%;
+  z-index: 10;
+  transform: rotate(-3deg);
+}
+
+.baby-head {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  left: 26px;
+  top: 0;
+  background: #70462f;
+  border: 4px solid #222;
+  border-radius: 50%;
+  z-index: 4;
+}
+
+.baby-hair {
+  position: absolute;
+  width: 46px;
+  height: 20px;
+  left: 29px;
+  top: -4px;
+  background: #191919;
+  border-radius: 50% 50% 35% 35%;
+  z-index: 5;
+}
+
+.baby-body {
+  position: absolute;
+  width: 64px;
+  height: 58px;
+  left: 20px;
+  top: 44px;
+  background: #f4f4f4;
+  border: 4px solid #222;
+  border-radius: 25px 25px 18px 18px;
+}
+
+.baby-arm {
+  position: absolute;
+  width: 17px;
+  height: 42px;
+  top: 49px;
+  background: #70462f;
+  border: 4px solid #222;
+  border-radius: 12px;
+  z-index: 3;
+}
+
+.baby-arm.left {
+  left: 4px;
+  transform: rotate(25deg);
+}
+
+.baby-arm.right {
+  right: 4px;
+  transform: rotate(-25deg);
+}
+
+.baby-leg {
+  position: absolute;
+  width: 19px;
+  height: 35px;
+  top: 91px;
+  background: #70462f;
+  border: 4px solid #222;
+  border-radius: 12px;
+}
+
+.baby-leg.left {
+  left: 27px;
+  transform: rotate(8deg);
+}
+
+.baby-leg.right {
+  right: 27px;
+  transform: rotate(-8deg);
+}
+
+
+/* =========================================
    DIALOGUE
-================================= */
+   ========================================= */
 
 .dialogue-box {
   position: absolute;
-  left: 7%;
-  right: 7%;
-  bottom: 5%;
-  min-height: 100px;
-  padding: 18px 24px;
-  background: rgba(12, 20, 21, 0.94);
-  border: 2px solid #e7c44b;
+  left: 50%;
+  bottom: 8%;
+  transform: translateX(-50%);
+  width: min(88%, 560px);
+  padding: 16px 20px;
+  background: rgba(20, 20, 20, 0.94);
+  border: 4px solid #f3c623;
   border-radius: 14px;
-  z-index: 50;
+  color: #fff;
+  z-index: 30;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.35);
 }
 
 .dialogue-name {
-  color: #f3c92c;
-  font-size: 17px;
+  margin-bottom: 6px;
+  color: #f3c623;
+  font-size: 16px;
   font-weight: 900;
-  margin-bottom: 8px;
 }
 
 .dialogue-text {
-  color: #ffffff;
-  font-size: 19px;
-  line-height: 1.4;
+  font-size: clamp(15px, 3.5vw, 20px);
+  line-height: 1.35;
+  font-weight: 700;
 }
 
 
-/* =================================
+/* =========================================
    RESULT SCREEN
-================================= */
+   ========================================= */
 
 .result-screen {
-  position: absolute;
-  inset: 0;
-  z-index: 40;
   display: flex;
   justify-content: center;
   align-items: center;
-  background:
-    linear-gradient(
-      135deg,
-      #102e27,
-      #17483d
-    );
-  padding: 25px;
+  padding: 20px;
+  background: #f2d58d;
 }
 
 .result-card {
-  width: min(90%, 500px);
-  padding: 35px;
+  width: min(92%, 500px);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 28px;
   background: #fff;
-  color: #17211e;
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border: 5px solid #222;
+  border-radius: 18px;
+  box-shadow: 0 8px 0 #222;
 }
 
 .result-card h1 {
-  font-size: 30px;
-  margin-bottom: 12px;
+  margin: 0 0 12px;
+  font-size: clamp(25px, 7vw, 40px);
 }
 
 .result-card p {
-  margin-bottom: 25px;
-  color: #555;
+  margin-bottom: 22px;
+  font-size: 17px;
+  line-height: 1.4;
 }
 
 .result-row {
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 12px 0;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 2px solid #ddd;
+  font-size: 17px;
 }
 
 .result-row strong {
-  color: #17483d;
+  min-width: 90px;
+}
+
+.result-card .play {
+  width: 100%;
+  margin-top: 24px;
 }
 
 
-/* =================================
-   APPEARANCE SCREEN
-================================= */
+/* =========================================
+   APPEARANCE
+   ========================================= */
 
 .appearance-screen {
-  position: absolute;
-  inset: 0;
-  z-index: 45;
   overflow-y: auto;
-  background:
-    linear-gradient(
-      135deg,
-      #12362d,
-      #1d5144
-    );
-  padding: 35px 20px 60px;
+  background: #f2d58d;
+  padding: 30px 20px;
 }
 
 .appearance-container {
-  width: min(900px, 100%);
+  width: min(94%, 700px);
   margin: 0 auto;
+  padding-bottom: 40px;
   text-align: center;
 }
 
 .appearance-title {
-  font-size: clamp(32px, 7vw, 55px);
-  font-weight: 900;
-  color: #f5c927;
-  margin-bottom: 8px;
+  margin: 10px 0 4px;
+  font-size: clamp(28px, 7vw, 48px);
 }
 
 .appearance-subtitle {
-  font-size: clamp(25px, 5vw, 38px);
-  font-weight: 800;
-  margin-bottom: 10px;
+  font-size: clamp(20px, 5vw, 30px);
+  font-weight: 900;
 }
 
 .appearance-container > p {
-  margin-bottom: 30px;
-  color: #dbe8e4;
+  margin: 8px auto 25px;
+  max-width: 550px;
+  font-size: 16px;
 }
 
 .appearance-group {
-  margin-bottom: 25px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
+  margin: 20px 0;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 3px solid #222;
+  border-radius: 14px;
 }
 
 .appearance-group h3 {
-  margin-bottom: 15px;
+  margin: 0 0 12px;
   font-size: 20px;
 }
 
@@ -915,124 +813,110 @@ button {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .option-button {
-  padding: 11px 17px;
+  padding: 10px 14px;
+  border: 3px solid #222;
   border-radius: 10px;
-  background: #f1f1ed;
-  color: #18352e;
-  font-weight: 700;
+  background: #fff;
+  color: #222;
+  font-weight: 800;
+  cursor: pointer;
 }
 
 .option-button.selected {
-  background: #f3c927;
-  color: #171717;
-  box-shadow: 0 0 0 3px rgba(243, 201, 39, 0.25);
+  background: #f3c623;
 }
 
 .appearance-commentary {
-  margin-top: 12px;
+  margin-top: 10px;
   font-size: 14px;
   font-style: italic;
-  color: #f3d85d;
 }
 
 .confirm-button {
-  margin-top: 15px;
-  padding: 15px 35px;
+  margin-top: 10px;
+  padding: 14px 35px;
+  border: 4px solid #222;
   border-radius: 12px;
-  background: #f3c927;
-  color: #171717;
-  font-size: 17px;
+  background: #f3c623;
+  color: #222;
+  font-size: 18px;
   font-weight: 900;
+  cursor: pointer;
 }
 
 
-/* =================================
+/* =========================================
    MOBILE
-================================= */
+   ========================================= */
 
 @media (max-width: 600px) {
 
   .logo {
-    font-size: 48px;
-  }
-
-  .tagline {
-    font-size: 15px;
-  }
-
-  .subtext {
-    font-size: 14px;
-  }
-
-  .bus {
-    transform: scale(0.8);
+    letter-spacing: -2px;
   }
 
   .hospital-bed {
-    width: 72%;
-    height: 220px;
-    bottom: 31%;
+    width: 70%;
+    left: 4%;
+    bottom: 36%;
+    transform: scale(0.9);
+    transform-origin: left bottom;
   }
 
   .mother-character {
-    width: 330px;
-    height: 165px;
-    left: 50%;
-    bottom: calc(31% + 65px);
-    transform: translateX(-50%) scale(0.72);
+    left: 4%;
+    bottom: 43%;
+    transform: scale(0.8) rotate(-7deg);
+    transform-origin: left bottom;
+  }
+
+  .newborn-baby {
+    left: 42%;
+    bottom: 42%;
+    transform: scale(0.82);
     transform-origin: center bottom;
   }
 
-  .doctor-character {
-    left: -2%;
-    bottom: 19%;
-    transform: scale(0.66);
-    transform-origin: bottom center;
+  .character {
+    transform: scale(0.72);
+    transform-origin: center bottom;
   }
 
   .nurse-character {
-    right: -1%;
-    bottom: 19%;
-    transform: scale(0.66);
-    transform-origin: bottom center;
+    left: 59%;
+  }
+
+  .doctor-character {
+    left: 75%;
   }
 
   .father-character {
-    display: none;
+    right: -3%;
   }
 
   .dialogue-box {
-    bottom: 3%;
-    left: 4%;
-    right: 4%;
-    padding: 14px 16px;
+    bottom: 5%;
+    padding: 13px 15px;
+  }
+
+  .dialogue-name {
+    font-size: 14px;
   }
 
   .dialogue-text {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .result-card {
-    padding: 25px 20px;
+    padding: 22px;
   }
 
-  .result-card h1 {
-    font-size: 25px;
+  .result-row {
+    font-size: 15px;
   }
 
-  .appearance-screen {
-    padding-top: 25px;
-  }
-
-  .appearance-group {
-    padding: 15px;
-  }
-
-  .option-button {
-    font-size: 14px;
-  }
 }
