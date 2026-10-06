@@ -12,62 +12,87 @@
 
     body {
       margin: 0;
-      background: #f4efe6;
+      min-height: 100vh;
       font-family: Arial, sans-serif;
-      color: #222;
+      background: #111;
+      color: white;
     }
 
     #game {
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
     }
 
-    .topbar {
-      background: #111;
-      color: white;
-      padding: 18px 22px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .title-screen {
+      width: 100%;
+      max-width: 700px;
+      text-align: center;
+      padding: 40px 24px;
     }
 
     .logo {
+      font-size: clamp(48px, 12vw, 88px);
+      font-weight: 900;
+      letter-spacing: -4px;
+      margin-bottom: 8px;
+    }
+
+    .tagline {
+      font-size: 16px;
+      color: #aaa;
+      margin-bottom: 48px;
+    }
+
+    .welcome {
       font-size: 24px;
-      font-weight: bold;
+      font-weight: 700;
+      margin-bottom: 8px;
     }
 
-    .age {
-      font-size: 14px;
-      opacity: 0.8;
+    .subtext {
+      color: #aaa;
+      line-height: 1.6;
+      margin: 0 auto 30px;
+      max-width: 430px;
     }
 
-    .scene {
-      flex: 1;
-      padding: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .play-button {
+      border: none;
+      border-radius: 14px;
+      padding: 16px 50px;
+      background: white;
+      color: #111;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
     }
 
-    .character-card {
+    .play-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .game-screen {
+      display: none;
       width: 100%;
       max-width: 700px;
-      background: white;
+      background: #f4efe6;
+      color: #222;
       border-radius: 24px;
       padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
       text-align: center;
     }
 
-    .character {
+    .baby {
       font-size: 90px;
-      margin-bottom: 10px;
+      margin: 15px 0;
     }
 
     .headline {
       font-size: 28px;
-      font-weight: bold;
+      font-weight: 800;
       margin-bottom: 12px;
     }
 
@@ -76,42 +101,6 @@
       line-height: 1.6;
       margin-bottom: 24px;
     }
-
-    .choices {
-      display: grid;
-      gap: 12px;
-    }
-
-    button {
-      border: none;
-      padding: 15px 18px;
-      border-radius: 12px;
-      background: #111;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      opacity: 0.85;
-    }
-
-    .bottom-nav {
-      background: white;
-      border-top: 1px solid #ddd;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      padding: 12px;
-      flex-wrap: wrap;
-    }
-
-    .nav-button {
-      background: #eee;
-      color: #222;
-      font-size: 13px;
-      padding: 10px 14px;
-    }
   </style>
 </head>
 
@@ -119,48 +108,82 @@
 
   <div id="game">
 
-    <div class="topbar">
+    <div class="title-screen" id="titleScreen">
+
       <div class="logo">THE NAIJS</div>
-      <div class="age">Age 0</div>
+
+      <div class="tagline">
+        A Nigerian life. Your choices. Your story.
+      </div>
+
+      <div class="welcome" id="welcomeText">
+        Welcome to The Naijs
+      </div>
+
+      <p class="subtext" id="subText">
+        No dull yourself. Your life is about to begin.
+      </p>
+
+      <button class="play-button" id="playButton" onclick="startGame()">
+        ▶ PLAY
+      </button>
+
     </div>
 
-    <main class="scene">
-      <div class="character-card">
 
-        <div class="character">👶🏾</div>
+    <div class="game-screen" id="gameScreen">
 
-        <div class="headline">
-          YOU NO GET CHOICE
-        </div>
+      <div class="baby">👶🏾</div>
 
-        <div class="description">
-          Welcome to Nigeria. You have just been born.
-          Your family, your state, your circumstances and your story
-          are about to be decided.
-        </div>
-
-        <div class="choices">
-          <button onclick="startLife()">
-            Start Life
-          </button>
-        </div>
-
+      <div class="headline">
+        YOU NO GET CHOICE
       </div>
-    </main>
 
-    <nav class="bottom-nav">
-      <button class="nav-button">Family</button>
-      <button class="nav-button">Location</button>
-      <button class="nav-button">Map</button>
-      <button class="nav-button">Stats</button>
-    </nav>
+      <div class="description">
+        Welcome to Nigeria. You have just been born.
+        Your family, your state, your circumstances
+        and your story are about to be decided.
+      </div>
+
+      <button class="play-button" onclick="beginLife()">
+        Continue
+      </button>
+
+    </div>
 
   </div>
 
+
   <script>
 
-    function startLife() {
-      alert("Your Nigerian life is about to begin...");
+    const hasSavedGame = localStorage.getItem("theNaijsSave");
+
+    if (hasSavedGame) {
+      document.getElementById("welcomeText").textContent =
+        "Welcome back to The Naijs";
+
+      document.getElementById("subText").textContent =
+        "Your story is still waiting for you.";
+
+      document.getElementById("playButton").textContent =
+        "▶ CONTINUE";
+    }
+
+
+    function startGame() {
+
+      document.getElementById("titleScreen").style.display = "none";
+      document.getElementById("gameScreen").style.display = "block";
+
+      localStorage.setItem("theNaijsSave", "started");
+
+    }
+
+
+    function beginLife() {
+
+      alert("Birth system coming next.");
+
     }
 
   </script>
