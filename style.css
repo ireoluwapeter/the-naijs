@@ -355,6 +355,8 @@ button {
 .subtext {
   margin-top: 8px;
   font-size: clamp(15px, 2.5vw, 20px);
+  font-weight: 800;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.45);
 }
 
 .play {
@@ -837,7 +839,6 @@ button {
 
   .subtext {
     font-size: 14px;
-    padding: 0 20px;
   }
 
   .bus {
