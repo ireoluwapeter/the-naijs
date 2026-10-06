@@ -2,946 +2,403 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>The Naijs</title>
 
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Arial,Helvetica,sans-serif;background:#0b1020}
-button{font:inherit;border:0;cursor:pointer}
-.hidden{opacity:0!important;visibility:hidden!important;pointer-events:none!important}
-.scene{position:fixed;inset:0;transition:opacity .8s ease,visibility .8s ease}
+*{box-sizing:border-box}
 
-/* =========================
-   INTRO - LOCKED
-========================= */
-
-#titleScene{
-  background:linear-gradient(#69bdf3 0%,#a9ddf7 55%,#d9eef4 56%,#d9eef4 100%);
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#061b13;
+ color:white;
+ overflow:hidden
 }
+
+button{font:inherit;cursor:pointer}
+
+#game{
+ min-height:100vh;
+ position:relative;
+ overflow:hidden;
+ background:linear-gradient(#73c7e5 0%,#c5edf3 48%,#57945b 48%,#326b38 100%)
+}
+
+/* TITLE WORLD */
+
 .sun{
-  position:absolute;width:90px;height:90px;border-radius:50%;
-  background:#ffd45b;top:9%;right:11%;
-  box-shadow:0 0 45px rgba(255,212,91,.55)
+ position:absolute;
+ width:90px;height:90px;
+ border-radius:50%;
+ background:#ffd447;
+ top:50px;right:45px;
+ box-shadow:0 0 45px #ffd447
 }
+
 .cloud{
-  position:absolute;width:130px;height:35px;background:rgba(255,255,255,.86);
-  border-radius:40px
-}
-.cloud:before,.cloud:after{content:"";position:absolute;background:inherit;border-radius:50%}
-.cloud:before{width:55px;height:55px;left:20px;bottom:0}
-.cloud:after{width:70px;height:70px;right:15px;bottom:0}
-.c1{top:17%;left:8%;animation:floatCloud 20s linear infinite}
-.c2{top:27%;right:20%;transform:scale(.7);animation:floatCloud 27s linear infinite reverse}
-@keyframes floatCloud{
-  0%,100%{margin-left:-20px}50%{margin-left:25px}
-}
-.skyline{
-  position:absolute;bottom:20%;left:0;right:0;height:30%;
-  background:linear-gradient(90deg,
-  #687886 0 8%,transparent 8% 11%,#536674 11% 19%,transparent 19% 22%,
-  #71818b 22% 31%,transparent 31% 35%,#4e616e 35% 46%,transparent 46% 49%,
-  #697982 49% 58%,transparent 58% 62%,#53656e 62% 72%,transparent 72% 76%,
-  #667780 76% 87%,transparent 87%);
-}
-.road{position:absolute;left:0;right:0;bottom:0;height:21%;background:#333940}
-.road:before{
-  content:"";position:absolute;top:48%;left:0;right:0;height:5px;
-  background:repeating-linear-gradient(90deg,#e6d58a 0 55px,transparent 55px 105px)
+ position:absolute;
+ width:135px;height:35px;
+ background:white;
+ border-radius:50px;
+ opacity:.8;
+ animation:cloudMove 28s linear infinite
 }
 
-/* FIXED DANFO: front is contained inside body */
-.danfo{
-  position:absolute;width:120px;height:50px;bottom:12%;left:-140px;
-  background:#f3ca27;border:4px solid #222;
-  border-radius:10px 13px 7px 7px;
-  animation:drive 8s linear infinite;
-  overflow:hidden;
+.cloud:before,.cloud:after{
+ content:"";
+ position:absolute;
+ background:white;
+ border-radius:50%
 }
-.danfo:before{
-  content:"";position:absolute;left:10px;top:7px;width:92px;height:21px;
-  background:
-    linear-gradient(90deg,#1d303d 0 28%,transparent 28% 33%,
-    #1d303d 33% 62%,transparent 62% 67%,#1d303d 67% 100%);
-  border-radius:3px;
+
+.cloud:before{width:55px;height:55px;left:20px;top:-25px}
+.cloud:after{width:70px;height:70px;right:15px;top:-35px}
+
+.cloud.one{top:90px;left:-160px}
+.cloud.two{top:170px;left:-300px;animation-delay:10s}
+
+@keyframes cloudMove{
+ from{transform:translateX(0)}
+ to{transform:translateX(120vw)}
 }
-.danfo:after{
-  content:"";position:absolute;width:17px;height:17px;border-radius:50%;
-  background:#181818;bottom:-11px;left:14px;
-  box-shadow:78px 0 #181818;
+
+.city{
+ position:absolute;
+ bottom:31%;
+ left:0;right:0;
+ height:150px;
+ display:flex;
+ align-items:flex-end;
+ gap:8px;
+ padding:0 20px
 }
-@keyframes drive{
-  from{transform:translateX(0)}to{transform:translateX(calc(100vw + 300px))}
+
+.building{
+ width:70px;
+ height:110px;
+ background:#747f7b
 }
-.titleCard{
-  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  text-align:center;width:min(90%,560px)
+
+.building:nth-child(2){height:145px}
+.building:nth-child(3){height:95px}
+.building:nth-child(4){height:125px}
+.building:nth-child(5){height:80px}
+
+.windows{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:8px;
+ padding:12px
 }
+
+.windows span{
+ height:13px;
+ background:#f5d65d
+}
+
+.ground{
+ position:absolute;
+ bottom:0;
+ width:100%;
+ height:31%;
+ background:#326b38
+}
+
+.road{
+ position:absolute;
+ bottom:0;
+ width:100%;
+ height:105px;
+ background:#303332
+}
+
+.road:after{
+ content:"";
+ position:absolute;
+ top:48px;left:0;right:0;
+ height:7px;
+ background:repeating-linear-gradient(
+  90deg,#f3df72 0 55px,transparent 55px 105px
+ )
+}
+
+.bus{
+ position:absolute;
+ bottom:45px;
+ left:-180px;
+ width:150px;height:65px;
+ background:#e5b91e;
+ border-radius:12px 18px 5px 5px;
+ animation:busMove 13s linear infinite
+}
+
+.bus:before{
+ content:"";
+ position:absolute;
+ width:95px;height:25px;
+ background:#243b36;
+ top:10px;left:12px;
+ border-radius:4px
+}
+
+@keyframes busMove{
+ from{left:-180px}
+ to{left:110%}
+}
+
+/* TITLE CARD */
+
+.card{
+ position:relative;
+ z-index:10;
+ width:min(92%,600px);
+ margin:auto;
+ top:50vh;
+ transform:translateY(-50%);
+ padding:35px 28px;
+ border-radius:24px;
+ background:rgba(3,35,23,.92);
+ text-align:center;
+ box-shadow:0 20px 60px rgba(0,0,0,.35)
+}
+
 .logo{
-  color:white;font-size:clamp(45px,11vw,88px);font-weight:1000;
-  letter-spacing:-5px;text-shadow:0 5px 0 rgba(0,0,0,.16)
-}
-.tagline{margin-top:4px;color:#172331;font-size:clamp(14px,3.8vw,21px);font-weight:700}
-.playBtn{
-  margin-top:30px;padding:17px 45px;border-radius:999px;
-  background:#151b25;color:white;font-weight:900;font-size:18px;
-  box-shadow:0 10px 25px rgba(0,0,0,.22)
+ font-size:clamp(48px,12vw,82px);
+ font-weight:1000;
+ letter-spacing:-4px
 }
 
-/* =========================
-   BIRTH MOVIE
-========================= */
+.logo span{color:#ffd42f}
 
-#birthScene{
-  background:linear-gradient(#e8eef1 0 12%,#d7dfe3 12% 69%,#c3c9ca 69% 100%);
-  overflow:hidden;
-}
-.hospitalLight{
-  position:absolute;top:4%;left:50%;transform:translateX(-50%);
-  width:35%;min-width:170px;height:45px;background:#fff;border-radius:20px;
-  box-shadow:0 0 30px rgba(255,255,255,.95)
-}
-.window{
-  position:absolute;top:17%;right:5%;width:27%;height:24%;min-width:120px;
-  border:8px solid #b7c1c6;background:linear-gradient(#8ec9ee 0 55%,#77a98b 55%)
-}
-.window:before{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent 47%,#b7c1c6 47% 53%,transparent 53%),
-  linear-gradient(0deg,transparent 47%,#b7c1c6 47% 53%,transparent 53%)
-}
-.curtain{position:absolute;top:0;bottom:25%;width:15%;background:#f4f2ed;box-shadow:inset 0 0 20px rgba(0,0,0,.08)}
-.curtain.left{left:0}.curtain.right{right:0}
-.floor{
-  position:absolute;bottom:0;left:0;right:0;height:31%;
-  background:repeating-linear-gradient(90deg,#c9ced0 0 80px,#bec4c6 80px 82px)
+.tagline{
+ color:#d8e7df;
+ font-size:15px
 }
 
-/* ACTUAL HOSPITAL BED */
-.bed{
-  position:absolute;width:57%;height:19%;left:21.5%;bottom:27%;
-  background:#eef3f4;border:5px solid #a7b0b3;border-radius:12px;
-  box-shadow:0 16px 25px rgba(0,0,0,.16);z-index:3
-}
-.bed:before{
-  content:"";position:absolute;left:-12px;top:-15px;width:18px;height:110%;
-  background:#858f93;border-radius:6px
-}
-.bed:after{
-  content:"";position:absolute;left:5%;right:5%;bottom:-16px;height:15px;
-  background:#6e767a;border-radius:10px
+.card h2{margin-top:30px}
+
+.card p{
+ color:#d6ded9;
+ line-height:1.5
 }
 
-/* MOTHER ON BED */
+.main-btn{
+ margin-top:20px;
+ border:0;
+ border-radius:14px;
+ padding:15px 35px;
+ background:#ffd42f;
+ color:#173522;
+ font-weight:900;
+ font-size:17px
+}
+
+/* BIRTH SCENE */
+
+.birth-screen{
+ display:none;
+ position:relative;
+ z-index:30;
+ min-height:100vh;
+ background:#071b14
+}
+
+.delivery-room{
+ min-height:100vh;
+ position:relative;
+ overflow:hidden;
+ background:linear-gradient(#d8e7e3,#9fb8b1)
+}
+
+.hospital-sign{
+ position:absolute;
+ top:25px;
+ left:50%;
+ transform:translateX(-50%);
+ background:white;
+ color:#174b38;
+ padding:12px 22px;
+ border-radius:8px;
+ font-weight:bold;
+ z-index:5
+}
+
+/* WINDOW */
+
+.room-window{
+ position:absolute;
+ top:0;
+ left:0;
+ width:32%;
+ height:35%;
+ background:#83cde0;
+ border-right:8px solid white;
+ border-bottom:8px solid white
+}
+
+.window-sun{
+ position:absolute;
+ width:55px;height:55px;
+ border-radius:50%;
+ background:#ffd447;
+ top:35px;right:25px
+}
+
+/* BED */
+
+.delivery-bed{
+ position:absolute;
+ width:310px;
+ height:145px;
+ background:white;
+ border-radius:18px;
+ left:50%;
+ top:52%;
+ transform:translate(-50%,-50%);
+ box-shadow:0 18px 40px rgba(0,0,0,.2)
+}
+
 .mother{
-  position:absolute;width:48%;height:31%;left:26%;bottom:37%;z-index:7
-}
-.motherBody{
-  position:absolute;width:66%;height:55%;left:18%;bottom:0;
-  border-radius:35px 35px 15px 15px;background:#d9b7a9
-}
-.motherDress{
-  position:absolute;width:76%;height:62%;left:12%;bottom:0;
-  border-radius:40px 40px 10px 10px;background:#edf0ef
-}
-.motherHead{
-  position:absolute;width:29%;aspect-ratio:1;left:35%;top:0;
-  border-radius:50%;background:#7a4c36;z-index:8;
-  box-shadow:inset -8px -8px 0 rgba(0,0,0,.1)
-}
-.motherHair{
-  position:absolute;width:36%;aspect-ratio:1;left:32%;top:-3%;
-  border-radius:50%;background:#211914;z-index:9
-}
-.motherHair:after{
-  content:"";position:absolute;width:115%;height:45%;left:-8%;top:20%;
-  border-radius:50%;background:#211914
-}
-.motherHead:before,.motherHead:after{
-  content:"";position:absolute;width:7%;height:7%;top:42%;
-  border-radius:50%;background:#18120f;z-index:10
-}
-.motherHead:before{left:30%}.motherHead:after{right:30%}
-.mouth{
-  position:absolute;width:24%;height:9%;border-bottom:3px solid #3a1b16;
-  border-radius:50%;left:38%;top:61%;z-index:10
-}
-.motherArm{
-  position:absolute;width:17%;height:48%;border-radius:20px;
-  background:#7a4c36;top:42%;z-index:10
-}
-.motherArm.left{left:9%;transform:rotate(27deg)}
-.motherArm.right{right:9%;transform:rotate(-27deg)}
-
-/* separate characters */
-.actor{
-  position:absolute;bottom:29%;width:110px;height:220px;z-index:12;
-  animation:breathe 2.8s ease-in-out infinite
-}
-.nursePosition{left:5%;bottom:29%}
-.doctorPosition{right:5%;bottom:29%}
-.fatherPosition{right:24%;bottom:29%}
-
-@keyframes breathe{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-4px)}
-}
-.actorHead{
-  position:absolute;width:65px;height:65px;left:22px;top:0;
-  border-radius:50%;background:var(--skin);
-  border:2px solid rgba(0,0,0,.18);z-index:5
-}
-.actorHair{
-  position:absolute;width:70px;height:37px;left:19px;top:-5px;
-  border-radius:50% 50% 35% 35%;background:var(--hair);z-index:7
-}
-.actorHair:before,.actorHair:after{
-  content:"";position:absolute;background:var(--hair);border-radius:50%
-}
-.actorHair:before{width:22px;height:24px;left:-4px;top:9px}
-.actorHair:after{width:22px;height:24px;right:-4px;top:9px}
-.actorEyes{
-  position:absolute;z-index:8;top:27px;left:37px;width:7px;height:7px;
-  border-radius:50%;background:#171717;box-shadow:23px 0 #171717
-}
-.actorBody{
-  position:absolute;left:8px;top:63px;width:94px;height:130px;
-  border-radius:28px 28px 8px 8px;background:var(--shirt);
-  border:2px solid rgba(0,0,0,.12)
-}
-.actorNeck{
-  position:absolute;width:25px;height:25px;left:42px;top:52px;
-  background:var(--skin);z-index:3
-}
-.actorArm{
-  position:absolute;width:24px;height:105px;top:75px;border-radius:20px;
-  background:var(--skin);z-index:2
-}
-.actorArm.left{left:-1px;transform:rotate(12deg)}
-.actorArm.right{right:-1px;transform:rotate(-12deg)}
-.actorLeg{
-  position:absolute;width:28px;height:65px;top:185px;
-  background:#30343a;border-radius:8px
-}
-.actorLeg.left{left:25px}.actorLeg.right{right:25px}
-
-.doctor{--skin:#70432f;--hair:#171412;--shirt:#fff}
-.nurse{--skin:#8a583d;--hair:#201914;--shirt:#d9edf5}
-.father{--skin:#633c2c;--hair:#161310;--shirt:#a9b8bd}
-
-.doctor .actorBody:after{
-  content:"";position:absolute;left:15px;top:13px;width:60px;height:3px;
-  background:#d6dde0;box-shadow:0 12px #d6dde0
-}
-.nurse .actorBody:after{
-  content:"+";position:absolute;left:39px;top:22px;color:#5d8ca0;
-  font-size:24px;font-weight:900
-}
-.doctor{animation:doctorMove 4s ease-in-out infinite}
-.nurse{animation:nurseMove 3.2s ease-in-out infinite}
-.father{animation:fatherMove 4.5s ease-in-out infinite}
-@keyframes doctorMove{
-  0%,100%{transform:translate(0,0)}50%{transform:translate(-10px,-3px)}
-}
-@keyframes nurseMove{
-  0%,100%{transform:translate(0,0)}50%{transform:translate(8px,-5px)}
-}
-@keyframes fatherMove{
-  0%,100%{transform:translate(0,0)}50%{transform:translate(-5px,-3px)}
+ position:absolute;
+ left:60px;
+ top:-75px;
+ font-size:90px;
+ animation:mumMove 1.8s ease-in-out infinite
 }
 
-.cinematicBars:before,.cinematicBars:after{
-  content:"";position:absolute;left:0;right:0;height:8%;
-  background:#080808;z-index:30
-}
-.cinematicBars:before{top:0}.cinematicBars:after{bottom:0}
-
-.birthDialogue{
-  position:absolute;z-index:35;left:50%;bottom:12%;
-  transform:translateX(-50%);width:min(90%,650px);
-  padding:14px 18px;border-radius:12px;
-  background:rgba(0,0,0,.72);color:#fff;text-align:center;
-  font-size:15px;font-weight:700
-}
-.flash{
-  position:absolute;inset:0;background:#fff;z-index:40;
-  opacity:0;pointer-events:none
-}
-.flash.go{animation:birthFlash .9s ease}
-@keyframes birthFlash{
-  0%{opacity:0}35%{opacity:1}100%{opacity:0}
-}
-.babyReveal{
-  position:absolute;z-index:45;left:50%;bottom:31%;
-  transform:translateX(-50%) scale(.6);opacity:0
-}
-.babyReveal.show{animation:babyReveal .9s ease forwards}
-@keyframes babyReveal{
-  to{transform:translateX(-50%) scale(1);opacity:1}
-}
-.babyBody{
-  position:relative;width:105px;height:80px;background:#f3f0ea;
-  border-radius:45px 45px 25px 25px;box-shadow:0 12px 20px rgba(0,0,0,.15)
-}
-.babyHead{
-  position:absolute;width:68px;height:68px;left:18px;top:-43px;
-  border-radius:50%;background:#87563d;border:3px solid rgba(0,0,0,.08)
-}
-.babyHead:before,.babyHead:after{
-  content:"";position:absolute;width:7px;height:7px;border-radius:50%;
-  background:#18110f;top:29px
-}
-.babyHead:before{left:18px}.babyHead:after{right:18px}
-
-/* =========================
-   INTERACTION TEMPLATE - LOCKED
-========================= */
-
-#resultScene,#appearanceScene{
-  background:radial-gradient(circle at 50% 15%,#ffe9b1 0 8%,transparent 28%),
-  linear-gradient(135deg,#f3efe5,#d8e7e9);overflow:auto
-}
-.resultCard{
-  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:min(92%,600px);max-height:88vh;overflow:auto;
-  background:rgba(255,255,255,.93);border-radius:24px;padding:25px;
-  box-shadow:0 25px 60px rgba(0,0,0,.18)
-}
-.eyebrow{font-size:13px;letter-spacing:2px;font-weight:900;color:#8d6b25}
-.resultCard h1{margin:6px 0 20px;font-size:clamp(32px,8vw,55px)}
-.infoGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.info{background:#f3f4f3;border-radius:13px;padding:12px}
-.info small{display:block;color:#777;font-size:11px;font-weight:800;text-transform:uppercase}
-.info strong{display:block;margin-top:4px;font-size:15px}
-.primary{
-  width:100%;margin-top:20px;padding:15px;border-radius:13px;
-  background:#151b25;color:#fff;font-weight:900
+@keyframes mumMove{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-5px)}
 }
 
-/* =========================
-   APPEARANCE - LOCKED WORDING
-========================= */
+/* PEOPLE */
 
-.appearanceWrap{width:min(950px,94%);margin:0 auto;padding:22px 0 40px}
-.appearanceHeader{text-align:center;margin-bottom:16px}
-.appearanceHeader .eyebrow{color:#92702a}
-.appearanceHeader h1{margin:5px 0;font-size:clamp(30px,7vw,48px)}
-.appearanceHeader p{margin:0;color:#666;font-weight:600}
-.appearanceLayout{display:grid;grid-template-columns:280px 1fr;gap:18px}
-@media(max-width:700px){.appearanceLayout{grid-template-columns:1fr}}
-.babyPreviewCard{
-  background:rgba(255,255,255,.92);border-radius:22px;padding:18px;
-  min-height:360px;box-shadow:0 15px 40px rgba(0,0,0,.12);
-  display:flex;flex-direction:column;align-items:center;justify-content:center
-}
-.previewLabel{align-self:flex-start;font-size:11px;font-weight:900;letter-spacing:1.5px;color:#777}
-.previewStage{position:relative;width:210px;height:250px;margin-top:8px}
-.previewBody{
-  position:absolute;width:130px;height:125px;left:40px;bottom:20px;
-  border-radius:60px 60px 35px 35px;background:#e7e2d9;
-  box-shadow:0 12px 22px rgba(0,0,0,.12)
-}
-.previewHead{
-  position:absolute;width:122px;height:122px;left:44px;top:28px;
-  border-radius:50%;background:#80513b;border:3px solid rgba(0,0,0,.08);
-  z-index:5;box-shadow:inset -10px -10px 0 rgba(0,0,0,.08)
-}
-.previewEye{
-  position:absolute;width:10px;height:10px;border-radius:50%;
-  background:#5a3827;top:54px;z-index:12
-}
-.previewEye.left{left:32px}.previewEye.right{right:32px}
-.previewEar{
-  position:absolute;width:24px;height:35px;border-radius:50%;
-  background:inherit;top:44px;z-index:3
-}
-.previewEar.left{left:-13px}.previewEar.right{right:-13px}
-.previewMouth{
-  position:absolute;width:28px;height:12px;border-bottom:3px solid #55251e;
-  border-radius:50%;left:47px;top:82px;z-index:12
+.person{
+ position:absolute;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ font-size:65px;
+ z-index:4;
+ animation:personMove 2s ease-in-out infinite alternate
 }
 
-/* detailed hair, safely ABOVE head but BELOW eyes */
-.previewHair{position:absolute;z-index:15;pointer-events:none}
-.previewHair.afro{
-  width:134px;height:96px;left:-6px;top:-20px;border-radius:55%;
-  background:
-    radial-gradient(circle at 15% 25%,#392b23 0 3px,transparent 4px),
-    radial-gradient(circle at 30% 12%,#17120f 0 4px,transparent 5px),
-    radial-gradient(circle at 48% 20%,#34271f 0 4px,transparent 5px),
-    radial-gradient(circle at 67% 12%,#17120f 0 4px,transparent 5px),
-    radial-gradient(circle at 85% 28%,#392b23 0 3px,transparent 4px),
-    radial-gradient(circle at 20% 48%,#17120f 0 4px,transparent 5px),
-    radial-gradient(circle at 43% 43%,#392b23 0 4px,transparent 5px),
-    radial-gradient(circle at 66% 45%,#17120f 0 4px,transparent 5px),
-    radial-gradient(circle at 85% 52%,#392b23 0 4px,transparent 5px),
-    radial-gradient(circle at 30% 72%,#17120f 0 4px,transparent 5px),
-    radial-gradient(circle at 58% 70%,#392b23 0 4px,transparent 5px),
-    #211914;
-  box-shadow:0 0 0 7px #171310,inset 8px 10px rgba(255,255,255,.035)
-}
-.previewHair.lowcut{
-  width:117px;height:52px;left:2px;top:-8px;border-radius:55px 55px 25px 25px;
-  background:repeating-linear-gradient(105deg,#17120f 0 3px,#29201b 3px 6px);
-  box-shadow:inset 0 -7px rgba(0,0,0,.12)
-}
-.previewHair.patches{
-  width:122px;height:65px;left:0;top:-10px
-}
-.previewHair.patches:before,.previewHair.patches:after{
-  content:"";position:absolute;background:#211914;border-radius:50%
-}
-.previewHair.patches:before{
-  width:45px;height:34px;left:4px;top:4px;
-  box-shadow:38px -7px 0 3px #211914,72px 1px 0 2px #211914
-}
-.previewHair.patches:after{
-  width:32px;height:25px;left:27px;top:31px;
-  box-shadow:38px 4px 0 2px #211914
-}
-.previewHair.afaridan{display:none}
-
-.optionPanel{
-  background:rgba(255,255,255,.92);border-radius:22px;padding:18px;
-  box-shadow:0 15px 40px rgba(0,0,0,.12)
-}
-.optionGroup{margin-bottom:19px}.optionGroup:last-child{margin-bottom:0}
-.optionTitle{font-weight:1000;font-size:16px;margin-bottom:9px}
-.optionSub{color:#777;font-size:12px;margin-top:-5px;margin-bottom:8px}
-.optionButtons{display:flex;flex-wrap:wrap;gap:8px}
-.optionBtn{
-  padding:11px 13px;border-radius:11px;background:#f0f1ef;color:#24272a;
-  font-size:13px;font-weight:800;border:2px solid transparent;transition:.15s
-}
-.optionBtn.selected{border-color:#202733;background:#e1e6e7;box-shadow:0 3px #202733}
-.skinDeep{background:#4b2a20}.skinDark{background:#633a2a}
-.skinBrown{background:#80513b}.skinLightBrown{background:#9f7054}.skinLight{background:#c89572}
-.skinBtn{color:white;min-width:78px}
-.skinBtn.skinLight,.skinBtn.skinLightBrown{color:#201814}
-.eyeBtn{min-width:80px}.outfitBtn{min-width:120px}
-.saveNote{text-align:center;color:#777;font-size:12px;margin-top:10px}
-
-/* ERROR */
-#errorScene{
-  background:#151923;color:white;display:flex;align-items:center;
-  justify-content:center;text-align:center;padding:30px
-}
-.errorBox{max-width:500px}.errorBox h1{font-size:40px}.errorBox p{color:#c4c8d0}
-</style>
-</head>
-
-<body>
-
-<section id="titleScene" class="scene">
-  <div class="sun"></div>
-  <div class="cloud c1"></div>
-  <div class="cloud c2"></div>
-  <div class="skyline"></div>
-  <div class="road"></div>
-  <div class="danfo"></div>
-
-  <div class="titleCard">
-    <div class="logo">THE NAIJS</div>
-    <div class="tagline">Your life. Your Naija. Your wahala.</div>
-    <button id="playBtn" class="playBtn">PLAY</button>
-  </div>
-</section>
-
-<section id="birthScene" class="scene hidden">
-
-  <div class="hospitalLight"></div>
-  <div class="window"></div>
-  <div class="curtain left"></div>
-  <div class="curtain right"></div>
-  <div class="floor"></div>
-
-  <div class="bed"></div>
-
-  <div class="mother">
-    <div class="motherBody"></div>
-    <div class="motherDress"></div>
-    <div class="motherHead">
-      <div class="mouth"></div>
-    </div>
-    <div class="motherHair"></div>
-    <div class="motherArm left"></div>
-    <div class="motherArm right"></div>
-  </div>
-
-  <div class="actor nurse nursePosition">
-    <div class="actorHead"><div class="actorEyes"></div></div>
-    <div class="actorHair"></div>
-    <div class="actorNeck"></div>
-    <div class="actorBody"></div>
-    <div class="actorArm left"></div>
-    <div class="actorArm right"></div>
-    <div class="actorLeg left"></div>
-    <div class="actorLeg right"></div>
-  </div>
-
-  <div class="actor doctor doctorPosition">
-    <div class="actorHead"><div class="actorEyes"></div></div>
-    <div class="actorHair"></div>
-    <div class="actorNeck"></div>
-    <div class="actorBody"></div>
-    <div class="actorArm left"></div>
-    <div class="actorArm right"></div>
-    <div class="actorLeg left"></div>
-    <div class="actorLeg right"></div>
-  </div>
-
-  <div class="actor father fatherPosition">
-    <div class="actorHead"><div class="actorEyes"></div></div>
-    <div class="actorHair"></div>
-    <div class="actorNeck"></div>
-    <div class="actorBody"></div>
-    <div class="actorArm left"></div>
-    <div class="actorArm right"></div>
-    <div class="actorLeg left"></div>
-    <div class="actorLeg right"></div>
-  </div>
-
-  <div class="cinematicBars"></div>
-
-  <div id="birthDialogue" class="birthDialogue">
-    Something is happening...
-  </div>
-
-  <div id="flash" class="flash"></div>
-
-  <div id="babyReveal" class="babyReveal">
-    <div class="babyBody">
-      <div class="babyHead"></div>
-    </div>
-  </div>
-</section>
-
-<section id="resultScene" class="scene hidden">
-  <div class="resultCard">
-    <div class="eyebrow">WELCOME TO NAIJA</div>
-    <h1>YOU NO GET CHOICE.</h1>
-    <div id="resultGrid" class="infoGrid"></div>
-    <button id="appearanceBtn" class="primary">SEE MY APPEARANCE</button>
-  </div>
-</section>
-
-<section id="appearanceScene" class="scene hidden">
-
-  <div class="appearanceWrap">
-
-    <div class="appearanceHeader">
-      <div class="eyebrow">THIS ONE NA YOUR OWN</div>
-      <h1>How You Wan Look?</h1>
-      <p>Your circumstances were chosen. Your appearance is yours.</p>
-    </div>
-
-    <div class="appearanceLayout">
-
-      <div class="babyPreviewCard">
-        <div class="previewLabel">BABY PREVIEW</div>
-
-        <div class="previewStage">
-          <div id="previewBody" class="previewBody"></div>
-
-          <div id="previewHead" class="previewHead">
-            <div class="previewEar left"></div>
-            <div class="previewEar right"></div>
-            <div class="previewEye left"></div>
-            <div class="previewEye right"></div>
-            <div class="previewMouth"></div>
-            <div id="previewHair" class="previewHair afro"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="optionPanel">
-
-        <div class="optionGroup">
-          <div class="optionTitle">Your Complexion</div>
-          <div class="optionSub">Pick your starting skin tone.</div>
-          <div class="optionButtons">
-            <button class="optionBtn skinBtn skinDeep" data-type="skin" data-value="Deep">Deep</button>
-            <button class="optionBtn skinBtn skinDark" data-type="skin" data-value="Dark">Dark</button>
-            <button class="optionBtn skinBtn skinBrown" data-type="skin" data-value="Brown">Brown</button>
-            <button class="optionBtn skinBtn skinLightBrown" data-type="skin" data-value="Light Brown">Light Brown</button>
-            <button class="optionBtn skinBtn skinLight" data-type="skin" data-value="Light">Light</button>
-          </div>
-        </div>
-
-        <div class="optionGroup">
-          <div class="optionTitle">Your Hair</div>
-          <div class="optionSub">Na baby hair, abeg. Keep am realistic.</div>
-          <div class="optionButtons">
-            <button class="optionBtn" data-type="hair" data-value="Afaridan">Afaridan</button>
-            <button class="optionBtn" data-type="hair" data-value="Low Cut">Low Cut</button>
-            <button class="optionBtn" data-type="hair" data-value="Afro">Afro</button>
-            <button class="optionBtn" data-type="hair" data-value="Mr Patches">Mr Patches</button>
-          </div>
-        </div>
-
-        <div class="optionGroup">
-          <div class="optionTitle">Your Eyes</div>
-          <div class="optionButtons">
-            <button class="optionBtn eyeBtn" data-type="eyes" data-value="Brown">Brown</button>
-            <button class="optionBtn eyeBtn" data-type="eyes" data-value="Dark Brown">Dark Brown</button>
-            <button class="optionBtn eyeBtn" data-type="eyes" data-value="Light Brown">Light Brown</button>
-          </div>
-        </div>
-
-        <div class="optionGroup">
-          <div class="optionTitle">Your Ears</div>
-          <div class="optionButtons">
-            <button class="optionBtn" data-type="ears" data-value="Normal">Normal</button>
-            <button class="optionBtn" data-type="ears" data-value="Small">Small</button>
-            <button class="optionBtn" data-type="ears" data-value="Prominent">Prominent</button>
-          </div>
-        </div>
-
-        <div class="optionGroup">
-          <div class="optionTitle">Baby Drip</div>
-          <div class="optionButtons">
-            <button class="optionBtn outfitBtn" data-type="outfit" data-value="Hospital Wrap">Hospital Wrap</button>
-            <button class="optionBtn outfitBtn" data-type="outfit" data-value="Mint Wrap">Mint Wrap</button>
-            <button class="optionBtn outfitBtn" data-type="outfit" data-value="Lavender Wrap">Lavender Wrap</button>
-            <button class="optionBtn outfitBtn" data-type="outfit" data-value="Blue Wrap">Blue Wrap</button>
-          </div>
-        </div>
-
-        <button id="finishAppearance" class="primary">THIS IS ME</button>
-
-        <div class="saveNote">
-          Your choices are saved to this life.
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="errorScene" class="scene hidden">
-  <div class="errorBox">
-    <h1>Omo 😭</h1>
-    <p>Something went wrong while loading your life.</p>
-    <button class="playBtn" onclick="location.reload()">TRY AGAIN</button>
-  </div>
-</section>
-
-<script>
-"use strict";
-
-const names=[
-"Ifeoluwa","Damilola","Tomiwa","Temiloluwa","Ayomide",
-"Favour","Chiamaka","Chinonso","Ebube","Zainab",
-"Aisha","Fatima","Mubarak","Daniel","David",
-"Blessing","Precious","Kelechi","Oluwatobi","Morenike"
-];
-
-const states=[
-"Lagos","Oyo","Ogun","Osun","Kwara","Ondo","Edo","Delta",
-"Rivers","Enugu","Anambra","Abia","Imo","Kano","Kaduna",
-"Katsina","Plateau","Benue","Cross River","Akwa Ibom"
-];
-
-const ethnicities=[
-"Yoruba","Igbo","Hausa","Edo","Ibibio","Efik","Ijaw","Urhobo","Tiv","Nupe"
-];
-
-const religions=[
-"Christian","Muslim","Traditional / Family Practice"
-];
-
-const families=[
-"Lower income household",
-"Working-class household",
-"Middle-class household",
-"Upper-middle-class household",
-"Wealthy household"
-];
-
-const occupations=[
-"Teacher","Civil servant","Nurse","Trader","Engineer","Banker",
-"Small business owner","Lawyer","Driver","Tech worker","Doctor","Accountant"
-];
-
-const wealthMap={
-"Lower income household":"Low",
-"Working-class household":"Modest",
-"Middle-class household":"Stable",
-"Upper-middle-class household":"High",
-"Wealthy household":"Very high"
-};
-
-const skinColours={
-"Deep":"#4b2a20",
-"Dark":"#633a2a",
-"Brown":"#80513b",
-"Light Brown":"#9f7054",
-"Light":"#c89572"
-};
-
-const eyeColours={
-"Brown":"#5a3827",
-"Dark Brown":"#2b1912",
-"Light Brown":"#806044"
-};
-
-const outfitColours={
-"Hospital Wrap":"#e7e2d9",
-"Mint Wrap":"#cfe9dd",
-"Lavender Wrap":"#ddd3eb",
-"Blue Wrap":"#cbddea"
-};
-
-let currentLife=null;
-
-function pick(a){return a[Math.floor(Math.random()*a.length)]}
-function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min}
-
-function generateLife(){
-const gender=Math.random()<.5?"Girl":"Boy";
-const family=pick(families);
-
-return{
-name:pick(names),
-gender,
-state:pick(states),
-ethnicity:pick(ethnicities),
-religion:pick(religions),
-family,
-wealth:wealthMap[family],
-fatherName:pick(names),
-motherName:pick(names),
-fatherOccupation:pick(occupations),
-motherOccupation:pick(occupations),
-birthOrder:rand(1,4),
-siblings:rand(0,3),
-rareChoice:Math.random()<.01,
-appearance:{
-skin:"Brown",
-hair:"Afro",
-eyes:"Brown",
-ears:"Normal",
-outfit:"Hospital Wrap"
-},
-stats:{
-intelligence:rand(35,65),
-discipline:rand(35,65),
-confidence:rand(35,65),
-social:rand(35,65),
-health:rand(45,85),
-popularity:rand(20,55),
-likeability:rand(35,70),
-respect:rand(25,60),
-wealth:rand(20,80),
-connections:rand(10,45),
-luck:rand(25,75)
-},
-memories:[]
-};
+.person span{
+ background:rgba(0,0,0,.7);
+ padding:4px 8px;
+ border-radius:7px;
+ font-size:11px;
+ color:white
 }
 
-const titleScene=document.getElementById("titleScene");
-const birthScene=document.getElementById("birthScene");
-const resultScene=document.getElementById("resultScene");
-const appearanceScene=document.getElementById("appearanceScene");
-const errorScene=document.getElementById("errorScene");
-
-function show(scene){
-[titleScene,birthScene,resultScene,appearanceScene,errorScene]
-.forEach(s=>s.classList.add("hidden"));
-scene.classList.remove("hidden");
+.person.nurse{
+ left:10%;
+ top:43%
 }
 
-const birthDialogue=document.getElementById("birthDialogue");
-const flash=document.getElementById("flash");
-const babyReveal=document.getElementById("babyReveal");
-
-function runBirth(){
-
-currentLife=generateLife();
-
-try{
-localStorage.setItem("theNaijsCurrentLife",JSON.stringify(currentLife));
-}catch(e){}
-
-show(birthScene);
-
-birthDialogue.textContent="Something is happening...";
-
-setTimeout(()=>{
-birthDialogue.textContent="The nurse moves closer. The doctor checks again.";
-},1800);
-
-setTimeout(()=>{
-birthDialogue.textContent="Everybody is watching. Nobody knows what comes next.";
-},3600);
-
-setTimeout(()=>{
-birthDialogue.textContent="It's happening!";
-},5200);
-
-setTimeout(()=>{
-flash.classList.remove("go");
-void flash.offsetWidth;
-flash.classList.add("go");
-
-babyReveal.classList.remove("show");
-void babyReveal.offsetWidth;
-babyReveal.classList.add("show");
-
-birthDialogue.textContent="A new Naija life has entered the world.";
-},6500);
-
-setTimeout(()=>{
-renderResult();
-show(resultScene);
-},8700);
+.person.doctor{
+ right:10%;
+ top:39%;
+ animation-delay:.5s
 }
 
-function renderResult(){
-
-const grid=document.getElementById("resultGrid");
-
-const data=[
-["Name",currentLife.name],
-["Gender",currentLife.gender],
-["State",currentLife.state],
-["Ethnicity",currentLife.ethnicity],
-["Religion",currentLife.religion],
-["Family",currentLife.family],
-["Family Wealth",currentLife.wealth],
-["Dad",currentLife.fatherName],
-["Dad's Work",currentLife.fatherOccupation],
-["Mum",currentLife.motherName],
-["Mum's Work",currentLife.motherOccupation],
-["Birth Order",ordinal(currentLife.birthOrder)],
-["Siblings",currentLife.siblings]
-];
-
-grid.innerHTML=data.map(item=>`
-<div class="info">
-<small>${escapeHTML(item[0])}</small>
-<strong>${escapeHTML(item[1])}</strong>
-</div>
-`).join("");
+.person.family{
+ left:43%;
+ bottom:9%;
+ animation-delay:1s
 }
 
-function ordinal(n){
-if(n===1)return"1st child";
-if(n===2)return"2nd child";
-if(n===3)return"3rd child";
-return n+"th child";
+@keyframes personMove{
+ from{transform:translateY(0)}
+ to{transform:translateY(-8px)}
 }
 
-function escapeHTML(value){
-return String(value)
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
+/* DELIVERY */
+
+.delivery-text{
+ position:absolute;
+ bottom:22%;
+ left:50%;
+ transform:translateX(-50%);
+ color:#173c2d;
+ font-weight:bold;
+ font-size:18px;
+ white-space:nowrap;
+ animation:pulse 1.2s infinite
 }
 
-const previewHead=document.getElementById("previewHead");
-const previewBody=document.getElementById("previewBody");
-const previewHair=document.getElementById("previewHair");
-
-function renderAppearance(){
-
-if(!currentLife)return;
-
-const a=currentLife.appearance;
-
-previewHead.style.background=skinColours[a.skin];
-previewBody.style.background=outfitColours[a.outfit];
-
-previewHair.className="previewHair";
-
-if(a.hair==="Afro")previewHair.classList.add("afro");
-if(a.hair==="Low Cut")previewHair.classList.add("lowcut");
-if(a.hair==="Mr Patches")previewHair.classList.add("patches");
-if(a.hair==="Afaridan")previewHair.classList.add("afaridan");
-
-document.querySelectorAll(".previewEye").forEach(e=>{
-e.style.background=eyeColours[a.eyes];
-});
-
-document.querySelectorAll(".previewEar").forEach(e=>{
-e.style.width=
-a.ears==="Small"?"18px":
-a.ears==="Prominent"?"29px":"24px";
-
-e.style.height=
-a.ears==="Small"?"28px":
-a.ears==="Prominent"?"40px":"35px";
-});
-
-document.querySelectorAll("[data-type]").forEach(btn=>{
-btn.classList.toggle(
-"selected",
-btn.dataset.value===a[btn.dataset.type]
-);
-});
+@keyframes pulse{
+ 50%{opacity:.45}
 }
 
-function setAppearance(type,value){
+/* BABY ARRIVAL */
 
-if(!currentLife)return;
-
-currentLife.appearance[type]=value;
-
-try{
-localStorage.setItem(
-"theNaijsCurrentLife",
-JSON.stringify(currentLife)
-);
-}catch(e){}
-
-renderAppearance();
+.baby-scene{
+ position:absolute;
+ inset:0;
+ z-index:20;
+ background:rgba(4,30,21,.82);
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ opacity:0;
+ pointer-events:none;
+ transform:scale(.85);
+ transition:1.2s
 }
 
-document.getElementById("playBtn").addEventListener("click",runBirth);
-
-document.getElementById("appearanceBtn").addEventListener("click",()=>{
-show(appearanceScene);
-renderAppearance();
-});
-
-document.querySelectorAll(".optionBtn").forEach(btn=>{
-btn.addEventListener("click",()=>{
-setAppearance(btn.dataset.type,btn.dataset.value);
-});
-});
-
-document.getElementById("finishAppearance").addEventListener("click",()=>{
-try{
-localStorage.setItem(
-"theNaijsCurrentLife",
-JSON.stringify(currentLife)
-);
-}catch(e){}
-
-alert(
-"This is you. 🇳🇬\n\n"+
-currentLife.name+
-" is ready to enter Age 0 → 1."
-);
-});
-
-window.addEventListener("error",event=>{
-console.error(event.error||event.message);
-});
-
-try{
-const saved=localStorage.getItem("theNaijsCurrentLife");
-if(saved){
-const parsed=JSON.parse(saved);
-if(parsed&&parsed.appearance)currentLife=parsed;
+.baby-scene.show{
+ opacity:1;
+ transform:scale(1)
 }
-}catch(e){}
 
-show(titleScene);
-</script>
+.baby{
+ font-size:105px;
+ animation:babyBounce .8s ease-in-out infinite alternate
+}
 
-</body>
-</html>
+@keyframes babyBounce{
+ from{transform:translateY(4px)}
+ to{transform:translateY(-10px)}
+}
+
+.baby-scene h1{
+ color:#ffd42f;
+ font-size:clamp(40px,10vw,75px);
+ margin:10px;
+ text-align:center
+}
+
+.baby-scene p{
+ font-size:17px;
+ text-align:center
+}
+
+/* BIRTH RESULT */
+
+.birth-result{
+ display:none;
+ min-height:100vh;
+ overflow:auto;
+ padding:35px 18px;
+ background:linear-gradient(#073b29,#061e15)
+}
+
+.birth-container{
+ width:min(100%,720px);
+ margin:auto
+}
+
+.birth-title{
+ text-align:center;
+ font-size:clamp(35px,9vw,60px);
+ font-weight:1000;
+ margin:10px 0
+}
+
+.birth-subtitle{
+ text-align:center;
+ color:#b9d1c6;
+ margin-bottom:
