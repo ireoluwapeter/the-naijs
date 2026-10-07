@@ -1,0 +1,336 @@
+(function () {
+  "use strict";
+
+  window.Naijs = window.Naijs || {};
+
+  var namePools = {
+    Yoruba: {
+      female: [
+        "Adesewa",
+        "Ayomide",
+        "Bisola",
+        "Damilola",
+        "Eniola",
+        "Folake",
+        "Funke",
+        "Kemi",
+        "Morenike",
+        "Temilade",
+        "Teniola",
+        "Yetunde"
+      ],
+      male: [
+        "Adekunle",
+        "Adewale",
+        "Ayomide",
+        "Damilare",
+        "Femi",
+        "Kayode",
+        "Kunle",
+        "Oluwaseun",
+        "Segun",
+        "Tobi",
+        "Tunde",
+        "Yemi"
+      ]
+    },
+
+    Igbo: {
+      female: [
+        "Adaeze",
+        "Adanna",
+        "Amarachi",
+        "Chiamaka",
+        "Chidinma",
+        "Chinaza",
+        "Ifeoma",
+        "Kamsiyochukwu",
+        "Ngozi",
+        "Nneka",
+        "Uchechi",
+        "Ugochi"
+      ],
+      male: [
+        "Chibueze",
+        "Chibuike",
+        "Chidera",
+        "Chinedu",
+        "Chukwudi",
+        "Chukwuemeka",
+        "Emeka",
+        "Ikenna",
+        "Kelechi",
+        "Nnamdi",
+        "Obinna",
+        "Uche"
+      ]
+    },
+
+    Hausa: {
+      female: [
+        "Aisha",
+        "Amina",
+        "Asma'u",
+        "Fatima",
+        "Hadiza",
+        "Hauwa",
+        "Khadija",
+        "Maryam",
+        "Rahma",
+        "Safiya",
+        "Zainab",
+        "Zulaiha"
+      ],
+      male: [
+        "Abdullahi",
+        "Abubakar",
+        "Ahmad",
+        "Aliyu",
+        "Bashir",
+        "Bello",
+        "Ibrahim",
+        "Musa",
+        "Mustapha",
+        "Sani",
+        "Usman",
+        "Yusuf"
+      ]
+    },
+
+    Edo: {
+      female: [
+        "Adesuwa",
+        "Eghosa",
+        "Efe",
+        "Eseosa",
+        "Ivie",
+        "Osayomore",
+        "Osaretin",
+        "Ovbude",
+        "Uwa",
+        "Yemisi"
+      ],
+      male: [
+        "Eghosa",
+        "Ehi",
+        "Osagie",
+        "Osaro",
+        "Osaigbovo",
+        "Omoregie",
+        "Ovbiosa",
+        "Osemwegie",
+        "Oviawe",
+        "Uyi"
+      ]
+    },
+
+    Ibibio: {
+      female: [
+        "Akpan",
+        "Aniedi",
+        "Ekaette",
+        "Ekemini",
+        "Idongesit",
+        "Imaobong",
+        "Mfon",
+        "Nsikak",
+        "Uduak",
+        "Unyime"
+      ],
+      male: [
+        "Akpan",
+        "Aniefiok",
+        "Asuquo",
+        "Ekemini",
+        "Etim",
+        "Idongesit",
+        "Imaobong",
+        "Mfon",
+        "Nsikak",
+        "Uduak"
+      ]
+    },
+
+    Efik: {
+      female: [
+        "Adiaha",
+        "Anietie",
+        "Ekaette",
+        "Ekemini",
+        "Idongesit",
+        "Imaobong",
+        "Mfon",
+        "Nsidibe",
+        "Uduak",
+        "Unyime"
+      ],
+      male: [
+        "Aniefiok",
+        "Asuquo",
+        "Etim",
+        "Eyo",
+        "Idongesit",
+        "Imaobong",
+        "Mfon",
+        "Nsikak",
+        "Uduak",
+        "Unyime"
+      ]
+    },
+
+    Ijaw: {
+      female: [
+        "Ama",
+        "Boma",
+        "Ebikeme",
+        "Ebiere",
+        "Ebitare",
+        "Ere",
+        "Fiyesima",
+        "Ibiwari",
+        "Preye",
+        "Tebidaba"
+      ],
+      male: [
+        "Boma",
+        "Ebi",
+        "Ebikeme",
+        "Ebitare",
+        "Fiyesima",
+        "Godspower",
+        "Kuro",
+        "Preye",
+        "Tebidaba",
+        "Tonye"
+      ]
+    },
+
+    Urhobo: {
+      female: [
+        "Ese",
+        "Ejiro",
+        "Erhi",
+        "Efe",
+        "Ejiroghene",
+        "Oghenekaro",
+        "Oghenetega",
+        "Oghenero",
+        "Oghogho",
+        "Onoriode"
+      ],
+      male: [
+        "Efe",
+        "Ejiro",
+        "Erhi",
+        "Oghenekaro",
+        "Oghenekevwe",
+        "Oghenetega",
+        "Oghenero",
+        "Ogho",
+        "Onoriode",
+        "Ovie"
+      ]
+    },
+
+    Tiv: {
+      female: [
+        "Aondofa",
+        "Aondongu",
+        "Aondohemba",
+        "Iember",
+        "Iorliam",
+        "Ityav",
+        "Mnena",
+        "Mlumun",
+        "Terkimbi",
+        "Terseer"
+      ],
+      male: [
+        "Aondofa",
+        "Aondohemba",
+        "Iember",
+        "Iorliam",
+        "Iortim",
+        "Iorwuese",
+        "Terkimbi",
+        "Terna",
+        "Terseer",
+        "Tyav"
+      ]
+    },
+
+    Nupe: {
+      female: [
+        "Aisha",
+        "Fatima",
+        "Hauwa",
+        "Hajara",
+        "Khadija",
+        "Maryam",
+        "Rabi",
+        "Safiya",
+        "Zainab",
+        "Zulaiha"
+      ],
+      male: [
+        "Abubakar",
+        "Ahmad",
+        "Aliyu",
+        "Bello",
+        "Ibrahim",
+        "Musa",
+        "Sani",
+        "Usman",
+        "Yahaya",
+        "Yusuf"
+      ]
+    }
+  };
+
+  Naijs.randomChoice = function (array) {
+    if (!array || array.length === 0) {
+      return "";
+    }
+
+    return array[Math.floor(Math.random() * array.length)];
+  };
+
+  Naijs.getName = function (gender, ethnicity) {
+    var group = namePools[ethnicity];
+
+    if (!group) {
+      return "";
+    }
+
+    var names = group[gender];
+
+    if (!names || names.length === 0) {
+      return "";
+    }
+
+    return Naijs.randomChoice(names);
+  };
+
+  Naijs.generateBirth = function () {
+    var ethnicities = Object.keys(namePools);
+
+    var genders = ["female", "male"];
+
+    var gender = Naijs.randomChoice(genders);
+    var ethnicity = Naijs.randomChoice(ethnicities);
+
+    var babyName = Naijs.getName(gender, ethnicity);
+
+    var motherName = Naijs.getName("female", ethnicity);
+    var fatherName = Naijs.getName("male", ethnicity);
+
+    return {
+      gender: gender,
+      ethnicity: ethnicity,
+      name: babyName,
+      mother: motherName,
+      father: fatherName
+    };
+  };
+
+})();
