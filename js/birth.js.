@@ -6,7 +6,8 @@
   Naijs.birthState = {
     baby: null,
     step: 0,
-    timer: null
+    timer: null,
+    revealTimers: []
   };
 
   Naijs.startBirth = function () {
@@ -19,10 +20,12 @@
     var baby = document.querySelector(".newborn-baby");
 
     if (baby) {
-      baby.classList.remove("baby-appearing");
-      baby.classList.remove("baby-visible");
+      baby.style.display = "none";
       baby.style.opacity = "0";
-      baby.style.transform = "translateY(35px) scale(0.65)";
+      baby.style.visibility = "hidden";
+      baby.style.transform = "translateY(45px) scale(0.6)";
+      baby.style.transition =
+        "opacity 0.35s ease, transform 0.35s ease";
     }
 
     Naijs.runBirthSequence();
@@ -58,38 +61,71 @@
 
     Naijs.birthState.step = 0;
 
+    function clearRevealTimers() {
+      for (var i = 0; i < Naijs.birthState.revealTimers.length; i++) {
+        clearTimeout(Naijs.birthState.revealTimers[i]);
+      }
+
+      Naijs.birthState.revealTimers = [];
+    }
+
     function makeBabyAppear() {
       if (!baby) {
         return;
       }
 
-      baby.classList.add("baby-appearing");
+      clearRevealTimers();
 
-      setTimeout(function () {
-        baby.style.opacity = "0.25";
-        baby.style.transform = "translateY(28px) scale(0.72)";
-      }, 100);
+      baby.style.display = "block";
+      baby.style.visibility = "visible";
+      baby.style.opacity = "0";
+      baby.style.transform = "translateY(45px) scale(0.6)";
 
-      setTimeout(function () {
-        baby.style.opacity = "0.5";
-        baby.style.transform = "translateY(20px) scale(0.8)";
-      }, 350);
+      Naijs.birthState.revealTimers.push(
+        setTimeout(function () {
+          baby.style.opacity = "0.2";
+          baby.style.transform =
+            "translateY(36px) scale(0.68)";
+        }, 100)
+      );
 
-      setTimeout(function () {
-        baby.style.opacity = "0.75";
-        baby.style.transform = "translateY(10px) scale(0.9)";
-      }, 650);
+      Naijs.birthState.revealTimers.push(
+        setTimeout(function () {
+          baby.style.opacity = "0.45";
+          baby.style.transform =
+            "translateY(27px) scale(0.76)";
+        }, 350)
+      );
 
-      setTimeout(function () {
-        baby.style.opacity = "1";
-        baby.style.transform = "translateY(0) scale(1)";
-        baby.classList.add("baby-visible");
-      }, 950);
+      Naijs.birthState.revealTimers.push(
+        setTimeout(function () {
+          baby.style.opacity = "0.7";
+          baby.style.transform =
+            "translateY(17px) scale(0.87)";
+        }, 650)
+      );
+
+      Naijs.birthState.revealTimers.push(
+        setTimeout(function () {
+          baby.style.opacity = "0.9";
+          baby.style.transform =
+            "translateY(7px) scale(0.96)";
+        }, 850)
+      );
+
+      Naijs.birthState.revealTimers.push(
+        setTimeout(function () {
+          baby.style.opacity = "1";
+          baby.style.transform =
+            "translateY(0) scale(1)";
+        }, 1050)
+      );
     }
 
     function nextScene() {
       if (Naijs.birthState.step >= scenes.length) {
         clearInterval(Naijs.birthState.timer);
+        clearRevealTimers();
 
         if (typeof Naijs.showBirthResult === "function") {
           Naijs.showBirthResult();
