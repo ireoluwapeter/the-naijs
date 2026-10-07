@@ -15,12 +15,23 @@
     }
 
     Naijs.showScreen("birth-screen");
+
+    var baby = document.querySelector(".newborn-baby");
+
+    if (baby) {
+      baby.classList.remove("baby-appearing");
+      baby.classList.remove("baby-visible");
+      baby.style.opacity = "0";
+      baby.style.transform = "translateY(35px) scale(0.65)";
+    }
+
     Naijs.runBirthSequence();
   };
 
   Naijs.runBirthSequence = function () {
     var dialogueName = document.getElementById("dialogue-name");
     var dialogueText = document.getElementById("dialogue-text");
+    var baby = document.querySelector(".newborn-baby");
 
     var scenes = [
       {
@@ -47,6 +58,35 @@
 
     Naijs.birthState.step = 0;
 
+    function makeBabyAppear() {
+      if (!baby) {
+        return;
+      }
+
+      baby.classList.add("baby-appearing");
+
+      setTimeout(function () {
+        baby.style.opacity = "0.25";
+        baby.style.transform = "translateY(28px) scale(0.72)";
+      }, 100);
+
+      setTimeout(function () {
+        baby.style.opacity = "0.5";
+        baby.style.transform = "translateY(20px) scale(0.8)";
+      }, 350);
+
+      setTimeout(function () {
+        baby.style.opacity = "0.75";
+        baby.style.transform = "translateY(10px) scale(0.9)";
+      }, 650);
+
+      setTimeout(function () {
+        baby.style.opacity = "1";
+        baby.style.transform = "translateY(0) scale(1)";
+        baby.classList.add("baby-visible");
+      }, 950);
+    }
+
     function nextScene() {
       if (Naijs.birthState.step >= scenes.length) {
         clearInterval(Naijs.birthState.timer);
@@ -68,6 +108,10 @@
         dialogueText.textContent = scene.text;
       }
 
+      if (Naijs.birthState.step === 3) {
+        makeBabyAppear();
+      }
+
       Naijs.birthState.step += 1;
     }
 
@@ -75,4 +119,5 @@
 
     Naijs.birthState.timer = setInterval(nextScene, 1800);
   };
+
 })();
