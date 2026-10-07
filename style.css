@@ -1,0 +1,1082 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #111;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.screen {
+  width: 100%;
+  min-height: 100vh;
+}
+
+
+/* =========================================
+   TITLE WORLD
+   ========================================= */
+
+.title-world {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    #70c9f4 0%,
+    #b9e7fa 58%,
+    #f5d39a 58%,
+    #e8b66f 100%
+  );
+  z-index: 0;
+}
+
+.sun {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  top: 8%;
+  right: 12%;
+  border-radius: 50%;
+  background: #ffd84d;
+  box-shadow: 0 0 35px rgba(255, 216, 77, 0.8);
+}
+
+.cloud {
+  position: absolute;
+  width: 120px;
+  height: 35px;
+  background: #fff;
+  border-radius: 30px;
+  opacity: 0.9;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.cloud::before {
+  width: 45px;
+  height: 45px;
+  left: 20px;
+  top: -20px;
+}
+
+.cloud::after {
+  width: 55px;
+  height: 55px;
+  right: 18px;
+  top: -28px;
+}
+
+.cloud.one {
+  top: 16%;
+  left: 8%;
+}
+
+.cloud.two {
+  top: 27%;
+  right: 30%;
+  transform: scale(0.75);
+}
+
+.city {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 27%;
+  height: 28%;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 0 5%;
+}
+
+.building {
+  position: relative;
+  width: 20%;
+  background: #777;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.building.b1 {
+  height: 75%;
+  background: #a86f52;
+}
+
+.building.b2 {
+  height: 100%;
+  background: #666;
+}
+
+.building.b3 {
+  height: 62%;
+  background: #8a735e;
+}
+
+.building.b4 {
+  height: 84%;
+  background: #536b73;
+}
+
+.window {
+  position: absolute;
+  inset: 12px;
+  background:
+    repeating-linear-gradient(
+      to right,
+      #f9d56e 0,
+      #f9d56e 12px,
+      transparent 12px,
+      transparent 24px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 20px,
+      #333 20px,
+      #333 23px
+    );
+  opacity: 0.8;
+}
+
+.tree {
+  position: absolute;
+  bottom: 24%;
+  width: 55px;
+  height: 100px;
+}
+
+.tree::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 23px;
+  width: 12px;
+  height: 55px;
+  background: #75452b;
+}
+
+.tree::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #287a42;
+  box-shadow:
+    18px -15px 0 #32934d,
+    35px 4px 0 #236b3a;
+}
+
+.tree.one {
+  left: 5%;
+}
+
+.tree.two {
+  right: 6%;
+}
+
+.road {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 25%;
+  background: #454545;
+}
+
+.road-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: repeating-linear-gradient(
+    to right,
+    #f5dc62 0,
+    #f5dc62 55px,
+    transparent 55px,
+    transparent 100px
+  );
+}
+
+.bus {
+  position: absolute;
+  width: 120px;
+  height: 55px;
+  left: 30%;
+  bottom: 13%;
+  background: #e6bd28;
+  border: 4px solid #222;
+  border-radius: 8px;
+  animation: busMove 12s linear infinite;
+}
+
+@keyframes busMove {
+  0% {
+    left: -140px;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+.bus::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 9px;
+  width: 22px;
+  height: 18px;
+  background: #9ed5e8;
+  box-shadow:
+    31px 0 0 #9ed5e8,
+    62px 0 0 #9ed5e8;
+}
+
+.bus::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #222;
+  bottom: -11px;
+  left: 18px;
+  box-shadow: 68px 0 0 #222;
+}
+
+.person {
+  position: absolute;
+  bottom: 22%;
+  font-size: 42px;
+  z-index: 3;
+}
+
+.person.one {
+  left: 24%;
+}
+
+.person.two {
+  right: 24%;
+}
+
+
+/* =========================================
+   TITLE SCREEN
+   ========================================= */
+
+.title-screen {
+  position: relative;
+  z-index: 5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  padding: 30px;
+}
+
+.logo {
+  font-size: clamp(48px, 12vw, 100px);
+  font-weight: 900;
+  letter-spacing: 5px;
+  text-shadow: 4px 4px 0 #222;
+}
+
+.logo span {
+  color: #ffd447;
+}
+
+.tagline {
+  margin-top: 12px;
+  font-size: clamp(18px, 4vw, 30px);
+  font-weight: 700;
+  text-shadow: 2px 2px 0 #222;
+}
+
+.subtext {
+  margin-top: 10px;
+  font-size: clamp(14px, 3vw, 20px);
+  text-shadow: 2px 2px 0 #222;
+}
+
+.play {
+  margin-top: 35px;
+  padding: 15px 35px;
+  border: 3px solid #222;
+  border-radius: 8px;
+  background: #ffd447;
+  color: #222;
+  font-size: 20px;
+  font-weight: 900;
+  box-shadow: 4px 4px 0 #222;
+}
+
+.play:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 #222;
+}
+
+
+/* =========================================
+   BIRTH SCREEN
+   ========================================= */
+
+.birth-screen {
+  position: relative;
+  background: #dfe8ed;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.hospital-room {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background:
+    linear-gradient(
+      to bottom,
+      #eef5f8 0%,
+      #eef5f8 72%,
+      #cbd1d3 72%,
+      #cbd1d3 100%
+    );
+  overflow: hidden;
+}
+
+
+/* =========================================
+   HOSPITAL BED
+   ========================================= */
+
+.hospital-bed {
+  position: absolute;
+  width: 45%;
+  height: 150px;
+  left: 27%;
+  top: 43%;
+  z-index: 2;
+}
+
+.bed-pillow {
+  position: absolute;
+  width: 34%;
+  height: 42px;
+  left: 5%;
+  top: 0;
+  background: #fff;
+  border: 4px solid #555;
+  border-radius: 15px;
+}
+
+.bed-mattress {
+  position: absolute;
+  width: 100%;
+  height: 65px;
+  left: 0;
+  top: 35px;
+  background: #f8f8f8;
+  border: 4px solid #555;
+  border-radius: 10px;
+}
+
+.bed-frame {
+  position: absolute;
+  width: 100%;
+  height: 18px;
+  left: 0;
+  bottom: 22px;
+  background: #555;
+}
+
+.bed-leg {
+  position: absolute;
+  width: 12px;
+  height: 55px;
+  bottom: -30px;
+  background: #444;
+}
+
+.bed-leg.left {
+  left: 12%;
+}
+
+.bed-leg.right {
+  right: 12%;
+}
+
+
+/* =========================================
+   MOTHER
+   ========================================= */
+
+.mother-character {
+  position: absolute;
+  width: 190px;
+  height: 180px;
+  left: 29%;
+  top: 31%;
+  z-index: 5;
+}
+
+.mother-hair {
+  position: absolute;
+  width: 62px;
+  height: 70px;
+  left: 45px;
+  top: 0;
+  background: #171717;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.mother-head {
+  position: absolute;
+  width: 55px;
+  height: 62px;
+  left: 50px;
+  top: 10px;
+  background: #75452f;
+  border: 3px solid #222;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.mother-body {
+  position: absolute;
+  width: 135px;
+  height: 100px;
+  left: 35px;
+  top: 63px;
+  background: #a94f65;
+  border: 4px solid #222;
+  border-radius: 35px 35px 15px 15px;
+  transform: rotate(-8deg);
+}
+
+.mother-arm {
+  position: absolute;
+  width: 90px;
+  height: 18px;
+  left: 82px;
+  top: 75px;
+  background: #75452f;
+  border: 3px solid #222;
+  border-radius: 15px;
+  transform: rotate(20deg);
+  z-index: 5;
+}
+
+
+/* =========================================
+   OTHER CHARACTERS
+   ========================================= */
+
+.character {
+  position: absolute;
+  width: 100px;
+  height: 190px;
+  z-index: 8;
+}
+
+.character-hair {
+  position: absolute;
+  width: 50px;
+  height: 45px;
+  left: 25px;
+  top: 0;
+  background: #171717;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.character-head {
+  position: absolute;
+  width: 48px;
+  height: 55px;
+  left: 26px;
+  top: 10px;
+  background: #70452f;
+  border: 3px solid #222;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.character-body {
+  position: absolute;
+  width: 70px;
+  height: 80px;
+  left: 15px;
+  top: 62px;
+  background: #eee;
+  border: 4px solid #222;
+  border-radius: 18px;
+}
+
+.character-arm {
+  position: absolute;
+  width: 15px;
+  height: 62px;
+  top: 70px;
+  background: #70452f;
+  border: 3px solid #222;
+  border-radius: 12px;
+  z-index: 4;
+}
+
+.character-arm.left {
+  left: 5px;
+  transform: rotate(18deg);
+}
+
+.character-arm.right {
+  right: 5px;
+  transform: rotate(-18deg);
+}
+
+.character-leg {
+  position: absolute;
+  width: 18px;
+  height: 65px;
+  top: 135px;
+  background: #333;
+  border: 3px solid #222;
+  border-radius: 10px;
+}
+
+.character-leg.left {
+  left: 30px;
+}
+
+.character-leg.right {
+  right: 30px;
+}
+
+.nurse-character {
+  left: 8%;
+  top: 38%;
+}
+
+.nurse-character .character-body {
+  background: #fff;
+}
+
+.doctor-character {
+  right: 8%;
+  top: 34%;
+}
+
+.doctor-character .character-body {
+  background: #dce9f4;
+}
+
+.father-character {
+  right: 20%;
+  bottom: 10%;
+}
+
+.father-character .character-body {
+  background: #52677a;
+}
+
+
+/* =========================================
+   NEWBORN BABY
+   ========================================= */
+
+.newborn-baby {
+  position: absolute;
+  width: 110px;
+  height: 145px;
+  left: 44%;
+  top: 42%;
+  z-index: 12;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(45px) scale(0.6);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.baby-head {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  left: 26px;
+  top: 0;
+  background: #70462f;
+  border: 4px solid #222;
+  border-radius: 50%;
+  z-index: 4;
+}
+
+.baby-hair {
+  position: absolute;
+  width: 62px;
+  height: 25px;
+  left: 24px;
+  top: -5px;
+  background: #191919;
+  border-radius: 50%;
+  z-index: 6;
+}
+
+.baby-body {
+  position: absolute;
+  width: 70px;
+  height: 65px;
+  left: 20px;
+  top: 50px;
+  background: #f5f5f5;
+  border: 4px solid #222;
+  border-radius: 25px;
+}
+
+.baby-arm {
+  position: absolute;
+  width: 16px;
+  height: 43px;
+  top: 58px;
+  background: #70462f;
+  border: 3px solid #222;
+  border-radius: 12px;
+  z-index: 3;
+}
+
+.baby-arm.left {
+  left: 5px;
+  transform: rotate(25deg);
+}
+
+.baby-arm.right {
+  right: 5px;
+  transform: rotate(-25deg);
+}
+
+.baby-leg {
+  position: absolute;
+  width: 18px;
+  height: 38px;
+  top: 108px;
+  background: #70462f;
+  border: 3px solid #222;
+  border-radius: 12px;
+}
+
+.baby-leg.left {
+  left: 27px;
+}
+
+.baby-leg.right {
+  right: 27px;
+}
+
+
+/* =========================================
+   DIALOGUE
+   ========================================= */
+
+.dialogue-box {
+  position: absolute;
+  left: 50%;
+  bottom: 5%;
+  transform: translateX(-50%);
+  width: min(90%, 650px);
+  padding: 18px 22px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 4px solid #222;
+  border-radius: 12px;
+  z-index: 30;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.25);
+}
+
+.dialogue-name {
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 7px;
+  color: #b33a3a;
+}
+
+.dialogue-text {
+  font-size: 17px;
+  line-height: 1.4;
+  color: #222;
+}
+
+
+/* =========================================
+   RESULT SCREEN
+   ========================================= */
+
+.result-screen {
+  min-height: 100vh;
+  padding: 30px 20px;
+  background: #f2dfb4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-card {
+  width: min(92%, 600px);
+  padding: 35px;
+  background: #fff;
+  border: 5px solid #222;
+  border-radius: 16px;
+  box-shadow: 8px 8px 0 #222;
+}
+
+.result-card h1 {
+  margin-top: 0;
+  font-size: clamp(28px, 7vw, 48px);
+  text-align: center;
+}
+
+.result-card p {
+  text-align: center;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 13px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 17px;
+}
+
+.result-card .play {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* =========================================
+   APPEARANCE SCREEN
+   ========================================= */
+
+.appearance-screen {
+  min-height: 100vh;
+  background: #f5ead2;
+  padding: 35px 20px;
+  color: #222;
+}
+
+.appearance-container {
+  width: min(94%, 850px);
+  margin: 0 auto;
+  padding-bottom: 50px;
+}
+
+.appearance-title {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(30px, 7vw, 55px);
+  font-weight: 900;
+}
+
+.appearance-subtitle {
+  margin-top: 8px;
+  text-align: center;
+  font-size: clamp(20px, 4vw, 30px);
+  font-weight: 700;
+}
+
+.appearance-container > p {
+  text-align: center;
+  font-size: 16px;
+  margin: 12px auto 25px;
+}
+
+.appearance-group {
+  margin-top: 25px;
+  padding: 20px;
+  background: #fff;
+  border: 3px solid #222;
+  border-radius: 12px;
+}
+
+.appearance-group h3 {
+  margin: 0 0 12px;
+  font-size: 20px;
+}
+
+.option-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.option-button {
+  padding: 10px 14px;
+  border: 2px solid #222;
+  border-radius: 8px;
+  background: #eee;
+  color: #222;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.option-button.selected {
+  background: #222;
+  color: #fff;
+}
+
+.appearance-commentary {
+  margin-top: 12px;
+  font-size: 14px;
+  font-style: italic;
+  color: #666;
+}
+
+
+/* =========================================
+   APPEARANCE BABY PREVIEW
+   ========================================= */
+
+.appearance-baby-preview {
+  width: 180px;
+  height: 190px;
+  margin: 20px auto 28px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.preview-baby {
+  position: relative;
+  width: 120px;
+  height: 165px;
+}
+
+.preview-baby-head {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  left: 24px;
+  top: 0;
+  background: #70462f;
+  border: 4px solid #222;
+  border-radius: 50%;
+  z-index: 4;
+}
+
+.preview-baby-hair {
+  position: absolute;
+  left: 22px;
+  top: -6px;
+  background: #191919;
+  z-index: 6;
+}
+
+.preview-baby-hair.afaridan {
+  width: 76px;
+  height: 32px;
+  border-radius: 50% 50% 42% 42%;
+  box-shadow:
+    0 2px 0 #111,
+    -5px 8px 0 -2px #191919,
+    5px 8px 0 -2px #191919;
+}
+
+.preview-baby-hair.low-cut {
+  width: 70px;
+  height: 18px;
+  left: 25px;
+  top: -2px;
+  border-radius: 50% 50% 45% 45%;
+  box-shadow:
+    0 2px 0 #111,
+    0 5px 0 -2px #191919;
+}
+
+.preview-baby-hair.afro {
+  width: 78px;
+  height: 48px;
+  left: 21px;
+  top: -10px;
+  border-radius: 50%;
+  box-shadow:
+    -6px 8px 0 -2px #191919,
+    6px 8px 0 -2px #191919,
+    0 12px 0 -4px #191919;
+}
+
+.preview-baby-hair.mr-patches {
+  width: 18px;
+  height: 18px;
+  left: 30px;
+  top: 0;
+  border-radius: 50%;
+  box-shadow:
+    25px 0 0 #191919,
+    43px 5px 0 #191919,
+    8px 15px 0 #191919,
+    32px 16px 0 #191919;
+}
+
+.preview-baby-body {
+  position: absolute;
+  width: 78px;
+  height: 68px;
+  left: 21px;
+  top: 60px;
+  background: #f4f4f4;
+  border: 4px solid #222;
+  border-radius: 28px 28px 20px 20px;
+}
+
+.preview-baby-arm {
+  position: absolute;
+  width: 18px;
+  height: 48px;
+  top: 66px;
+  background: #70462f;
+  border: 4px solid #222;
+  border-radius: 12px;
+  z-index: 3;
+}
+
+.preview-baby-arm.left {
+  left: 7px;
+  transform: rotate(25deg);
+}
+
+.preview-baby-arm.right {
+  right: 7px;
+  transform: rotate(-25deg);
+}
+
+.preview-baby-leg {
+  position: absolute;
+  width: 20px;
+  height: 38px;
+  top: 116px;
+  background: #70462f;
+  border: 4px solid #222;
+  border-radius: 12px;
+}
+
+.preview-baby-leg.left {
+  left: 29px;
+  transform: rotate(8deg);
+}
+
+.preview-baby-leg.right {
+  right: 29px;
+  transform: rotate(-8deg);
+}
+
+
+/* =========================================
+   CONFIRM BUTTON
+   ========================================= */
+
+.confirm-button {
+  display: block;
+  margin: 30px auto 0;
+  padding: 14px 35px;
+  border: 3px solid #222;
+  border-radius: 9px;
+  background: #222;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.confirm-button:active {
+  transform: translateY(2px);
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 700px) {
+  .logo {
+    font-size: 52px;
+  }
+
+  .hospital-bed {
+    width: 58%;
+    left: 21%;
+  }
+
+  .mother-character {
+    left: 24%;
+    transform: scale(0.85);
+    transform-origin: top left;
+  }
+
+  .nurse-character {
+    left: 0;
+    transform: scale(0.75);
+    transform-origin: top left;
+  }
+
+  .doctor-character {
+    right: 0;
+    transform: scale(0.75);
+    transform-origin: top right;
+  }
+
+  .father-character {
+    right: 8%;
+    transform: scale(0.7);
+    transform-origin: bottom right;
+  }
+
+  .newborn-baby {
+    left: 39%;
+  }
+
+  .dialogue-box {
+    bottom: 3%;
+  }
+
+  .dialogue-text {
+    font-size: 15px;
+  }
+
+  .result-card {
+    padding: 25px 20px;
+  }
+
+  .result-row {
+    font-size: 15px;
+  }
+}
