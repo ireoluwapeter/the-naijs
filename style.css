@@ -1,922 +1,136 @@
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #111;
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#game {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  background: #f5d58a;
-}
-
-.screen {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-}
-
-.hidden {
-  display: none !important;
-}
-
-
 /* =========================================
-   TITLE WORLD
+   APPEARANCE BABY PREVIEW
    ========================================= */
 
-.title-world {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  background: linear-gradient(
-    to bottom,
-    #55bde8 0%,
-    #8ed8ef 55%,
-    #f2c46d 56%,
-    #d79a45 100%
-  );
-}
-
-.sun {
-  position: absolute;
-  width: 90px;
-  height: 90px;
-  top: 8%;
-  right: 12%;
-  border-radius: 50%;
-  background: #ffd84a;
-  box-shadow: 0 0 35px rgba(255, 216, 74, 0.8);
-}
-
-.cloud {
-  position: absolute;
-  width: 120px;
-  height: 35px;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 30px;
-}
-
-.cloud::before,
-.cloud::after {
-  content: "";
-  position: absolute;
-  background: inherit;
-  border-radius: 50%;
-}
-
-.cloud::before {
-  width: 55px;
-  height: 55px;
-  left: 20px;
-  bottom: 5px;
-}
-
-.cloud::after {
-  width: 70px;
-  height: 70px;
-  right: 15px;
-  bottom: 0;
-}
-
-.cloud.one {
-  top: 13%;
-  left: 8%;
-}
-
-.cloud.two {
-  top: 23%;
-  left: 52%;
-  transform: scale(0.75);
-}
-
-.city {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 31%;
-  height: 31%;
-}
-
-.building {
-  position: absolute;
-  bottom: 0;
-  background: #9b6d55;
-  border: 3px solid #704b3d;
-}
-
-.b1 {
-  left: 4%;
-  width: 16%;
-  height: 72%;
-}
-
-.b2 {
-  left: 23%;
-  width: 19%;
-  height: 92%;
-  background: #b47c5d;
-}
-
-.b3 {
-  left: 45%;
-  width: 15%;
-  height: 65%;
-}
-
-.b4 {
-  right: 6%;
-  width: 20%;
-  height: 82%;
-  background: #a66f52;
-}
-
-.window {
-  position: absolute;
-  inset: 15% 15%;
-  background:
-    linear-gradient(to right, transparent 42%, #e8c96d 42%, #e8c96d 58%, transparent 58%),
-    linear-gradient(to bottom, transparent 42%, #e8c96d 42%, #e8c96d 58%, transparent 58%);
-  border: 3px solid #704b3d;
-}
-
-.tree {
-  position: absolute;
-  bottom: 29%;
-  width: 70px;
-  height: 110px;
-}
-
-.tree::before {
-  content: "";
-  position: absolute;
-  width: 16px;
-  height: 70px;
-  bottom: 0;
-  left: 27px;
-  background: #71452b;
-}
-
-.tree::after {
-  content: "";
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  top: 0;
-  border-radius: 50%;
-  background: #3d873f;
-}
-
-.tree.one {
-  left: 3%;
-}
-
-.tree.two {
-  right: 5%;
-  transform: scale(0.85);
-}
-
-.road {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 31%;
-  background: #454545;
-  border-top: 5px solid #222;
-}
-
-.road-line {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  height: 6px;
-  background: repeating-linear-gradient(
-    to right,
-    #f6df6b 0,
-    #f6df6b 70px,
-    transparent 70px,
-    transparent 130px
-  );
-}
-
-.bus {
-  position: absolute;
-  width: 190px;
-  height: 82px;
-  left: -220px;
-  bottom: 18%;
-  background: #f3c623;
-  border: 5px solid #161616;
-  border-radius: 12px 18px 8px 8px;
-  z-index: 5;
-  animation: danfoMove 7s linear infinite;
-}
-
-.bus::before {
-  content: "";
-  position: absolute;
-  width: 65px;
-  height: 38px;
-  left: 15px;
-  top: 10px;
-  background: #9fd4e8;
-  border: 4px solid #161616;
-}
-
-.bus::after {
-  content: "";
-  position: absolute;
-  width: 65px;
-  height: 38px;
-  right: 15px;
-  top: 10px;
-  background: #9fd4e8;
-  border: 4px solid #161616;
-}
-
-@keyframes danfoMove {
-  from {
-    left: -220px;
-  }
-
-  to {
-    left: calc(100% + 220px);
-  }
-}
-
-.person {
-  position: absolute;
-  bottom: 29%;
-  z-index: 6;
-  font-size: 48px;
-}
-
-.person.one {
-  left: 32%;
-}
-
-.person.two {
-  right: 28%;
-}
-
-
-/* =========================================
-   TITLE SCREEN
-   ========================================= */
-
-.title-screen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 20px;
-}
-
-.logo {
-  font-size: clamp(46px, 12vw, 92px);
-  font-weight: 900;
-  letter-spacing: -3px;
-  color: #fff;
-  text-shadow:
-    0 5px 10px rgba(0, 0, 0, 0.45),
-    0 0 15px rgba(0, 0, 0, 0.25);
-}
-
-.logo span {
-  color: #f3c623;
-}
-
-.tagline {
-  margin-top: 8px;
-  font-size: clamp(16px, 3vw, 24px);
-  font-weight: 800;
-  text-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.8),
-    0 0 8px rgba(0, 0, 0, 0.45);
-}
-
-.subtext {
-  margin-top: 8px;
-  font-size: clamp(15px, 2.5vw, 20px);
-  font-weight: 800;
-  text-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.8),
-    0 0 8px rgba(0, 0, 0, 0.45);
-}
-
-.play {
-  margin-top: 28px;
-  padding: 15px 34px;
-  border: 4px solid #161616;
-  border-radius: 12px;
-  background: #f3c623;
-  color: #161616;
-  font-size: 18px;
-  font-weight: 900;
-  cursor: pointer;
-  box-shadow: 0 5px 0 #161616;
-}
-
-.play:active {
-  transform: translateY(4px);
-  box-shadow: 0 1px 0 #161616;
-}
-
-
-/* =========================================
-   BIRTH SCREEN
-   ========================================= */
-
-.birth-screen {
-  background: #d9e4e8;
-}
-
-.hospital-room {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  background:
-    linear-gradient(
-      to bottom,
-      #edf4f5 0%,
-      #edf4f5 72%,
-      #c7b59e 72%,
-      #c7b59e 100%
-    );
-}
-
-
-/* Hospital bed */
-
-.hospital-bed {
-  position: absolute;
-  width: 55%;
-  max-width: 500px;
-  height: 145px;
-  left: 10%;
-  bottom: 32%;
-  z-index: 3;
-}
-
-.bed-pillow {
-  position: absolute;
-  width: 28%;
-  height: 45px;
-  left: 4%;
-  top: 5px;
-  background: #fff;
-  border: 4px solid #303030;
-  border-radius: 15px;
-}
-
-.bed-mattress {
-  position: absolute;
-  width: 92%;
-  height: 75px;
-  left: 4%;
-  top: 42px;
-  background: #f4f4f4;
-  border: 5px solid #303030;
-  border-radius: 12px;
-}
-
-.bed-frame {
-  position: absolute;
-  width: 100%;
-  height: 15px;
-  left: 0;
-  bottom: 15px;
-  background: #555;
-  border: 3px solid #222;
-}
-
-.bed-leg {
-  position: absolute;
-  width: 12px;
-  height: 55px;
-  bottom: -35px;
-  background: #333;
-}
-
-.bed-leg.left {
-  left: 8%;
-}
-
-.bed-leg.right {
-  right: 8%;
-}
-
-
-/* =========================================
-   MOTHER
-   ========================================= */
-
-.mother-character {
-  position: absolute;
+.appearance-baby-preview {
   width: 180px;
-  height: 150px;
-  left: 13%;
-  bottom: 39%;
+  height: 190px;
+  margin: 20px auto 28px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.preview-baby {
+  position: relative;
+  width: 120px;
+  height: 165px;
+}
+
+.preview-baby-head {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  left: 24px;
+  top: 0;
+  background: #70462f;
+  border: 4px solid #222;
+  border-radius: 50%;
+  z-index: 4;
+}
+
+.preview-baby-hair {
+  position: absolute;
+  left: 22px;
+  top: -6px;
+  background: #191919;
   z-index: 6;
-  transform: rotate(-7deg);
 }
 
-.mother-head {
-  position: absolute;
-  width: 52px;
-  height: 52px;
-  left: 18px;
-  top: 4px;
-  background: #70462f;
-  border: 4px solid #222;
-  border-radius: 50%;
-  z-index: 4;
+.preview-baby-hair.afaridan {
+  width: 76px;
+  height: 32px;
+  border-radius: 50% 50% 42% 42%;
+  box-shadow:
+    0 2px 0 #111,
+    -5px 8px 0 -2px #191919,
+    5px 8px 0 -2px #191919;
 }
 
-.mother-hair {
-  position: absolute;
-  width: 62px;
+.preview-baby-hair.low-cut {
+  width: 70px;
+  height: 18px;
+  left: 25px;
+  top: -2px;
+  border-radius: 50% 50% 45% 45%;
+  box-shadow:
+    0 2px 0 #111,
+    0 5px 0 -2px #191919;
+}
+
+.preview-baby-hair.afro {
+  width: 78px;
   height: 48px;
-  left: 13px;
-  top: -5px;
-  background: #191919;
-  border: 4px solid #222;
-  border-radius: 50% 50% 35% 35%;
-  z-index: 5;
-}
-
-.mother-body {
-  position: absolute;
-  width: 125px;
-  height: 75px;
-  left: 55px;
-  top: 45px;
-  background: #d36b6b;
-  border: 4px solid #222;
-  border-radius: 35px 45px 25px 25px;
-  transform: rotate(3deg);
-}
-
-.mother-arm {
-  position: absolute;
-  width: 22px;
-  height: 70px;
-  left: 76px;
-  top: 78px;
-  background: #70462f;
-  border: 4px solid #222;
-  border-radius: 15px;
-  transform: rotate(-42deg);
-  z-index: 5;
-}
-
-
-/* =========================================
-   OTHER CHARACTERS
-   ========================================= */
-
-.character {
-  position: absolute;
-  width: 80px;
-  height: 180px;
-  bottom: 29%;
-  z-index: 7;
-}
-
-.character-head {
-  position: absolute;
-  width: 48px;
-  height: 48px;
-  left: 16px;
-  top: 0;
-  background: #70462f;
-  border: 4px solid #222;
+  left: 21px;
+  top: -10px;
   border-radius: 50%;
+  box-shadow:
+    -6px 8px 0 -2px #191919,
+    6px 8px 0 -2px #191919,
+    0 12px 0 -4px #191919;
 }
 
-.character-hair {
-  position: absolute;
-  width: 52px;
-  height: 30px;
-  left: 14px;
-  top: -5px;
-  background: #191919;
-  border: 4px solid #222;
-  border-radius: 50% 50% 30% 30%;
-  z-index: 2;
-}
-
-.character-body {
-  position: absolute;
-  width: 58px;
-  height: 78px;
-  left: 11px;
-  top: 46px;
-  background: #fff;
-  border: 4px solid #222;
-  border-radius: 12px;
-}
-
-.character-arm {
-  position: absolute;
-  width: 16px;
-  height: 65px;
-  top: 52px;
-  background: #70462f;
-  border: 4px solid #222;
-  border-radius: 12px;
-}
-
-.character-arm.left {
-  left: -3px;
-  transform: rotate(12deg);
-}
-
-.character-arm.right {
-  right: -3px;
-  transform: rotate(-12deg);
-}
-
-.character-leg {
-  position: absolute;
-  width: 19px;
-  height: 60px;
-  top: 120px;
-  background: #333;
-  border: 4px solid #222;
-  border-radius: 10px;
-}
-
-.character-leg.left {
-  left: 18px;
-}
-
-.character-leg.right {
-  right: 18px;
-}
-
-.nurse-character {
-  left: 66%;
-}
-
-.doctor-character {
-  left: 79%;
-}
-
-.father-character {
-  right: 4%;
-}
-
-
-/* =========================================
-   NEWBORN BABY
-   ========================================= */
-
-.newborn-baby {
-  position: absolute;
-  width: 105px;
-  height: 125px;
-  left: 43%;
-  bottom: 39%;
-  z-index: 10;
-  transform: rotate(-3deg);
-}
-
-.baby-head {
-  position: absolute;
-  width: 52px;
-  height: 52px;
-  left: 26px;
+.preview-baby-hair.mr-patches {
+  width: 18px;
+  height: 18px;
+  left: 30px;
   top: 0;
-  background: #70462f;
-  border: 4px solid #222;
   border-radius: 50%;
-  z-index: 4;
+  box-shadow:
+    25px 0 0 #191919,
+    43px 5px 0 #191919,
+    8px 15px 0 #191919,
+    32px 16px 0 #191919;
 }
 
-.baby-hair {
+.preview-baby-body {
   position: absolute;
-  width: 46px;
-  height: 20px;
-  left: 29px;
-  top: -4px;
-  background: #191919;
-  border-radius: 50% 50% 35% 35%;
-  z-index: 5;
-}
-
-.baby-body {
-  position: absolute;
-  width: 64px;
-  height: 58px;
-  left: 20px;
-  top: 44px;
+  width: 78px;
+  height: 68px;
+  left: 21px;
+  top: 60px;
   background: #f4f4f4;
   border: 4px solid #222;
-  border-radius: 25px 25px 18px 18px;
+  border-radius: 28px 28px 20px 20px;
 }
 
-.baby-arm {
+.preview-baby-arm {
   position: absolute;
-  width: 17px;
-  height: 42px;
-  top: 49px;
+  width: 18px;
+  height: 48px;
+  top: 66px;
   background: #70462f;
   border: 4px solid #222;
   border-radius: 12px;
   z-index: 3;
 }
 
-.baby-arm.left {
-  left: 4px;
+.preview-baby-arm.left {
+  left: 7px;
   transform: rotate(25deg);
 }
 
-.baby-arm.right {
-  right: 4px;
+.preview-baby-arm.right {
+  right: 7px;
   transform: rotate(-25deg);
 }
 
-.baby-leg {
+.preview-baby-leg {
   position: absolute;
-  width: 19px;
-  height: 35px;
-  top: 91px;
+  width: 20px;
+  height: 38px;
+  top: 116px;
   background: #70462f;
   border: 4px solid #222;
   border-radius: 12px;
 }
 
-.baby-leg.left {
-  left: 27px;
+.preview-baby-leg.left {
+  left: 29px;
   transform: rotate(8deg);
 }
 
-.baby-leg.right {
-  right: 27px;
+.preview-baby-leg.right {
+  right: 29px;
   transform: rotate(-8deg);
-}
-
-
-/* =========================================
-   DIALOGUE
-   ========================================= */
-
-.dialogue-box {
-  position: absolute;
-  left: 50%;
-  bottom: 8%;
-  transform: translateX(-50%);
-  width: min(88%, 560px);
-  padding: 16px 20px;
-  background: rgba(20, 20, 20, 0.94);
-  border: 4px solid #f3c623;
-  border-radius: 14px;
-  color: #fff;
-  z-index: 30;
-  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.35);
-}
-
-.dialogue-name {
-  margin-bottom: 6px;
-  color: #f3c623;
-  font-size: 16px;
-  font-weight: 900;
-}
-
-.dialogue-text {
-  font-size: clamp(15px, 3.5vw, 20px);
-  line-height: 1.35;
-  font-weight: 700;
-}
-
-
-/* =========================================
-   RESULT SCREEN
-   ========================================= */
-
-.result-screen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background: #f2d58d;
-}
-
-.result-card {
-  width: min(92%, 500px);
-  max-height: 90vh;
-  overflow-y: auto;
-  padding: 28px;
-  background: #fff;
-  border: 5px solid #222;
-  border-radius: 18px;
-  box-shadow: 0 8px 0 #222;
-}
-
-.result-card h1 {
-  margin: 0 0 12px;
-  font-size: clamp(25px, 7vw, 40px);
-}
-
-.result-card p {
-  margin-bottom: 22px;
-  font-size: 17px;
-  line-height: 1.4;
-}
-
-.result-row {
-  display: flex;
-  gap: 10px;
-  padding: 10px 0;
-  border-bottom: 2px solid #ddd;
-  font-size: 17px;
-}
-
-.result-row strong {
-  min-width: 90px;
-}
-
-.result-card .play {
-  width: 100%;
-  margin-top: 24px;
-}
-
-
-/* =========================================
-   APPEARANCE
-   ========================================= */
-
-.appearance-screen {
-  overflow-y: auto;
-  background: #f2d58d;
-  padding: 30px 20px;
-}
-
-.appearance-container {
-  width: min(94%, 700px);
-  margin: 0 auto;
-  padding-bottom: 40px;
-  text-align: center;
-}
-
-.appearance-title {
-  margin: 10px 0 4px;
-  font-size: clamp(28px, 7vw, 48px);
-}
-
-.appearance-subtitle {
-  font-size: clamp(20px, 5vw, 30px);
-  font-weight: 900;
-}
-
-.appearance-container > p {
-  margin: 8px auto 25px;
-  max-width: 550px;
-  font-size: 16px;
-}
-
-.appearance-group {
-  margin: 20px 0;
-  padding: 18px;
-  background: rgba(255, 255, 255, 0.7);
-  border: 3px solid #222;
-  border-radius: 14px;
-}
-
-.appearance-group h3 {
-  margin: 0 0 12px;
-  font-size: 20px;
-}
-
-.option-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-}
-
-.option-button {
-  padding: 10px 14px;
-  border: 3px solid #222;
-  border-radius: 10px;
-  background: #fff;
-  color: #222;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.option-button.selected {
-  background: #f3c623;
-}
-
-.appearance-commentary {
-  margin-top: 10px;
-  font-size: 14px;
-  font-style: italic;
-}
-
-.confirm-button {
-  margin-top: 10px;
-  padding: 14px 35px;
-  border: 4px solid #222;
-  border-radius: 12px;
-  background: #f3c623;
-  color: #222;
-  font-size: 18px;
-  font-weight: 900;
-  cursor: pointer;
-}
-
-
-/* =========================================
-   MOBILE
-   ========================================= */
-
-@media (max-width: 600px) {
-
-  .logo {
-    letter-spacing: -2px;
-  }
-
-  .hospital-bed {
-    width: 70%;
-    left: 4%;
-    bottom: 36%;
-    transform: scale(0.9);
-    transform-origin: left bottom;
-  }
-
-  .mother-character {
-    left: 4%;
-    bottom: 43%;
-    transform: scale(0.8) rotate(-7deg);
-    transform-origin: left bottom;
-  }
-
-  .newborn-baby {
-    left: 42%;
-    bottom: 42%;
-    transform: scale(0.82);
-    transform-origin: center bottom;
-  }
-
-  .character {
-    transform: scale(0.72);
-    transform-origin: center bottom;
-  }
-
-  .nurse-character {
-    left: 59%;
-  }
-
-  .doctor-character {
-    left: 75%;
-  }
-
-  .father-character {
-    right: -3%;
-  }
-
-  .dialogue-box {
-    bottom: 5%;
-    padding: 13px 15px;
-  }
-
-  .dialogue-name {
-    font-size: 14px;
-  }
-
-  .dialogue-text {
-    font-size: 15px;
-  }
-
-  .result-card {
-    padding: 22px;
-  }
-
-  .result-row {
-    font-size: 15px;
-  }
-
 }
