@@ -1,143 +1,172 @@
-/* =========================================
-   APPEARANCE BABY PREVIEW
-   ========================================= */
+(function () {
+  "use strict";
 
-.appearance-baby-preview {
-  width: 180px;
-  height: 190px;
-  margin: 20px auto 28px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-}
+  window.Naijs = window.Naijs || {};
 
-.preview-baby {
-  position: relative;
-  width: 120px;
-  height: 165px;
-}
+  Naijs.birthState = {
+    baby: null,
+    step: 0,
+    timer: null,
+    revealTimers: []
+  };
 
-.preview-baby-head {
-  position: absolute;
-  width: 72px;
-  height: 72px;
-  left: 24px;
-  top: 0;
-  background: #70462f;
-  border: 4px solid #222;
-  border-radius: 50%;
-  z-index: 4;
-}
+  Naijs.startBirth = function () {
+    if (typeof Naijs.generateBirth === "function") {
+      Naijs.birthState.baby = Naijs.generateBirth();
+    }
 
-.preview-baby-hair {
-  position: absolute;
-  left: 22px;
-  top: -6px;
-  background: #191919;
-  z-index: 6;
-}
+    Naijs.showScreen("birth-screen");
 
-.preview-baby-hair.afaridan {
-  width: 76px;
-  height: 32px;
-  border-radius: 50% 50% 42% 42%;
-  box-shadow:
-    0 2px 0 #111,
-    -5px 8px 0 -2px #191919,
-    5px 8px 0 -2px #191919;
-}
+    var baby = document.querySelector(".newborn-baby");
 
-.preview-baby-hair.low-cut {
-  width: 70px;
-  height: 18px;
-  left: 25px;
-  top: -2px;
-  border-radius: 50% 50% 45% 45%;
-  box-shadow:
-    0 2px 0 #111,
-    0 5px 0 -2px #191919;
-}
+    if (baby) {
+      baby.style.display = "none";
+      baby.style.opacity = "0";
+      baby.style.visibility = "hidden";
+      baby.style.transform = "translateY(45px) scale(0.6)";
+      baby.style.transition = "opacity 0.35s ease, transform 0.35s ease";
+    }
 
-.preview-baby-hair.afro {
-  width: 78px;
-  height: 48px;
-  left: 21px;
-  top: -10px;
-  border-radius: 50%;
-  box-shadow:
-    -6px 8px 0 -2px #191919,
-    6px 8px 0 -2px #191919,
-    0 12px 0 -4px #191919;
-}
+    Naijs.runBirthSequence();
+  };
 
-.preview-baby-hair.mr-patches {
-  width: 18px;
-  height: 18px;
-  left: 30px;
-  top: 0;
-  border-radius: 50%;
-  box-shadow:
-    25px 0 0 #191919,
-    43px 5px 0 #191919,
-    8px 15px 0 #191919,
-    32px 16px 0 #191919;
-}
+  Naijs.runBirthSequence = function () {
+    var dialogueName = document.getElementById("dialogue-name");
+    var dialogueText = document.getElementById("dialogue-text");
+    var baby = document.querySelector(".newborn-baby");
 
-.preview-baby-body {
-  position: absolute;
-  width: 78px;
-  height: 68px;
-  left: 21px;
-  top: 60px;
-  background: #f4f4f4;
-  border: 4px solid #222;
-  border-radius: 28px 28px 20px 20px;
-}
+    var scenes = [
+      {
+        name: "Nurse",
+        text: "Easy, mama. You dey do well. Take a deep breath."
+      },
+      {
+        name: "Doctor",
+        text: "Alright. We are almost there. Keep pushing."
+      },
+      {
+        name: "Father",
+        text: "God abeg... everything go dey alright."
+      },
+      {
+        name: "Nurse",
+        text: "Yes! Baby is coming!"
+      },
+      {
+        name: "Doctor",
+        text: "And... welcome to the world, little one."
+      }
+    ];
 
-.preview-baby-arm {
-  position: absolute;
-  width: 18px;
-  height: 48px;
-  top: 66px;
-  background: #70462f;
-  border: 4px solid #222;
-  border-radius: 12px;
-  z-index: 3;
-}
+    Naijs.birthState.step = 0;
 
-.preview-baby-arm.left {
-  left: 7px;
-  transform: rotate(25deg);
-}
+    function clearRevealTimers() {
+      for (var i = 0; i < Naijs.birthState.revealTimers.length; i++) {
+        clearTimeout(Naijs.birthState.revealTimers[i]);
+      }
 
-.preview-baby-arm.right {
-  right: 7px;
-  transform: rotate(-25deg);
-}
+      Naijs.birthState.revealTimers = [];
+    }
 
-.preview-baby-leg {
-  position: absolute;
-  width: 20px;
-  height: 38px;
-  top: 116px;
-  background: #70462f;
-  border: 4px solid #222;
-  border-radius: 12px;
-}
+    function revealBaby() {
+      if (!baby) {
+        return;
+      }
 
-.preview-baby-leg.left {
-  left: 29px;
-  transform: rotate(8deg);
-}
+      clearRevealTimers();
 
-.preview-baby-leg.right {
-  right: 29px;
-  transform: rotate(-8deg);
-}
-.newborn-baby {
-  opacity: 0;
-  transform: translateY(35px) scale(0.65);
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
-}
+      /*
+       * The baby is completely hidden until this function runs.
+       */
+
+      baby.style.display = "block";
+      baby.style.visibility = "visible";
+      baby.style.opacity = "0";
+      baby.style.transform = "translateY(45px) scale(0.6)";
+
+      /*
+       * Gradual appearance:
+       * 0.0s  - barely beginning
+       * 0.35s - starting to appear
+       * 0.7s  - mostly visible
+       * 1.05s - fully born
+       */
+
+      Naijs.birthState.revealTimers.push(
+        setTimeout(function () {
+          baby.style.opacity = "0.2";
+          baby.style.transform = "translateY(36px) scale(0.68)";
+        }, 100)
+      );
+
+      Naijs.birthState.revealTimers.push(
+        setTimeout(function () {
+          baby.style.opacity = "0.45";
+          baby.style.transform = "translateY(27px) scale(0.76)";
+        }, 350)
+      );
+
+      Naijs.birthState.revealTimers.push(
+        setTimeout(function () {
+          baby.style.opacity = "0.7";
+          baby.style.transform = "translateY(17px) scale(0.87)";
+        }, 650)
+      );
+
+      Naijs.birthState.revealTimers.push(
+        setTimeout(function () {
+          baby.style.opacity = "0.9";
+          baby.style.transform = "translateY(7px) scale(0.96)";
+        }, 850)
+      );
+
+      Naijs.birthState.revealTimers.push(
+        setTimeout(function () {
+          baby.style.opacity = "1";
+          baby.style.transform = "translateY(0) scale(1)";
+        }, 1050)
+      );
+    }
+
+    function nextScene() {
+      if (Naijs.birthState.step >= scenes.length) {
+        clearInterval(Naijs.birthState.timer);
+        clearRevealTimers();
+
+        if (typeof Naijs.showBirthResult === "function") {
+          Naijs.showBirthResult();
+        }
+
+        return;
+      }
+
+      var scene = scenes[Naijs.birthState.step];
+
+      if (dialogueName) {
+        dialogueName.textContent = scene.name;
+      }
+
+      if (dialogueText) {
+        dialogueText.textContent = scene.text;
+      }
+
+      /*
+       * Scene 4:
+       * "Yes! Baby is coming!"
+       *
+       * This is the exact moment the baby begins to appear.
+       */
+
+      if (Naijs.birthState.step === 3) {
+        revealBaby();
+      }
+
+      Naijs.birthState.step += 1;
+    }
+
+    nextScene();
+
+    Naijs.birthState.timer = setInterval(nextScene, 1800);
+  };
+
+})();
