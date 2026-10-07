@@ -134,3 +134,10 @@
   right: 29px;
   transform: rotate(-8deg);
 }
+.newborn-baby {
+  opacity: 0;
+  transform: translateY(35px) scale(0.65);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
