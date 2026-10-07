@@ -30,6 +30,16 @@
 
     Naijs.appearance[type] = value;
 
+    if (type === "hair") {
+      var previewHair = document.querySelector(".preview-baby-hair");
+
+      if (previewHair) {
+        previewHair.className =
+          "preview-baby-hair " +
+          value.toLowerCase().replace(/\s+/g, "-");
+      }
+    }
+
     var buttons = document.querySelectorAll(
       '[data-appearance="' + type + '"]'
     );
